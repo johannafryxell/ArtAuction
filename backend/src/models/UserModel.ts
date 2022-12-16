@@ -3,8 +3,8 @@ import { Schema, model } from "mongoose";
 interface IUser {
   mail: String;
   password: String;
-  image: String;
-  description: String;
+  firstName: String;
+  lastName: String;
 }
 
 export const UserSchema = new Schema({
@@ -16,15 +16,14 @@ export const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  firstName: {
     type: String,
     required: true,
   },
-  description: {
+  lastName: {
     type: String,
     required: true,
   },
-  posts: [{ type: Schema.Types.ObjectId, ref: "Posts" }],
 });
 
 export const Users = model<IUser>("Users", UserSchema);
