@@ -1,9 +1,10 @@
 export interface IAuction {
-  id: string;
+  // id: string;
   artId: number;
   published: Date;
   endTime: Date;
-  bidList: IBid[];
+  // bidList: IBid[];
+  bidList: [];
 }
 
 export interface IBid {

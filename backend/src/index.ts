@@ -1,14 +1,33 @@
-import express, { Application, Request, Response } from 'express'
+import express, { Application, Request, Response } from "express";
+import AuctionRoute from "./routes/art-routes";
 
-const app: Application = express()
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+require("dotenv").config();
+
+require("../services/database.ts");
+
+const app: Application = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use((req: Request, res: Response, next: Function) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "*");
+  next();
+});
 app.use(express.json());
 
-const port: number = 3001
+const port: number = 3001;
 
-app.get('/toto', (req: Request, res: Response) => {
-    res.send('Hello toto')
-})
+app.get("/", async (req, res) => {
+    res.send({
+      msg: "Hello World!",
+    });
+  });
 
-app.listen(port, function () {
-    console.log(`App is listening on port ${port} !`)
-})
+app.use("/art", AuctionRoute);
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}`);
+});
