@@ -16,13 +16,13 @@ export function Home() {
   const [auctionList, setAuctionList] = useState<IAuction[]>([]);
   const [todaysArtId, setTodaysArtId] = useState();
   const [currentArt, setCurrentArt] = useState<IArt>({
-    objectId : "",
-    primaryImage : "",
-    objectName : "",
-    title : "",
-    country : "",
-    artistDisplayName : "",
-    period : "",
+    objectId: "",
+    primaryImage: "",
+    objectName: "",
+    title: "",
+    country: "",
+    artistDisplayName: "",
+    period: "",
   });
 
   /////////////////
