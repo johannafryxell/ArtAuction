@@ -30,7 +30,8 @@ export const getSingleAuction = async (req: Request, res: Response) => {
       });
     }
   } catch (err) {
-    res.send(err);
+    console.log(err);
+    res.send("error");
   }
   return;
 };

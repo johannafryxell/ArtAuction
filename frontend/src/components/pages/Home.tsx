@@ -15,7 +15,15 @@ export function Home() {
   //////////////
   const [auctionList, setAuctionList] = useState<IAuction[]>([]);
   const [todaysArtId, setTodaysArtId] = useState();
-  const [currentArt, setCurrentArt] = useState<IArt>();
+  const [currentArt, setCurrentArt] = useState<IArt>({
+    objectId : "",
+    primaryImage : "",
+    objectName : "",
+    title : "",
+    country : "",
+    artistDisplayName : "",
+    period : "",
+  });
 
   /////////////////
   // USEEFFECTS //
@@ -24,7 +32,6 @@ export function Home() {
     axios.get("http://localhost:3001/art/getauctions").then((res) => {
       setAuctionList(res.data);
       console.log("Get auctions" + res.data);
-      
     });
   }, []);
 
@@ -58,31 +65,23 @@ export function Home() {
     return day;
   }
 
-  function presentArtCard() {
-    if (currentArt != (null || undefined)) {
-      return (
-        <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="300"
-              image={currentArt.primaryImage}
-              alt="artwork"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {currentArt.title}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      );
-    }
-  }
-
   return (
     <>
-      {presentArtCard()}
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="300"
+            image={currentArt.primaryImage}
+            alt="artwork"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {currentArt.title}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
       <Grid container>
         {auctionList.map((auction) => (
           <Grid item key={auction.artId} xs={12} sm={true}>

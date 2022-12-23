@@ -7,7 +7,7 @@ export function HomeLayout() {
     <>
       <Header></Header>
       <Outlet></Outlet>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 }
