@@ -6,6 +6,8 @@ import axios from "axios";
 import { IArt, IArtCollection } from "./models/IArt";
 import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
+import { DetailLayout } from "./components/layouts/DetailLayout";
+import { Detail } from "./components/pages/Detail";
 
 ////////////////
 // MUI THEME //
@@ -52,6 +54,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeLayout />}>
               <Route path="/" element={<Home />}></Route>
+            </Route>
+            <Route path="/auction" element={<DetailLayout />}>
+              <Route path="/auction/:id" element={<Detail />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>

@@ -1,6 +1,9 @@
 import express, { Router, Request, Response } from "express";
 import { Auction } from "../models/AuctionModel";
-import { getTodaysAuction } from "../controllers/artControllers";
+import {
+  getSingleAuction,
+  getTodaysAuction,
+} from "../controllers/artControllers";
 
 const router: Router = express.Router();
 
@@ -16,5 +19,7 @@ router.get("/getauctions", async (req, res) => {
 });
 
 router.get("/gettodaysauction", getTodaysAuction);
+
+router.get("/getsingleauction", getSingleAuction);
 
 export default router;
