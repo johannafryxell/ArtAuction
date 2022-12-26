@@ -8,15 +8,10 @@ interface IAuctionInfoProps {
 
 export const AuctionInfo = (props: IAuctionInfoProps) => {
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ flexDirection: "row" }}>
-        <Typography sx={{ width: "20%", fontWeight: "bold" }} variant="body2">
-          Title
-        </Typography>
-        <Typography variant="body2">
-          {props.art.title ? props.art.title : "Unknown"}
-        </Typography>
-      </Box>
+    <Box sx={{ height: 300, border: 1, padding: 5 }}>
+      <Typography variant="body2" display="inline">
+        {props.art.title ? props.art.title : "Unknown"}
+      </Typography>
       <Typography variant="h6">
         {props.art.country ? props.art.country : "Unknown"}
       </Typography>

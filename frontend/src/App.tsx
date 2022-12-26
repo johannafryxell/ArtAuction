@@ -15,7 +15,9 @@ import { Detail } from "./components/pages/Detail";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#DBD8D4",
+      light: "#EDEBE9",
+      main: "#D1CDC7",
+      dark: "#877A6E"
     },
   },
 });
@@ -26,11 +28,6 @@ function App() {
   //////////////////
   // ART CONTEXT //
   ////////////////
-  // useEffect(() => {
-  //   axios.get("http://localhost:3001/art/gettodaysauction").then((res) => {
-  //     setTodaysAuction(res.data);
-  //   });
-  // }, []);
 
   // useEffect(() => {
   //Gets id:s for objects with images
@@ -39,13 +36,6 @@ function App() {
   //   .then((result) => {
   //     console.log(result);
   //   });
-  //Gets object
-  // axios
-  //   .get("https://collectionapi.metmuseum.org/public/collection/v1/objects/435962")
-  //   .then((result) => {
-  //     console.log(result.data);
-  //   });
-  // }, []);
 
   return (
     <>
