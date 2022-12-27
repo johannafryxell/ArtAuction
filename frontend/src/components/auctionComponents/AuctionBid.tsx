@@ -1,12 +1,3 @@
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormGroup from "@mui/material/FormGroup";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { IAuction } from "../../models/IAuction";
 
 interface IAuctionBidProps {
