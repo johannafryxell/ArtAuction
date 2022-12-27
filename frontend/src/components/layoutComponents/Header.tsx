@@ -1,14 +1,38 @@
-export function Header() {
+import { NavLink } from "react-router-dom";
 
+export function Header() {
   return (
     <>
-      <header>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/auction">Current Auction</a>
-          <a href="/login">Login</a>
+      <header className="header">
+        <nav className="header__menu">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "header__menu--linkActive" : "header__menu--link"
+            }
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "header__menu--linkActive" : "header__menu--link"
+            }
+            to="/auction"
+          >
+            Current Auction
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "header__menu--linkActive" : "header__menu--link"
+            }
+            to="/login"
+          >
+            Login
+          </NavLink>
         </nav>
-        <h1>ART AUCTION</h1>
+        <div className="header__logo">
+          <h1>ART AUCTION</h1>
+        </div>
       </header>
     </>
   );

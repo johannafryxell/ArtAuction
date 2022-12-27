@@ -1,0 +1,47 @@
+////////////////////
+// IMPORTS & USE //
+//////////////////
+@use "../mixins";
+@use "../base/typography";
+@import "../variables";
+
+////////////////////
+// HEADER STYLING//
+//////////////////
+.header {
+  margin: 0 auto;
+  @include mixins.flex(column, center, center);
+
+  &__menu {
+    @include mixins.flex(row, center, center, 2rem);
+    height: 50px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 100%;
+
+    &--link {
+      text-decoration: none;
+      color: black;
+      &:hover {
+        color: $greige-dark;
+      }
+    }
+    &--linkActive {
+      text-decoration: none;
+      color: $greige-dark;
+      &:hover {
+        color: $greige-dark;
+      }
+    }
+  }
+
+  &__logo {
+    @include mixins.flex(row, center, center);
+    border-bottom: 1px solid black;
+    width: 100%;
+
+    h1 {
+      font-size: 100px;
+    }
+  }
+}
