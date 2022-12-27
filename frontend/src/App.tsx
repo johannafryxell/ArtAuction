@@ -4,6 +4,7 @@ import { HomeLayout } from "./components/layouts/HomeLayout";
 import { DetailLayout } from "./components/layouts/DetailLayout";
 import { Detail } from "./components/pages/Detail";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "./scss/main.scss";
 
 ////////////////
 // MUI THEME //

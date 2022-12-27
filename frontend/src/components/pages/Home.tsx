@@ -1,9 +1,3 @@
-import CardActionArea from "@mui/material/CardActionArea";
-import CardMedia from "@mui/material/CardMedia";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { IArt } from "../../models/IArt";
@@ -67,34 +61,19 @@ export function Home() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="300"
-            image={currentArt.primaryImage}
-            alt="artwork"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {currentArt.title}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <Grid container>
-        {auctionList.map((auction) => (
-          <Grid item key={auction.artId} xs={12} sm={true}>
-            <Card>
-              <CardContent>
-                <Typography variant="h2" align="center">
-                  {presentDay(auction.endTime)}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <div className="home">
+        <div className="home__today">
+          <img src={currentArt.primaryImage} alt="artwork" />
+          <h3>{currentArt.title}</h3>
+        </div>
+        <div className="home__week">
+          {auctionList.map((auction) => (
+            <div className="home__week--day" key={auction.artId}>
+              <h2>{presentDay(auction.endTime)}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }
