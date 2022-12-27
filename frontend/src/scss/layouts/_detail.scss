@@ -1,0 +1,52 @@
+////////////////////
+// IMPORTS & USE //
+//////////////////
+@use "../mixins";
+@use "../base/typography";
+@import "../variables";
+
+//////////////////
+// HOME STYLING//
+////////////////
+.detail {
+  margin: 0 auto;
+  @include mixins.flex(row, space-between, center);
+
+  @include typography.inter();
+  ///////////////
+  // SECTIONS //
+  /////////////
+  &__artwork {
+    @include mixins.flex(column, center, center);
+    width: 70%;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
+    &--imageBox {
+      @include mixins.flex(column, center, center);
+      height: 90vh;
+      img {
+        // height: 100%;
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__artinfo {
+    @include mixins.flex(column, space-between, center);
+    border: 1px solid black;
+    max-height: 90vh;
+    overflow-y: scroll;
+    width: 30%;
+
+    &--box {
+      @include mixins.flex(column, space-between, center);
+      width: 100%;
+      min-height: 300px;
+      border-bottom: 1px solid black;
+      padding: 30px;
+    }
+  }
+}

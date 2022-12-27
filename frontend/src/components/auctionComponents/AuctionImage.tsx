@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import { IArt } from "../../models/IArt";
 
 interface IAuctionImageProps {
@@ -7,23 +6,10 @@ interface IAuctionImageProps {
 
 export const AuctionImage = (props: IAuctionImageProps) => {
   return (
-    <Box
-      sx={{
-        height: 500,
-        width: 500,
-      }}
-    >
-      <Box
-        component="img"
-        sx={
-          {
-            height: "100%",
-            width: "100%",
-          }
-        }
-        alt={props.art.objectName}
-        src={props.art.primaryImage}
-      />
-    </Box>
+    <>
+      <div className="detail__artwork--imageBox">
+        <img src={props.art.primaryImage} alt={props.art.objectName} />
+      </div>
+    </>
   );
 };

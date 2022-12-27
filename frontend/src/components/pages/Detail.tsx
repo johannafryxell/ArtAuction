@@ -70,33 +70,19 @@ export function Detail() {
 
   return (
     <>
-      <Grid
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-        container
-      >
-        <Grid
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          xs={true}
-          item
-        >
-          <AuctionImage art={art}></AuctionImage>
-        </Grid>
-        <Grid item>
-          <Box style={{ maxHeight: "85vh", overflow: "auto" }}>
+      <div className="detail">
+        <div className="detail__artwork">
+        <AuctionImage art={art}></AuctionImage>
+        </div>
+        <div className="detail__artinfo">
+        
             <AuctionBid auction={auction}></AuctionBid>
             <AuctionInfo art={art}></AuctionInfo>
             <AuctionInfo art={art}></AuctionInfo>
             <AuctionInfo art={art}></AuctionInfo>
-          </Box>
-        </Grid>
-      </Grid>
+          
+        </div>
+      </div>
     </>
   );
 }
