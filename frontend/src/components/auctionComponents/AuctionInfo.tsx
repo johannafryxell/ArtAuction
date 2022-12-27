@@ -8,7 +8,8 @@ interface IAuctionInfoProps {
 
 export const AuctionInfo = (props: IAuctionInfoProps) => {
   return (
-    <Box sx={{ height: 300, border: 1, padding: 5 }}>
+      
+    <Box sx={{ height: 300, borderLeft: 1, borderRight: 1, borderBottom: 1,padding: 5 }}>
       <Typography variant="body2" display="inline">
         {props.art.title ? props.art.title : "Unknown"}
       </Typography>

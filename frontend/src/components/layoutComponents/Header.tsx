@@ -1,4 +1,5 @@
-import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
+
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 const headersData = [
@@ -42,8 +43,8 @@ export function Header() {
     <>
       <header>
         <AppBar position="sticky">
-          <Typography variant="h2" align="center">ART AUCTION</Typography>
           {displayDesktop()}
+          <Typography variant="h2" align="center">ART AUCTION</Typography>
         </AppBar>
       </header>
     </>

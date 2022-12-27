@@ -21,7 +21,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         flexDirection: "column",
         justifyContent: "space-between",
         minHeight: 300,
-        border: 1,
+        borderLeft: 1,
+        borderRight: 1,
+        borderBottom: 1,
         padding: 5,
       }}
     >
