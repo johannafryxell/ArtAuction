@@ -8,7 +8,7 @@ export function Home() {
   // USESTATES //
   //////////////
   const [auctionList, setAuctionList] = useState<IAuction[]>([]);
-  const [todaysArtId, setTodaysArtId] = useState();
+  const [todaysArtId, setTodaysArtId] = useState(0);
   const [currentArt, setCurrentArt] = useState<IArt>({
     objectId: "",
     primaryImage: "",
@@ -63,8 +63,12 @@ export function Home() {
     <>
       <div className="home">
         <div className="home__today">
-          <img src={currentArt.primaryImage} alt="artwork" />
-          <h3>{currentArt.title}</h3>
+          <div className="home__today--info">
+            <h3>{currentArt.title}</h3>
+          </div>
+          <div className="home__today--image">
+            <img src={currentArt.primaryImage} alt="artwork" />
+          </div>
         </div>
         <div className="home__week">
           {auctionList.map((auction) => (

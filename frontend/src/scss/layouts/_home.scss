@@ -10,15 +10,61 @@
 ////////////////
 .home {
   margin: 0 auto;
-  @include mixins.flex(column, center, center);
+  min-height: 85%;
+  @include mixins.flex(column, space-between, center);
 
   @include typography.inter();
   ///////////////
   // SECTIONS //
   /////////////
   &__today {
-    height: 500px;
-    background-color: white;
+    @include mixins.flex(column, center, center);
+    width: 80%;
+    flex-grow: 1;
+
+    &--info {
+      width: 100%;
+    }
+    &--image {
+      @include mixins.flex(column, center, center);
+      flex-grow: 1;
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+    }
+
+    @include mixins.tablet {
+      @include mixins.flex(row, center, center);
+      width: 100%;
+
+      &--info {
+        width: 50%;
+      }
+      &--image {
+        @include mixins.flex(column, center, flex-start);
+        flex-grow: 1;
+        img {
+          width: 100%;
+          height: 400px;
+        }
+      }
+    }
+
+    @include mixins.desktop {
+      &--info {
+        width: 33%;
+      }
+      &--image {
+        @include mixins.flex(column, center, flex-start);
+        flex-grow: 1;
+        img {
+          width: 50%;
+          height: 400px;
+        }
+      }
+    }
   }
 
   &__week {
