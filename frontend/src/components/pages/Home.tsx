@@ -8,7 +8,6 @@ export function Home() {
   // USESTATES //
   //////////////
   const [auctionList, setAuctionList] = useState<IAuction[]>([]);
-  const [todaysArtId, setTodaysArtId] = useState(0);
   const [currentArt, setCurrentArt] = useState<IArt>({
     objectId: "",
     primaryImage: "",
@@ -31,22 +30,10 @@ export function Home() {
 
   useEffect(() => {
     axios.get("http://localhost:3001/art/gettodaysauction").then((res) => {
-      setTodaysArtId(res.data.artId);
-      console.log("Get todays auction" + res.data);
+      setCurrentArt(res.data);
+      console.log("primary" + res.data.primaryImage);
     });
   }, []);
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/objects/" +
-          todaysArtId
-      )
-      .then((result) => {
-        console.log(result.data.primaryImage);
-        setCurrentArt(result.data);
-      });
-  }, [todaysArtId]);
 
   ////////////////
   // FUNCTIONS //

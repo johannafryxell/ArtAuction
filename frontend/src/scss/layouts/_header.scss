@@ -41,7 +41,10 @@
     width: 100%;
 
     h1 {
-      font-size: 100px;
+      font-size: 64px;
+      @include mixins.tablet{
+        font-size: 100px;
+      }
     }
   }
 }

@@ -1,6 +1,8 @@
 import express, { Router, Request, Response } from "express";
 import { Auction } from "../models/AuctionModel";
 import {
+  getAllArt,
+  getAuctions,
   getSingleAuction,
   getTodaysAuction,
 } from "../controllers/artControllers";
@@ -8,15 +10,9 @@ import {
 const router: Router = express.Router();
 
 //Gets all auctions from database
-router.get("/getauctions", async (req, res) => {
-  try {
-    const auctions = await Auction.find({}).sort("desc").lean();
-    res.send(auctions);
-  } catch (err) {
-    res.send(err);
-  }
-  return;
-});
+router.get("/getauctions", getAuctions);
+
+router.get("/getartwork", getAllArt);
 
 router.get("/gettodaysauction", getTodaysAuction);
 
