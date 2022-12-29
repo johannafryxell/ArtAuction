@@ -8,6 +8,7 @@ export function Home() {
   // USESTATES //
   //////////////
   const [auctionList, setAuctionList] = useState<IAuction[]>([]);
+  const [artList, setArtList] = useState<IArt[]>([]);
   const [currentArt, setCurrentArt] = useState<IArt>({
     objectId: "",
     primaryImage: "",
@@ -24,14 +25,20 @@ export function Home() {
   useEffect(() => {
     axios.get("http://localhost:3001/art/getauctions").then((res) => {
       setAuctionList(res.data);
-      console.log("Get auctions" + res.data);
+      console.log("Get auctions " + res.data);
     });
   }, []);
+
+  useEffect(() =>{
+    axios.get("http://localhost:3001/art/getartwork").then((res) => {
+      setArtList(res.data);
+    });
+  }, [])
 
   useEffect(() => {
     axios.get("http://localhost:3001/art/gettodaysauction").then((res) => {
       setCurrentArt(res.data);
-      console.log("primary" + res.data.primaryImage);
+      console.log("primary " + res.data.primaryImage);
     });
   }, []);
 

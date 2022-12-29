@@ -2,6 +2,7 @@ import axios from "axios";
 import { Request, Response } from "express";
 import { fetchData } from "../../services/fetchData";
 import { Auction } from "../models/AuctionModel";
+import { IArt } from "../../../frontend/src/models/IArt";
 
 //////////////////////
 // ART CONTROLLERS //
@@ -60,14 +61,15 @@ export const getSingleAuction = async (req: Request, res: Response) => {
 export const getAllArt = async (req: Request, res: Response) => {
   const url = "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
   const auctions = await Auction.find({}).sort("desc").lean();
+  const artList:IArt[] = [];
 
   const art = await Promise.all(
     auctions.map(async (auction) => {
-      const auctionsData = await fetchData(url + auction.artId);
-      // return auctionsData;
-      res.send(auctionsData)
+      const auctionsData : IArt = await fetchData(url + auction.artId);
+      artList.push(auctionsData);
     })
   );
+  res.send(artList)
 }
 
 /////////////////////
