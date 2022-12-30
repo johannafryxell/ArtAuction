@@ -5,6 +5,9 @@ import { DetailLayout } from "./components/layouts/DetailLayout";
 import { Detail } from "./components/pages/Detail";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./scss/main.scss";
+import { useEffect } from "react";
+import axios from "axios";
+import { IArtCollection } from "./models/IArt";
 
 ////////////////
 // MUI THEME //
@@ -21,12 +24,14 @@ const theme = createTheme({
 
 function App() {
   // useEffect(() => {
-  //Gets id:s for objects with images
+  // // Gets id:s for objects with images
   // axios
   //   .get<IArtCollection>("https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir")
   //   .then((result) => {
   //     console.log(result);
   //   });
+  // }
+  // )
 
   return (
     <>

@@ -38,7 +38,7 @@ export const getSingleAuction = async (req: Request, res: Response) => {
   const todayString = getToday();
 
   try {
-    const auction = await Auction.findOne({ id: id });
+    const auction = await Auction.findOne({ artId: id });
 
     if (auction?.endTime == todayString) {
       res.send({

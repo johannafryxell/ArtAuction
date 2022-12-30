@@ -17,6 +17,105 @@
   ///////////////
   // SECTIONS //
   /////////////
+  &__top {
+    @include mixins.flex(row, center, center);
+    flex-wrap: wrap;
+    width: 100%;
+
+    &--first {
+      @include mixins.flex(column, center, center);
+      height: 100vw;
+      width: 100%;
+      border-bottom: 1px solid black;
+      border-left: 0.5px solid black;
+      border-right: 0.5px solid black;
+      img {
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+      }
+    }
+    &--quad {
+      @include mixins.flex(row, center, center);
+      flex-wrap: wrap;
+      width: 100%;
+
+      &__auction {
+        @include mixins.flex(column, center, center);
+        width: 50%;
+        height: 50vw;
+        border-bottom: 1px solid black;
+        border-left: 0.5px solid black;
+        border-right: 0.5px solid black;
+        img {
+          width: 50%;
+          height: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+    @include mixins.tablet {
+      &--first {
+        width: 50%;
+        height: 50vw;
+      }
+      &--quad {
+        width: 50vw;
+        &__auction{
+          height: 25vw;
+        }
+      }
+    }
+  }
+  &__grid {
+    @include mixins.flex(row, center, center);
+    flex-wrap: wrap;
+    width: 100%;
+
+    &--auction {
+      @include mixins.flex(column, center, center);
+      border-bottom: 1px solid black;
+      border-left: 0.5px solid black;
+      border-right: 0.5px solid black;
+      height: 50vw;
+      width: 50%;
+      img {
+        width: 50%;
+        height: 50%;
+        object-fit: cover;
+      }
+    }
+
+    @include mixins.tablet {
+      &--auction {
+        width: 20%;
+        height: 20vw;
+      }
+      // &--auction:nth-child(1),
+      // &--auction:nth-child(2) {
+      //   height: 50vw;
+      //   width: 50%;
+      // }
+    }
+    @include mixins.desktop {
+      &--auction {
+        width: 20%;
+        height: 20vw;
+      }
+      // &--auction:nth-child(1) {
+      //   height: 50vw;
+      //   width: 50%;
+      // }
+      // &--auction:nth-child(2),
+      // &--auction:nth-child(3),
+      // &--auction:nth-child(4),
+      // &--auction:nth-child(5) {
+      //   height: 10vw;
+      //   width: 10%;
+      // }
+    }
+  }
+
   &__today {
     @include mixins.flex(column, center, center);
     width: 80%;
@@ -67,26 +166,26 @@
     }
   }
 
-  &__week {
-    @include mixins.flex(column, center, center);
-    border-top: 1px solid black;
-    width: 100%;
+  // &__grid {
+  //   @include mixins.flex(column, center, center);
+  //   border-top: 1px solid black;
+  //   width: 100%;
 
-    &--day {
-      @include mixins.flex(row, center, center);
-      height: 120px;
-      width: 100%;
-      border-bottom: 1px solid black;
-    }
+  //   &--auction {
+  //     @include mixins.flex(row, center, center);
+  //     height: 120px;
+  //     width: 100%;
+  //     border-bottom: 1px solid black;
+  //   }
 
-    @include mixins.tablet {
-      @include mixins.flex(row, space-between, center);
-      &--day {
-        @include mixins.flex(row, center, center);
-        height: 200px;
-        flex-grow: 1;
-        border-right: 1px solid black;
-      }
-    }
-  }
+  //   @include mixins.tablet {
+  //     @include mixins.flex(row, space-between, center);
+  //     &--auction {
+  //       @include mixins.flex(row, center, center);
+  //       height: 200px;
+  //       flex-grow: 1;
+  //       border-right: 1px solid black;
+  //     }
+  //   }
+  // }
 }

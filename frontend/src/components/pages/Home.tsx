@@ -7,10 +7,10 @@ export function Home() {
   ////////////////
   // USESTATES //
   //////////////
-  const [auctionList, setAuctionList] = useState<IAuction[]>([]);
+  const [quadArtList, setQuadArtList] = useState<IArt[]>([]);
   const [artList, setArtList] = useState<IArt[]>([]);
-  const [currentArt, setCurrentArt] = useState<IArt>({
-    objectId: "",
+  const [firstArt, setFirstArt] = useState<IArt>({
+    objectID: "",
     primaryImage: "",
     objectName: "",
     title: "",
@@ -22,56 +22,54 @@ export function Home() {
   /////////////////
   // USEEFFECTS //
   ///////////////
-  useEffect(() => {
-    axios.get("http://localhost:3001/art/getauctions").then((res) => {
-      setAuctionList(res.data);
-      console.log("Get auctions " + res.data);
-    });
-  }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     axios.get("http://localhost:3001/art/getartwork").then((res) => {
-      setArtList(res.data);
-    });
-  }, [])
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/art/gettodaysauction").then((res) => {
-      setCurrentArt(res.data);
-      console.log("primary " + res.data.primaryImage);
+      const list = res.data;
+      setFirstArt(list[0]);
+      setQuadArtList([list[1], list[2], list[3], list[4]]);
+      setArtList(list.slice(5));
+      // setArtList(list)
     });
   }, []);
-
-  ////////////////
-  // FUNCTIONS //
-  //////////////
-  function presentDay(date: string) {
-    const weekday = ["S", "M", "T", "W", "T", "F", "S"];
-
-    const d = new Date(date);
-    let day = weekday[d.getDay()];
-    return day;
-  }
 
   return (
     <>
       <div className="home">
-        <div className="home__today">
-          <div className="home__today--info">
-            <h3>{currentArt.title}</h3>
+        <div className="home__top">
+          <div className="home__top--first" key={firstArt.objectID}>
+            <img src={firstArt.primaryImage} alt="artwork" />
           </div>
-          <div className="home__today--image">
-            <img src={currentArt.primaryImage} alt="artwork" />
+          <div className="home__top--quad">
+            {quadArtList.map((auction) => (
+              <div className="home__top--quad__auction" key={auction.objectID}>
+                <img src={auction.primaryImage} alt="artwork" />
+              </div>
+            ))}
           </div>
         </div>
-        <div className="home__week">
-          {auctionList.map((auction) => (
-            <div className="home__week--day" key={auction.artId}>
-              <h2>{presentDay(auction.endTime)}</h2>
+        <div className="home__grid">
+          {artList.map((auction) => (
+            <div className="home__grid--auction" key={auction.objectID}>
+              <img src={auction.primaryImage} alt="artwork" />
             </div>
           ))}
         </div>
       </div>
+      {/* <div className="home">
+        <div className="home__today">
+          <div className="home__today--image">
+            <img src={currentArt.primaryImage} alt="artwork" />
+          </div>
+        </div>
+        <div className="home__grid">
+        {artList.map((auction) => (
+            <div className="home__grid--auction" key={auction.objectID}>
+              <h2>{auction.title}</h2>
+            </div>
+          ))}
+        </div>
+      </div> */}
     </>
   );
 }

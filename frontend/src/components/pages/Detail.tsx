@@ -17,7 +17,7 @@ export function Detail() {
     bidList: [],
   });
   const [art, setArt] = useState<IArt>({
-    objectId: "",
+    objectID: "",
     primaryImage: "",
     objectName: "",
     title: "",
