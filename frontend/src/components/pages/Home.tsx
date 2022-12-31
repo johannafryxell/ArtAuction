@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { IArt } from "../../models/IArt";
 import { IAuction } from "../../models/IAuction";
 
@@ -50,9 +51,11 @@ export function Home() {
         </div>
         <div className="home__grid">
           {artList.map((auction) => (
-            <div className="home__grid--auction" key={auction.objectID}>
-              <img src={auction.primaryImage} alt="artwork" />
-            </div>
+            <Link to={"/auction/" + auction.objectID}>
+              <div className="home__grid--auction" key={auction.objectID}>
+                <img src={auction.primaryImage} alt="artwork" />
+              </div>
+            </Link>
           ))}
         </div>
       </div>
