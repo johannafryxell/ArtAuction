@@ -39,23 +39,36 @@ export function Home() {
       <div className="home">
         <div className="home__top">
           <div className="home__top--first" key={firstArt.objectID}>
-            <img src={firstArt.primaryImage} alt="artwork" />
+            <Link
+              className="home__grid--auction__link"
+              to={"/auction/" + firstArt.objectID}
+            >
+              <img src={firstArt.primaryImage} alt="artwork" />
+            </Link>
           </div>
           <div className="home__top--quad">
             {quadArtList.map((auction) => (
               <div className="home__top--quad__auction" key={auction.objectID}>
-                <img src={auction.primaryImage} alt="artwork" />
+                <Link
+                  className="home__grid--auction__link"
+                  to={"/auction/" + auction.objectID}
+                >
+                  <img src={auction.primaryImage} alt="artwork" />
+                </Link>
               </div>
             ))}
           </div>
         </div>
         <div className="home__grid">
           {artList.map((auction) => (
-            <Link to={"/auction/" + auction.objectID}>
-              <div className="home__grid--auction" key={auction.objectID}>
+            <div className="home__grid--auction" key={auction.objectID}>
+              <Link
+                className="home__grid--auction__link"
+                to={"/auction/" + auction.objectID}
+              >
                 <img src={auction.primaryImage} alt="artwork" />
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </div>

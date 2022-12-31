@@ -68,7 +68,7 @@
     }
   }
   &__grid {
-    @include mixins.flex(row, center, center);
+    @include mixins.flex(row, flex-start, flex-start);
     flex-wrap: wrap;
     width: 100%;
 
@@ -79,6 +79,13 @@
       border-right: 0.5px solid black;
       height: 50vw;
       width: 50%;
+      
+      &__link{
+        @include mixins.flex(column, center, center);
+        width: 100%;
+        height: 100%;
+      }
+
       img {
         width: 50%;
         height: 50%;
