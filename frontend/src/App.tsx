@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./components/pages/Home";
 import { HomeLayout } from "./components/layouts/HomeLayout";
 import { DetailLayout } from "./components/layouts/DetailLayout";
+import { LoginLayout } from "./components/layouts/LoginLayout";
 import { Detail } from "./components/pages/Detail";
+import { Login } from "./components/pages/Login";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./scss/main.scss";
 import { useEffect } from "react";
@@ -43,6 +45,9 @@ function App() {
               </Route>
               <Route path="/auction" element={<DetailLayout />}>
                 <Route path="/auction/:id" element={<Detail />}></Route>
+              </Route>
+              <Route path="/login" element={<LoginLayout />}>
+                <Route path="/login" element={<Login />}></Route>
               </Route>
             </Routes>
         </BrowserRouter>
