@@ -8,7 +8,7 @@ export interface IUser {
 }
 
 export const UserSchema = new Schema({
-  mail: {
+  email: {
     type: String,
     required: true,
   },

@@ -1,7 +1,16 @@
 export interface IUser {
-  id: string;
-  mail: String;
-  password: String;
-  firstName: String;
-  lastName: String;
+  // id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface ISignupUser {
+  // id: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
 }

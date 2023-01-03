@@ -17,6 +17,7 @@ app.use((req: Request, res: Response, next: Function) => {
   res.header("Access-Control-Allow-Methods", "*");
   next();
 });
+
 app.use(express.json());
 
 const port: number = 3001;
