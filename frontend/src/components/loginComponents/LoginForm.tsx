@@ -32,7 +32,9 @@ export function LoginForm() {
               Password
             </label>
           </div>
-          <input type="submit" className="form__input--btn" value="Sign in" />
+          {/* <div className="form__input"> */}
+            <input type="submit" className="form__input--btn" value="Sign in" />
+          {/* </div> */}
         </form>
       </div>
     </>

@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
 
-interface IUser {
-  mail: String;
-  password: String;
-  firstName: String;
-  lastName: String;
+export interface IUser {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
 }
 
 export const UserSchema = new Schema({

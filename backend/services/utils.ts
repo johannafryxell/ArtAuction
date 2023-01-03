@@ -1,25 +1,25 @@
 //////////////
 // IMPORTS //
 ////////////
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
+import crypto from "crypto";
+import bcrypt from "bcrypt";
 //////////////
 // HASHING //
 ////////////
-const getHashedPassword = (password) => {
+export const getHashedPassword = (password:string) => {
   const sha256 = crypto.createHash("sha256");
   const hash = sha256.update("password").digest("base64");
   return hash;
 };
-const hashPassword = (password) => {
+export const hashPassword = (password:string) => {
   const hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   return hash;
 };
-const comparePassword = (password, hash) => {
+export const comparePassword = (password:string, hash:string) => {
   const correct = bcrypt.compareSync(password, hash);
   return correct;
 };
-const generateAuthToken = () => {
+export const generateAuthToken = () => {
   return crypto.randomBytes(30).toString("hex");
 };
 
@@ -27,14 +27,3 @@ const generateAuthToken = () => {
 // GENERATE KEY //
 /////////////////
 const key = crypto.randomBytes(32).toString("hex");
-
-
-//////////////
-// EXPORTS //
-////////////
-module.exports = {
-  getHashedPassword,
-  generateAuthToken,
-  hashPassword,
-  comparePassword,
-};
