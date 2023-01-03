@@ -25,13 +25,13 @@ export const postSignup = async (req: Request, res: Response) => {
   Users.findOne({ email }, async (err: any, user: IUser) => {
     if (user) {
       console.log("The mail exists");
-      // res.render("login", { signIn: false, userExists: true });
+
     } else if (password !== confirmPassword) {
       console.log("The password doesnt match");
-      // res.render("login", { signIn: false, wrongPassword: true });
+
     } else if (!password || !confirmPassword) {
       console.log("You need to have a password");
-      // res.render("login", { signIn: false, wrongPassword: true });
+      
     } else {
       const newUser = new Users({
         email,
