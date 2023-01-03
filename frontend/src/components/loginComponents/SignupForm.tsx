@@ -1,9 +1,26 @@
-export function SignupForm() {
+import axios from "axios";
+
+interface ISignupFormProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  updFirstName: (firstName: string) => void;
+  updLastName: (lastName: string) => void;
+  updEmail: (email: string) => void;
+  updPassword: (password: string) => void;
+  updConfirmPassword: (confirmPassword: string) => void;
+  signUp: () => void;
+}
+
+export const SignupForm = (props: ISignupFormProps) => {
   return (
     <>
       <div>
         <form
-          action="art/login/sign-up"
+          //   action="login/sign-up"
+          onSubmit={props.signUp}
           className="login-page__section login-page__section--form"
         >
           <div className="form__input">
@@ -34,7 +51,7 @@ export function SignupForm() {
           </div>
           <div className="form__input">
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               className="form__input--text"
@@ -78,4 +95,4 @@ export function SignupForm() {
       </div>
     </>
   );
-}
+};

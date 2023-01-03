@@ -3,7 +3,7 @@ export function LoginForm() {
     <>
       <div className="form">
         <form
-          action="art/login/sign-in"
+          action="login/sign-in"
           className="login-page__section login-page__section--form"
         >
           <div className="form__input">

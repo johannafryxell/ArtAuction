@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import AuctionRoute from "./routes/art-routes";
+import LoginRoute from "./routes/login-routes";
 
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -27,6 +28,7 @@ app.get("/", async (req, res) => {
   });
 
 app.use("/art", AuctionRoute);
+app.use("/login", LoginRoute);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
