@@ -84,14 +84,6 @@ $transition: all 0.2s ease-out;
           transform: scale(1.05);
           outline: none;
         }
-        &--checkbox {
-          margin-top: -0.5rem;
-          justify-self: flex-start;
-          width: 100%;
-          > * {
-            cursor: pointer;
-          }
-        }
       }
       a {
         text-decoration: none;
@@ -115,13 +107,12 @@ $transition: all 0.2s ease-out;
         }
       }
     }
-
-    &--registerView{
+    &--registerView {
       @include mixins.flex(column, center, center, 1.7rem);
-      .registerView__text{
-        margin-top: 1.7rem;
+      .registerView__text {
+        // margin-top: 1.7rem;
       }
-
+  
       .registerView__btn {
         width: 100%;
         transition: $transition;
@@ -134,6 +125,13 @@ $transition: all 0.2s ease-out;
         cursor: pointer;
         border-radius: $border-radius;
       }
+
+      .registerView__btn:focus,
+      .registerView__btn:hover {
+        transform: scale(1.05);
+        outline: none;
+      }
+      
     }
   }
   *::selection {

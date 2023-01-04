@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 interface ILoginFormProps {
   email: string;
   password: string;
@@ -7,9 +9,12 @@ interface ILoginFormProps {
 }
 
 export const LoginForm = (props: ILoginFormProps) => {
+  // const handleView = (e: ChangeEvent<HTMLInputElement>) => {
+  //   props.updSignupView(e.target.value);
+  // };
   return (
     <>
-      <div className="form">
+      {/* <div className="form"> */}
         <form
           action="login/sign-in"
           className="login-page__section login-page__section--form"
@@ -44,11 +49,7 @@ export const LoginForm = (props: ILoginFormProps) => {
           <input type="submit" className="form__input--btn" value="Sign in" />
           {/* </div> */}
         </form>
-        <div className="login-page__section login-page__section--registerView">
-          <span className="registerView__text">Don't have an account?</span>
-          <button className="registerView__btn"> Sign up</button>
-        </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };

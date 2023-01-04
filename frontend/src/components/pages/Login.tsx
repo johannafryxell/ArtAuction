@@ -15,6 +15,10 @@ export function Login() {
 
   const navigate = useNavigate();
 
+  const updSignupView = () => {
+    setSignUpView(!signUpView);
+  };
+
   const updFirstName = (name: string) => {
     setFirstName(name);
   };
@@ -83,6 +87,14 @@ export function Login() {
         />
       )}
       {/* <LoginForm /> */}
+      <div className="login-page__section login-page__section--registerView">
+        <span className="registerView__text">
+          {signUpView ? "Already have an account?" : "Don't have an account?"}
+        </span>
+        <button className="registerView__btn" onClick={updSignupView}>
+          {signUpView ? "Sign in" : "Sign up"}
+        </button>
+      </div>
     </main>
   );
 }

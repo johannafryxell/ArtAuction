@@ -34,7 +34,7 @@ export const SignupForm = (props: ISignupFormProps) => {
 
   return (
     <>
-      <div>
+      {/* <div> */}
         <form
           className="login-page__section login-page__section--form"
         >
@@ -117,7 +117,7 @@ export const SignupForm = (props: ISignupFormProps) => {
           />
           {/* </div> */}
         </form>
-      </div>
+      {/* </div> */}
     </>
   );
 };
