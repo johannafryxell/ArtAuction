@@ -116,11 +116,11 @@ $transition: all 0.2s ease-out;
       .registerView__btn {
         width: 100%;
         transition: $transition;
-        padding: calc(var(--font-size) * 0.5);
+        padding: calc(var(--font-size) * 0.3);
         background-color: variables.$greige-main;
         color: black;
         border: 1px solid black;
-        font-size: 1.125rem;
+        font-size: 1rem;
         text-decoration: none;
         cursor: pointer;
         border-radius: $border-radius;
