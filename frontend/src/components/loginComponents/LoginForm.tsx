@@ -1,4 +1,12 @@
-export function LoginForm() {
+interface ILoginFormProps {
+  email: string;
+  password: string;
+  updEmail: (email: string) => void;
+  updPassword: (password: string) => void;
+  logIn: (e: any) => void;
+}
+
+export const LoginForm = (props: ILoginFormProps) => {
   return (
     <>
       <div className="form">
@@ -33,10 +41,14 @@ export function LoginForm() {
             </label>
           </div>
           {/* <div className="form__input"> */}
-            <input type="submit" className="form__input--btn" value="Sign in" />
+          <input type="submit" className="form__input--btn" value="Sign in" />
           {/* </div> */}
         </form>
+        <div className="login-page__section login-page__section--registerView">
+          <span className="registerView__text">Don't have an account?</span>
+          <button className="registerView__btn"> Sign up</button>
+        </div>
       </div>
     </>
   );
-}
+};

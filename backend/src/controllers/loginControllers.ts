@@ -18,8 +18,6 @@ export const postLogin = async (req: Request, res: Response) => {
 };
 
 export const postSignup = async (req: Request, res: Response) => {
-  console.log("req body");
-  console.log(req.body);
   const { email, firstName, lastName, password, confirmPassword } = req.body;
 
   Users.findOne({ email }, async (err: any, user: IUser) => {
@@ -41,7 +39,6 @@ export const postSignup = async (req: Request, res: Response) => {
       });
       newUser.validateSync();
       await newUser.save();
-      res.redirect("/login");
     }
   });
 };

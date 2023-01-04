@@ -12,16 +12,10 @@ interface ISignupFormProps {
   updEmail: (email: string) => void;
   updPassword: (password: string) => void;
   updConfirmPassword: (confirmPassword: string) => void;
-  signUp: () => void;
+  signUp: (e:any) => void;
 }
 
 export const SignupForm = (props: ISignupFormProps) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
   const handleFirstName = (e: ChangeEvent<HTMLInputElement>) => {
     props.updFirstName(e.target.value);
   };
@@ -42,8 +36,6 @@ export const SignupForm = (props: ISignupFormProps) => {
     <>
       <div>
         <form
-          //   action="login/sign-up"
-          //   onSubmit={props.signUp}
           className="login-page__section login-page__section--form"
         >
           <div className="form__input">
@@ -121,7 +113,7 @@ export const SignupForm = (props: ISignupFormProps) => {
             type="submit"
             className="form__input--btn"
             value="Sign up"
-            onClick={props.signUp}
+            onClick={ e => props.signUp(e)}
           />
           {/* </div> */}
         </form>
