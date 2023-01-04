@@ -108,14 +108,14 @@ export const SignupForm = (props: ISignupFormProps) => {
               Repeat password
             </label>
           </div>
-          {/* <div className="form__input"> */}
+          <div className="form__input">
           <input
             type="submit"
             className="form__input--btn"
             value="Sign up"
             onClick={ e => props.signUp(e)}
           />
-          {/* </div> */}
+          </div>
         </form>
       {/* </div> */}
     </>

@@ -45,9 +45,9 @@ export const LoginForm = (props: ILoginFormProps) => {
               Password
             </label>
           </div>
-          {/* <div className="form__input"> */}
+          <div className="form__input">
           <input type="submit" className="form__input--btn" value="Sign in" />
-          {/* </div> */}
+          </div>
         </form>
       {/* </div> */}
     </>
