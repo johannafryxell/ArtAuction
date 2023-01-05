@@ -14,3 +14,8 @@ export interface ISignupUser {
   firstName: string;
   lastName: string;
 }
+
+export interface ISigninUser {
+  email: string;
+  password: string;
+}

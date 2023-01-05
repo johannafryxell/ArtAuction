@@ -1,6 +1,8 @@
+import { ObjectId } from "mongodb";
 import { Schema, model } from "mongoose";
 
 export interface IUser {
+  _id : ObjectId
   email: string;
   password: string;
   firstName: string;

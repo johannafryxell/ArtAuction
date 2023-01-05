@@ -12,11 +12,11 @@ export const getHashedPassword = (password:string) => {
   return hash;
 };
 export const hashPassword = (password:string) => {
-  const hash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  const hash:string = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   return hash;
 };
 export const comparePassword = (password:string, hash:string) => {
-  const correct = bcrypt.compareSync(password, hash);
+  const correct:boolean = bcrypt.compareSync(password, hash);
   return correct;
 };
 export const generateAuthToken = () => {

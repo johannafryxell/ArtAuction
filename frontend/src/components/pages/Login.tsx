@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISignupUser, IUser } from "../../models/IUser";
+import { ISigninUser, ISignupUser, IUser } from "../../models/IUser";
 import { LoginForm } from "../loginComponents/LoginForm";
 import { SignupForm } from "../loginComponents/SignupForm";
 
@@ -56,10 +56,27 @@ export function Login() {
       console.log(err);
     }
 
-    navigate("/");
+    // navigate("/");
   };
 
-  const logIn = async (e: any) => {};
+  const logIn = async (e: any) => {
+    e.preventDefault();
+    let body: ISigninUser = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      let res:any = await axios.post("http://localhost:3001/login/sign-in", body);
+      console.log("signin posted:", res.data.signIn);
+      // success = true;
+    } catch (err) {
+      console.log("error");
+      console.log(err);
+    }
+
+
+  };
 
   return (
     <main className="login-page">
