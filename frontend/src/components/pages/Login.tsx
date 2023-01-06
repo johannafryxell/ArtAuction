@@ -5,6 +5,10 @@ import { ISigninUser, ISignupUser, IUser } from "../../models/IUser";
 import { LoginForm } from "../loginComponents/LoginForm";
 import { SignupForm } from "../loginComponents/SignupForm";
 
+import Cookies from "universal-cookie";
+import jwt from "jwt-decode";
+// import { useCookies } from "react-cookie";
+
 export function Login() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -14,6 +18,7 @@ export function Login() {
   const [signUpView, setSignUpView] = useState(false);
 
   const navigate = useNavigate();
+  const cookies = new Cookies();
 
   const updSignupView = () => {
     setSignUpView(!signUpView);
@@ -49,7 +54,7 @@ export function Login() {
     try {
       console.log("trying...");
       let res = await axios.post("http://localhost:3001/login/sign-up", body);
-      console.log("signup posted:", res);
+
       // success = true;
     } catch (err) {
       console.log("error");
@@ -67,15 +72,18 @@ export function Login() {
     };
 
     try {
-      let res:any = await axios.post("http://localhost:3001/login/sign-in", body);
-      console.log("signin posted:", res.data.signIn);
+      let res: any = await axios.post(
+        "http://localhost:3001/login/sign-in",
+        body
+      );
+      cookies.set("logIn", res.data.token);
+      const decoded = jwt(res.data.token);
+
       // success = true;
     } catch (err) {
       console.log("error");
       console.log(err);
     }
-
-
   };
 
   return (
