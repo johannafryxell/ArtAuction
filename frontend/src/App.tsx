@@ -5,24 +5,17 @@ import { DetailLayout } from "./components/layouts/DetailLayout";
 import { LoginLayout } from "./components/layouts/LoginLayout";
 import { Detail } from "./components/pages/Detail";
 import { Login } from "./components/pages/Login";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./scss/main.scss";
-import { useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { IArtCollection } from "./models/IArt";
 
-////////////////
-// MUI THEME //
-//////////////
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#EDEBE9",
-      main: "#D1CDC7",
-      dark: "#877A6E"
-    },
-  },
-});
+import { AuthProvider } from "../src/components/AuthProvider"
+
+import Cookies from "universal-cookie";
+
+
+// const AuthContext = createContext(null);
 
 function App() {
   // useEffect(() => {
@@ -37,21 +30,24 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      {/* <AuthContext.Provider> */}
+      <AuthProvider>
+
         <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<HomeLayout />}>
-                <Route path="/" element={<Home />}></Route>
-              </Route>
-              <Route path="/auction" element={<DetailLayout />}>
-                <Route path="/auction/:id" element={<Detail />}></Route>
-              </Route>
-              <Route path="/login" element={<LoginLayout />}>
-                <Route path="/login" element={<Login />}></Route>
-              </Route>
-            </Routes>
+          <Routes>
+            <Route path="/" element={<HomeLayout />}>
+              <Route path="/" element={<Home />}></Route>
+            </Route>
+            <Route path="/auction" element={<DetailLayout />}>
+              <Route path="/auction/:id" element={<Detail />}></Route>
+            </Route>
+            <Route path="/login" element={<LoginLayout />}>
+              <Route path="/login" element={<Login />}></Route>
+            </Route>
+          </Routes>
         </BrowserRouter>
-      </ThemeProvider>
+      </AuthProvider>
+      {/* </AuthContext.Provider> */}
     </>
   );
 }

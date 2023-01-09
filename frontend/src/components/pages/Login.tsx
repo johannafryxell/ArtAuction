@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ISigninUser, ISignupUser, IUser } from "../../models/IUser";
 import { LoginForm } from "../loginComponents/LoginForm";
@@ -7,7 +7,7 @@ import { SignupForm } from "../loginComponents/SignupForm";
 
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
-// import { useCookies } from "react-cookie";
+import { AuthContext, IAuth } from "../AuthProvider";
 
 export function Login() {
   const [firstName, setFirstName] = useState("");
@@ -19,11 +19,18 @@ export function Login() {
 
   const navigate = useNavigate();
   const cookies = new Cookies();
+  /////////////////////
+  // CONTEXT VALUES //
+  ///////////////////
+  const { token } = useContext(AuthContext) as IAuth;
+  const { onLogin } = useContext(AuthContext) as IAuth;
 
+  ///////////////////////
+  // UPDATE FUNCTIONS //
+  /////////////////////
   const updSignupView = () => {
     setSignUpView(!signUpView);
   };
-
   const updFirstName = (name: string) => {
     setFirstName(name);
   };
@@ -40,8 +47,10 @@ export function Login() {
     setConfirmPassword(email);
   };
 
+  //////////////////////
+  // LOGIN FUNCTIONS //
+  ////////////////////
   const signUp = async (e: any) => {
-    // let success = false;
     e.preventDefault();
     let body: ISignupUser = {
       firstName: firstName,
@@ -54,8 +63,6 @@ export function Login() {
     try {
       console.log("trying...");
       let res = await axios.post("http://localhost:3001/login/sign-up", body);
-
-      // success = true;
     } catch (err) {
       console.log("error");
       console.log(err);
@@ -76,14 +83,18 @@ export function Login() {
         "http://localhost:3001/login/sign-in",
         body
       );
+      //Sätter cookie
       cookies.set("logIn", res.data.token);
-      const decoded = jwt(res.data.token);
 
-      // success = true;
+      //Sätter token med samma värde som finns i cookie
+      onLogin(res.data.token);
+
+      const decoded = jwt(res.data.token);
     } catch (err) {
       console.log("error");
       console.log(err);
     }
+
   };
 
   return (
