@@ -9,6 +9,7 @@ interface IAuctionBidProps {
 
 export const AuctionBid = (props: IAuctionBidProps) => {
   const [bids, setBids] = useState<IBid[]>([]);
+  const [startBid, setStartBid] = useState<number>(500);
   const [highestBid, sethighestBid] = useState<number>(0);
 
   const getBids = async () => {
@@ -36,8 +37,24 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         <span>{props.auction.endTime}</span>
       </div>
       <div>
-        <span>Current bid</span>
-        <span>{highestBid}</span>
+        {bids.length != 0 ? (
+          <>
+            <span>Current bid</span>
+            <span>{highestBid}</span>
+          </>
+        ) : (
+          <>
+            <span>Starting price</span>
+            <span>{startBid}</span>
+          </>
+        )}
+      </div>
+      <div>
+        {bids.length != 0 ? (
+          <span>Place {highestBid + 20} or more</span>
+        ) : (
+          <span>Place {startBid + 20} or more</span>
+        )}
       </div>
       <div className="inputBox">
         <input type="text" />
@@ -45,7 +62,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
       </div>
       <div>
         <span>Bid history</span>
-        {/* Utfällbart grej */}
+        <span>{bids.length} bids</span>
       </div>
     </div>
   );
