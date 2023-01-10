@@ -70,15 +70,13 @@ export function Detail() {
     <>
       <div className="detail">
         <div className="detail__artwork">
-        <AuctionImage art={art}></AuctionImage>
+          <AuctionImage art={art}></AuctionImage>
         </div>
         <div className="detail__artinfo">
-        
-            <AuctionBid auction={auction}></AuctionBid>
-            <AuctionInfo art={art}></AuctionInfo>
-            <AuctionInfo art={art}></AuctionInfo>
-            <AuctionInfo art={art}></AuctionInfo>
-          
+          <AuctionBid auction={auction}></AuctionBid>
+          <AuctionInfo art={art}></AuctionInfo>
+          <AuctionInfo art={art}></AuctionInfo>
+          <AuctionInfo art={art}></AuctionInfo>
         </div>
       </div>
     </>
