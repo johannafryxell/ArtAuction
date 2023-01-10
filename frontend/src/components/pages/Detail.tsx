@@ -11,10 +11,10 @@ export function Detail() {
   const [id, setId] = useState(useParams().id);
   const [endsToday, setEndsToday] = useState<boolean>(false);
   const [auction, setAuction] = useState<IAuction>({
+    _id: "",
     artId: 0,
     published: "",
     endTime: "",
-    bidList: [],
   });
   const [art, setArt] = useState<IArt>({
     objectID: "",
@@ -26,21 +26,26 @@ export function Detail() {
     period: "",
   });
 
+  const getAuction = async () => {
+    axios
+    .get("http://localhost:3001/art/getsingleauction?id=" + id)
+    .then((res) => {
+      if (res.data === "error") {
+        console.log("error: " + res.data);
+      } else {
+        setAuction(res.data.auction);
+        checkToday(res.data.today);
+        console.log(res.data);
+      }
+    });
+  }
+
   //////////////////
   // USE EFFECTS //
   ////////////////
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/art/getsingleauction?id=" + id)
-      .then((res) => {
-        if (res.data === "error") {
-          console.log("error: " + res.data);
-        } else {
-          setAuction(res.data.auction);
-          checkToday(res.data.today);
-          console.log(res.data);
-        }
-      });
+    getAuction();
   }, []);
 
   useEffect(() => {
@@ -68,7 +73,7 @@ export function Detail() {
 
   return (
     <>
-      <div className="detail">
+      <main className="detail">
         <div className="detail__artwork">
           <AuctionImage art={art}></AuctionImage>
         </div>
@@ -78,7 +83,7 @@ export function Detail() {
           <AuctionInfo art={art}></AuctionInfo>
           <AuctionInfo art={art}></AuctionInfo>
         </div>
-      </div>
+      </main>
     </>
   );
 }

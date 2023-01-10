@@ -68,6 +68,7 @@ export function Home() {
               >
                 <img src={auction.primaryImage} alt="artwork" />
               </Link>
+              <span>{auction.objectID}</span>
             </div>
           ))}
         </div>
