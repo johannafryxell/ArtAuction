@@ -6,19 +6,27 @@ import {
   getBids,
   getSingleAuction,
   getTodaysAuction,
+  postBid,
 } from "../controllers/artControllers";
 
 const router: Router = express.Router();
 
-//Gets all auctions from database
-router.get("/getauctions", getAuctions);
-
+//////////
+// ART //
+////////
 router.get("/getartwork", getAllArt);
 
+///////////////
+// AUCTIONS //
+/////////////
+router.get("/getauctions", getAuctions);
 router.get("/gettodaysauction", getTodaysAuction);
-
 router.get("/getsingleauction", getSingleAuction);
 
+///////////
+// BIDS //
+/////////
 router.get("/getbids", getBids);
+router.post("/postbid", postBid);
 
 export default router;

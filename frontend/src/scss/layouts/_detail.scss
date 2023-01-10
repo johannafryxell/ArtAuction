@@ -69,11 +69,16 @@
       div {
         width: 100%;
         @include mixins.flex(row, space-between, center);
-      }
 
+      }
+      
       .inputBox {
         @include mixins.flex(column, center, center);
         width: 100%;
+        
+        @include mixins.desktop{
+          max-width: 250px;
+        }
 
         input {
           width: 100%;
@@ -93,7 +98,13 @@
           color: white;
           width: 100%;
           padding: 10px;
+          cursor: pointer;
         }
+      }
+
+      .minBox {
+        @include mixins.flex(column, center, center);
+        color: $greige-dark;
       }
     }
 

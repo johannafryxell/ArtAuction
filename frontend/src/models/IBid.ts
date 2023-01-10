@@ -5,3 +5,11 @@ export interface IBid {
   amount: number;
   published: string;
 }
+
+export interface IPlaceBid {
+  auctionId: string;
+  userId: string;
+  amount: number;
+  published: string;
+}
+

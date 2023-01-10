@@ -3,8 +3,9 @@ import { Request, Response } from "express";
 import { fetchData } from "../../services/fetchData";
 import { Auction } from "../models/AuctionModel";
 import { IArt } from "../../../frontend/src/models/IArt";
-import { Bids } from "../models/BidModel";
+import { Bids, IBid } from "../models/BidModel";
 import { ObjectId } from "mongodb";
+import { Number } from "mongoose";
 
 //////////////////////
 // ART CONTROLLERS //
@@ -65,6 +66,36 @@ export const getBids = async (req: Request, res: Response) => {
 
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
+    res.send(bids);
+  } catch (err) {
+    res.send(err);
+  }
+  return;
+};
+
+export const postBid = async (req: Request, res: Response) => {
+  // const { auctionId } = req.query as { auctionId: string };
+  const { auctionId, userId, amount, published } = req.body;
+  console.log(req.body);
+
+  try {
+    const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
+    const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
+
+    if (amount < highBid) {
+      console.log("You need to pay more");
+    } else {
+      const newBid = new Bids({
+        _id: new ObjectId(),
+        auctionId: auctionId,
+        userId: new ObjectId(userId),
+        amount: amount,
+        published: published.toString(),
+      });
+      newBid.validateSync();
+      await newBid.save();
+    }
+
     res.send(bids);
   } catch (err) {
     res.send(err);

@@ -11,7 +11,7 @@ export interface IBid {
 
 export const BidSchema = new Schema({
   _id: {
-    type: String,
+    type: ObjectId,
     required: true,
   },
   auctionId: {
@@ -19,7 +19,7 @@ export const BidSchema = new Schema({
     required: true,
   },
   userId: {
-    type: String,
+    type: ObjectId,
     required: true,
   },
   amount: {
