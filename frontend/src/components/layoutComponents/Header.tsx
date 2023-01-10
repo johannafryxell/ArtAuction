@@ -29,9 +29,9 @@ export function Header() {
             className={({ isActive }) =>
               isActive ? "header__menu--linkActive" : "header__menu--link"
             }
-            to={auth ? "/login" : "/account"}
+            to={auth ? "/account" : "/login"}
           >
-            {auth ? "Login" : "Account"}
+            {auth ? "Account" : "Login"}
           </NavLink>
         </nav>
         <div className="header__logo">

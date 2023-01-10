@@ -1,4 +1,5 @@
 import express, { Router, Request, Response } from "express";
+import { getAccount } from "../controllers/accountControllers";
 
 const router: Router = express.Router();
 
@@ -6,15 +7,13 @@ const router: Router = express.Router();
 //   if (!res.locals.loggedIn) {
 //     console.log("Not logged in");
 
-//     res.redirect("/art");
+//     // res.redirect("/");
 //   } else {
 //     console.log("Logged in");
 //   }
 //   next();
 // });
 
-router.get("/", (req, res) => {
-  console.log("You're in user router");
-});
+router.post("/", (getAccount));
 
 export default router;

@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 export interface IAuth {
   auth: boolean;
@@ -14,8 +14,17 @@ interface IAuthContextProps {
 export const AuthContext = createContext<IAuth | null>(null);
 
 export const AuthProvider = ({ children }: IAuthContextProps) => {
-  //Nu kollar den inte om det finns en cookie vid inlogg
-  const [auth, setAuth] = useState(false);
+  const cookies = new Cookies();
+
+  //Sets token based on cookie
+  function checkCookie() {
+    if (cookies.get("logIn")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  const [auth, setAuth] = useState(checkCookie());
 
   const handleLogin = async () => {
     setAuth(true);

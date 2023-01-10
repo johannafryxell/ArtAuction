@@ -5,6 +5,8 @@ import UserRoute from "./routes/user-routes";
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+// const path = require("path");
+
 
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -12,6 +14,9 @@ require("dotenv").config();
 require("../services/database.ts");
 
 const app: Application = express();
+
+// app.use(express.static(path.join(__dirname, "..", "build")));
+// app.use(express.static("public"));
 // app.use(
 //   session({
 //     secret: process.env.JWT_SECRET,
@@ -37,7 +42,7 @@ app.use(express.json());
  */
 app.use((req, res, next) => {  
   const { logIn } = req.cookies;
-  console.log(logIn);
+  
   if (logIn && jwt.verify(logIn, process.env.JWT_SECRET)) {
     const tokenData = jwt.decode(logIn, process.env.JWT_SECRET);
     res.locals.loggedIn = true;
@@ -57,6 +62,8 @@ app.use((req, res, next) => {
 const port: number = 3001;
 
 app.get("/", async (req, res) => {
+  // res.sendFile(path.join(__dirname, "public", "index.tsx"));
+
   res.send({
     msg: "Hello World!",
   });
