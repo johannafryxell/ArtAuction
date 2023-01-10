@@ -86,13 +86,13 @@ export function Login() {
       cookies.set("logIn", res.data.token);
 
       onLogin();
+      navigate("/");
 
       const decoded = jwt(res.data.token);
     } catch (err) {
       console.log("error");
       console.log(err);
     }
-
   };
 
   return (

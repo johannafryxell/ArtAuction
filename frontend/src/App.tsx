@@ -11,6 +11,8 @@ import axios from "axios";
 import { IArtCollection } from "./models/IArt";
 
 import { AuthProvider } from "../src/components/AuthProvider"
+import { AccountLayout } from "./components/layouts/AccountLayout";
+import { Account } from "./components/pages/Account";
 
 function App() {
   // useEffect(() => {
@@ -38,6 +40,9 @@ function App() {
             </Route>
             <Route path="/login" element={<LoginLayout />}>
               <Route path="/login" element={<Login />}></Route>
+            </Route>
+            <Route path="/account" element={<AccountLayout />}>
+              <Route path="/account/:id" element={<Account />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>
