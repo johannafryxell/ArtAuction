@@ -12,11 +12,6 @@ import { IArtCollection } from "./models/IArt";
 
 import { AuthProvider } from "../src/components/AuthProvider"
 
-import Cookies from "universal-cookie";
-
-
-// const AuthContext = createContext(null);
-
 function App() {
   // useEffect(() => {
   // // Gets id:s for objects with images

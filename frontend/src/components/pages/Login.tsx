@@ -22,7 +22,7 @@ export function Login() {
   /////////////////////
   // CONTEXT VALUES //
   ///////////////////
-  const { token } = useContext(AuthContext) as IAuth;
+  const { auth } = useContext(AuthContext) as IAuth;
   const { onLogin } = useContext(AuthContext) as IAuth;
 
   ///////////////////////
@@ -83,11 +83,9 @@ export function Login() {
         "http://localhost:3001/login/sign-in",
         body
       );
-      //Sätter cookie
       cookies.set("logIn", res.data.token);
 
-      //Sätter token med samma värde som finns i cookie
-      onLogin(res.data.token);
+      onLogin();
 
       const decoded = jwt(res.data.token);
     } catch (err) {

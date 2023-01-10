@@ -2,8 +2,8 @@ import { createContext, ReactNode, useState } from "react";
 import Cookies from "universal-cookie";
 
 export interface IAuth {
-  token: string | null;
-  onLogin: (cookieToken: string) => void;
+  auth: boolean;
+  onLogin: () => void;
   onLogout: () => void;
 }
 
@@ -22,21 +22,20 @@ export const AuthContext = createContext<IAuth | null>(null);
 export const AuthProvider = ({ children }: IAuthContextProps) => {
   const cookies = new Cookies();
 
-  const [token, setToken] = useState(cookies.get("logIn") || null);
+  //Nu kollar den inte om det finns en cookie vid inlogg
+  const [auth, setAuth] = useState(false);
+//   const [token, setToken] = useState(cookies.get("logIn") || null);
 
-  const handleLogin = async (cookieToken: string) => {
-    // const token = cookies.get("logIn");
-
-    // setToken(token);
-    setToken(cookieToken);    
+  const handleLogin = async () => {
+    setAuth(true);    
   };
 
   const handleLogout = () => {
-    setToken(null);
+    setAuth(false);
   };
 
   const value = {
-    token,
+    auth,
     onLogin: handleLogin,
     onLogout: handleLogout,
   };
