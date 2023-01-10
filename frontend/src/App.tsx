@@ -42,7 +42,7 @@ function App() {
               <Route path="/login" element={<Login />}></Route>
             </Route>
             <Route path="/account" element={<AccountLayout />}>
-              <Route path="/account/:id" element={<Account />}></Route>
+              <Route path="/account" element={<Account />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>

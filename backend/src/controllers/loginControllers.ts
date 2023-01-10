@@ -5,6 +5,7 @@ import { comparePassword, hashPassword } from "../../services/utils";
 const jwt = require("jsonwebtoken");
 import { Users } from "../models/UserModel";
 import { IUser } from "../models/UserModel";
+const cookieParser = require("cookie-parser");
 
 ////////////////////////
 // LOGIN CONTROLLERS //
@@ -17,7 +18,7 @@ export const postLogin = async (req: Request, res: Response) => {
     if (user && comparePassword(password, user.password)) {
       const userData = { email: user.email, id: user._id };
       const accessToken = jwt.sign(userData, process.env.JWT_SECRET);
-
+      
       res.send({signIn: true, token: accessToken});
     }else{
       res.send({signIn: false});

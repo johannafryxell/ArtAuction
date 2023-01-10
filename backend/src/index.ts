@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import AuctionRoute from "./routes/art-routes";
 import LoginRoute from "./routes/login-routes";
+import UserRoute from "./routes/user-routes";
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -31,6 +32,28 @@ app.use((req: Request, res: Response, next: Function) => {
 
 app.use(express.json());
 
+/*
+ * Middleware to check if logged in.
+ */
+app.use((req, res, next) => {  
+  const { logIn } = req.cookies;
+  console.log(logIn);
+  if (logIn && jwt.verify(logIn, process.env.JWT_SECRET)) {
+    const tokenData = jwt.decode(logIn, process.env.JWT_SECRET);
+    res.locals.loggedIn = true;
+    res.locals.email = tokenData.email;
+    res.locals.id = tokenData.id;
+    console.log(res.locals);
+    
+  } else {
+    res.locals.loggedIn = false;
+    
+  }
+  console.log(res.locals.loggedIn);
+  
+  next();
+});
+
 const port: number = 3001;
 
 app.get("/", async (req, res) => {
@@ -41,6 +64,7 @@ app.get("/", async (req, res) => {
 
 app.use("/art", AuctionRoute);
 app.use("/login", LoginRoute);
+app.use("/account", UserRoute);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
