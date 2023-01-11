@@ -19,6 +19,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   const [startBid, setStartBid] = useState<number>(500);
   const [highestBid, sethighestBid] = useState<number>(0);
   const [newBid, setNewBid] = useState<number>(0);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   const getBids = async () => {
     let auctionId = props.auction._id;
@@ -40,11 +41,11 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
   useEffect(() => {
     getBids();
-  }, [props.auction]);
+  }, [props.auction, newBid]);
 
   const placeBid = async () => {
-    const userToken = cookies.get("logIn");
     if (auth) {
+      const userToken = cookies.get("logIn");
       const decoded: any = jwt(userToken);
       let body: IPlaceBid = {
         auctionId: props.auction._id,
@@ -52,9 +53,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         amount: newBid,
         published: new Date().toDateString(),
       };
-      if (newBid < highestBid) {
-        console.log(newBid);
-        console.log("is to low");
+      if (newBid <= highestBid + 49) {
+        setErrorMsg(true);
+        setNewBid(highestBid + 50);
       } else {
         try {
           await axios.post("http://localhost:3001/art/postbid", body);
@@ -62,20 +63,32 @@ export const AuctionBid = (props: IAuctionBidProps) => {
           console.log(err);
           console.log("error");
         }
-        console.log("higher");
+        setNewBid(0);
       }
     } else {
       console.log("You need to be logged in");
     }
   };
 
+  function bidMessage() {
+    if (!errorMsg && bids.length != 0) {
+      return <span>Place {highestBid + 50} or more</span>;
+    } else if (errorMsg && bids.length != 0) {
+      return <span className="errorMsg">Place {highestBid + 50} or more</span>;
+    } else if (errorMsg) {
+      return <span className="errorMsg">Place {startBid + 50} or more</span>;
+    } else {
+      return <span>Place {startBid + 50} or more</span>;
+    }
+  }
+
   return (
     <div className="detail__artinfo--box">
-      <div>
+      <div className="bidInfo">
         <span>Ends</span>
         <span>{props.auction.endTime}</span>
       </div>
-      <div>
+      <div className="bidInfo">
         {bids.length != 0 ? (
           <>
             <span>Current bid</span>
@@ -88,18 +101,18 @@ export const AuctionBid = (props: IAuctionBidProps) => {
           </>
         )}
       </div>
-      <div className="minBox">
-        {bids.length != 0 ? (
-          <span>Place {highestBid + 20} or more</span>
-        ) : (
-          <span>Place {startBid + 20} or more</span>
-        )}
-      </div>
+      <div className="minBox">{bidMessage()}</div>
       <div className="inputBox">
-        <input type="number" onChange={handleBid} />
-        <button onClick={placeBid}>Place Bid</button>
+        {newBid == 0 ? (
+          <input type="number" onChange={handleBid} value={""} />
+        ) : (
+          <input type="number" onChange={handleBid} value={newBid} />
+        )}
+        <button onClick={placeBid} id="bidInput">
+          Place Bid
+        </button>
       </div>
-      <div>
+      <div className="bidInfo">
         <span>Bid history</span>
         <span>{bids.length} bids</span>
       </div>

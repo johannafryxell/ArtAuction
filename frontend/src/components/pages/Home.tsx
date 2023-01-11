@@ -18,6 +18,8 @@ export function Home() {
     country: "",
     artistDisplayName: "",
     period: "",
+    accessionYear: "",
+    artistDisplayBio: "",
   });
 
   /////////////////

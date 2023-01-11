@@ -76,13 +76,12 @@ export const getBids = async (req: Request, res: Response) => {
 export const postBid = async (req: Request, res: Response) => {
   // const { auctionId } = req.query as { auctionId: string };
   const { auctionId, userId, amount, published } = req.body;
-  console.log(req.body);
 
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
     const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
 
-    if (amount < highBid) {
+    if (amount <= (highBid + 49)) {
       console.log("You need to pay more");
     } else {
       const newBid = new Bids({

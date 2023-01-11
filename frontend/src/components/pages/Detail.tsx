@@ -6,6 +6,7 @@ import { IAuction } from "../../models/IAuction";
 import { AuctionBid } from "../auctionComponents/AuctionBid";
 import { AuctionImage } from "../auctionComponents/AuctionImage";
 import { AuctionInfo } from "../auctionComponents/AuctionInfo";
+import { BidInfo } from "../auctionComponents/BidInfo";
 
 export function Detail() {
   const [id, setId] = useState(useParams().id);
@@ -24,6 +25,8 @@ export function Detail() {
     country: "",
     artistDisplayName: "",
     period: "",
+    accessionYear: "",
+    artistDisplayBio: ""
   });
 
   const getAuction = async () => {
@@ -80,7 +83,7 @@ export function Detail() {
         <div className="detail__artinfo">
           <AuctionBid auction={auction}></AuctionBid>
           <AuctionInfo art={art}></AuctionInfo>
-          <AuctionInfo art={art}></AuctionInfo>
+          <BidInfo/>
           <AuctionInfo art={art}></AuctionInfo>
         </div>
       </main>

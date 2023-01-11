@@ -6,6 +6,8 @@ export interface IArt{
     country : string,
     artistDisplayName : string,
     period : string,
+    accessionYear  : string,
+    artistDisplayBio : string,
 }
 
 export interface IArtCollection{

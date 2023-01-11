@@ -66,17 +66,15 @@
       border-left: 1px solid black;
       padding: 30px;
 
-      div {
+      .bidInfo {
         width: 100%;
         @include mixins.flex(row, space-between, center);
-
       }
-      
       .inputBox {
         @include mixins.flex(column, center, center);
         width: 100%;
-        
-        @include mixins.desktop{
+
+        @include mixins.desktop {
           max-width: 250px;
         }
 
@@ -105,6 +103,32 @@
       .minBox {
         @include mixins.flex(column, center, center);
         color: $greige-dark;
+
+        .errorMsg {
+          color: $warning;
+        }
+      }
+
+      &__detail {
+        @include mixins.flex(column, space-between, center);
+        font-size: 0.9rem;
+        flex-grow: 0.8;
+
+        .detailInfo {
+          width: 100%;
+          @include mixins.flex(row, flex-start, flex-start);
+          h4{
+            width: 30%;
+          }
+          span{
+            width: 70%;
+            text-align: right;
+          }
+        }
+      }
+
+      p{
+        font-size: 0.9rem;
       }
     }
 
