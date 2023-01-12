@@ -5,6 +5,7 @@ interface IAuction {
   artId: number;
   published: String;
   endTime: String;
+  price: number;
 }
 
 export const AuctionSchema = new Schema({
@@ -22,6 +23,10 @@ export const AuctionSchema = new Schema({
   },
   endTime: {
     type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
     required: true,
   },
 });

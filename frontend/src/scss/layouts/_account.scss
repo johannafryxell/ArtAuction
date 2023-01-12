@@ -26,15 +26,22 @@
       @include mixins.flex(row, space-between, center);
 
       &__auctionSingle {
-        @include mixins.flex(row, center, center);
-        border: 1px solid black;
-        width: 50vw;
-        height: 50vw;
+        @include mixins.flex(column, center, center, 0.4rem);
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        width: 60vw;
+        height: 60vw;
+        font-size: 0.8rem;
 
         img {
           width: 50%;
           height: 50%;
           object-fit: cover;
+        }
+
+        .infoDetail {
+          width: 90%;
+          @include mixins.flex(row, space-between, center);
         }
       }
       @include mixins.tablet {

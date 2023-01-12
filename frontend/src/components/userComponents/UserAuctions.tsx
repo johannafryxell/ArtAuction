@@ -40,7 +40,16 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
               key={art.objectID}
               className="account__section--auctions__auctionSingle"
             >
+              <span>{art.title}</span>
               <img src={art.primaryImage} alt={art.title} />
+              <div className="infoDetail">
+                <h4>Leading bid</h4>
+                <span>{auction.price}</span>
+              </div>
+              <div className="infoDetail">
+                <h4>Starting price</h4>
+                <span>{auction.price}</span>
+              </div>
             </div>
           );
         }

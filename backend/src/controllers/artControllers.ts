@@ -68,6 +68,8 @@ export const getBids = async (req: Request, res: Response) => {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
     const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
 
+    console.log(bids);
+    
     res.send({bids:bids, highBid: highBid});
   } catch (err) {
     res.send(err);
@@ -94,13 +96,12 @@ export const postBid = async (req: Request, res: Response) => {
       });
       newBid.validateSync();
       await newBid.save();
+      res.send("success");
     }
-
-    // res.send({bids:bids, highBid: highBid});
   } catch (err) {
     res.send(err);
   }
-  return;
+  // return;
 };
 
 export const getAllArt = async (req: Request, res: Response) => {

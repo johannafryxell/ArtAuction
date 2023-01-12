@@ -3,4 +3,5 @@ export interface IAuction {
   artId: number;
   published: string;
   endTime: string;
+  price: number;
 }

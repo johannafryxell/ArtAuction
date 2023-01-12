@@ -16,6 +16,7 @@ export function Detail() {
     artId: 0,
     published: "",
     endTime: "",
+    price: 0,
   });
   const [art, setArt] = useState<IArt>({
     objectID: "",
@@ -26,22 +27,21 @@ export function Detail() {
     artistDisplayName: "",
     period: "",
     accessionYear: "",
-    artistDisplayBio: ""
+    artistDisplayBio: "",
   });
 
   const getAuction = async () => {
     axios
-    .get("http://localhost:3001/art/getsingleauction?id=" + id)
-    .then((res) => {
-      if (res.data === "error") {
-        console.log("error: " + res.data);
-      } else {
-        setAuction(res.data.auction);
-        checkToday(res.data.today);
-        console.log(res.data);
-      }
-    });
-  }
+      .get("http://localhost:3001/art/getsingleauction?id=" + id)
+      .then((res) => {
+        if (res.data === "error") {
+          console.log("error: " + res.data);
+        } else {
+          setAuction(res.data.auction);
+          checkToday(res.data.today);
+        }
+      });
+  };
 
   //////////////////
   // USE EFFECTS //
@@ -54,11 +54,9 @@ export function Detail() {
   useEffect(() => {
     axios
       .get(
-        "https://collectionapi.metmuseum.org/public/collection/v1/objects/" +
-          auction.artId
+        "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + id
       )
       .then((result) => {
-        console.log(result.data.primaryImage);
         setArt(result.data);
       });
   }, [auction]);
@@ -83,7 +81,7 @@ export function Detail() {
         <div className="detail__artinfo">
           <AuctionBid auction={auction}></AuctionBid>
           <AuctionInfo art={art}></AuctionInfo>
-          <BidInfo/>
+          <BidInfo />
           <AuctionInfo art={art}></AuctionInfo>
         </div>
       </main>

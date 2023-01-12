@@ -16,7 +16,6 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   const { auth } = useContext(AuthContext) as IAuth;
 
   const [bids, setBids] = useState<IBid[]>([]);
-  const [startBid, setStartBid] = useState<number>(500);
   const [highestBid, sethighestBid] = useState<number>(0);
   const [newBid, setNewBid] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState(false);
@@ -27,8 +26,12 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     let res: any = await axios.get(
       "http://localhost:3001/art/getbids/?auctionId=" + auctionId
     );
-    setBids(res.data.bids);
-    sethighestBid(res.data.highBid);
+
+    if (res.data.bids) {
+      // console.log(res.data);
+      setBids(res.data.bids);
+      sethighestBid(res.data.highBid);
+    }
   };
 
   const handleBid = (e: ChangeEvent<HTMLInputElement>) => {
@@ -55,12 +58,12 @@ export const AuctionBid = (props: IAuctionBidProps) => {
       } else {
         try {
           await axios.post("http://localhost:3001/art/postbid", body);
+          setNewBid(0);
+          setErrorMsg(false);
         } catch (err) {
           console.log(err);
           console.log("error");
         }
-        setNewBid(0);
-        setErrorMsg(false);
       }
     } else {
       console.log("You need to be logged in");
@@ -68,14 +71,18 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   };
 
   function bidMessage() {
-    if (!errorMsg && bids.length != 0) {
+    if (!errorMsg && props.auction.price < highestBid) {
       return <span>Place {highestBid + 50} or more</span>;
-    } else if (errorMsg && bids.length != 0) {
+    } else if (errorMsg && props.auction.price < highestBid) {
       return <span className="errorMsg">Place {highestBid + 50} or more</span>;
     } else if (errorMsg) {
-      return <span className="errorMsg">Place {startBid + 50} or more</span>;
+      return (
+        <span className="errorMsg">
+          Place {props.auction.price + 50} or more
+        </span>
+      );
     } else {
-      return <span>Place {startBid + 50} or more</span>;
+      return <span>Place {props.auction.price + 50} or more</span>;
     }
   }
 
@@ -86,7 +93,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         <span>{props.auction.endTime}</span>
       </div>
       <div className="bidInfo">
-        {bids.length != 0 ? (
+        {props.auction.price < highestBid ? (
           <>
             <span>Current bid</span>
             <span>{highestBid}</span>
@@ -94,7 +101,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         ) : (
           <>
             <span>Starting price</span>
-            <span>{startBid}</span>
+            <span>{props.auction.price}</span>
           </>
         )}
       </div>
