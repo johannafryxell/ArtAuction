@@ -20,17 +20,19 @@
 
   &__section {
     &--user {
+      min-width: 20vw;
       height: 40vh;
     }
     &--auctions {
       @include mixins.flex(row, space-between, center);
+      flex-wrap: wrap;
 
       &__auctionSingle {
         @include mixins.flex(column, center, center, 0.4rem);
         border-left: 1px solid black;
-        border-bottom: 1px solid black;
-        width: 60vw;
-        height: 60vw;
+        border-top: 1px solid black;
+        width: 50vw;
+        height: 50vw;
         font-size: 0.8rem;
 
         img {
@@ -43,11 +45,28 @@
           width: 90%;
           @include mixins.flex(row, space-between, center);
         }
+        .title {
+          width: 90%;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &:last-child {
+          border-right: 1px solid black;
+        }
+        &:nth-last-child(2) {
+          border-bottom: 1px solid black;
+        }
       }
       @include mixins.tablet {
+        @include mixins.flex(row, flex-start, center);
+
         &__auctionSingle {
           width: 20vw;
           height: 20vw;
+          border-bottom: 1px solid black;
+          border-top: none;
         }
       }
     }
