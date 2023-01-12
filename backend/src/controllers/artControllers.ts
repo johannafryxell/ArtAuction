@@ -67,8 +67,6 @@ export const getBids = async (req: Request, res: Response) => {
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
     const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
-
-    console.log(bids);
     
     res.send({bids:bids, highBid: highBid});
   } catch (err) {

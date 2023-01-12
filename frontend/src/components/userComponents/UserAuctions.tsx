@@ -5,6 +5,7 @@ import jwt from "jwt-decode";
 import axios from "axios";
 import { IAuction } from "../../models/IAuction";
 import { IArt } from "../../models/IArt";
+import { IBid } from "../../models/IBid";
 
 interface IUserAuctionsProps {
   user: IUser;
@@ -14,6 +15,7 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
   const cookies = new Cookies();
   const [auctions, setAuctions] = useState<IAuction[]>([]);
   const [artList, setArtlist] = useState<IArt[]>([]);
+  const [highBids, setHighBids] = useState<IBid[]>([]);
 
   const getAuctions = async () => {
     const user: any = jwt(cookies.get("logIn"));
@@ -23,6 +25,7 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
     );
     setAuctions(res.data.auctions);
     setArtlist(res.data.art);
+    setHighBids(res.data.highBids);
   };
 
   useEffect(() => {
@@ -31,30 +34,38 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
 
   function displayAuctions() {
     const list: any = [];
+    console.log(highBids);
+    
 
-    auctions.map((auction, i) => {
+    auctions.map((auction) => {
       artList.map((art) => {
         if (art.objectID == auction.artId.toString()) {
-          list.push(
-            <div
-              key={art.objectID}
-              className="account__section--auctions__auctionSingle"
-            >
-              <span>{art.title}</span>
-              <img src={art.primaryImage} alt={art.title} />
-              <div className="infoDetail">
-                <h4>Leading bid</h4>
-                <span>{auction.price}</span>
-              </div>
-              <div className="infoDetail">
-                <h4>Starting price</h4>
-                <span>{auction.price}</span>
-              </div>
-            </div>
-          );
+          highBids.map((bid) => {
+            if (bid.auctionId == auction._id.toString()) {
+              list.push(
+                <div
+                  key={art.objectID}
+                  className="account__section--auctions__auctionSingle"
+                >
+                  <span>{art.title}</span>
+                  <img src={art.primaryImage} alt={art.title} />
+                  <div className="infoDetail">
+                    <h4>Leading bid</h4>
+                    <span>{bid.amount}</span>
+                  </div>
+                  <div className="infoDetail">
+                    <h4>Starting price</h4>
+                    <span>{auction.price}</span>
+                  </div>
+                </div>
+              );
+            }
+          });
         }
       });
     });
+    console.log(list);
+    
 
     return list;
   }
