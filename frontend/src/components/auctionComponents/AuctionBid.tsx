@@ -27,12 +27,8 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     let res: any = await axios.get(
       "http://localhost:3001/art/getbids/?auctionId=" + auctionId
     );
-    setBids(res.data);
-
-    const highBid = Math.max(
-      ...(res.data as Array<IBid>).map((bid) => bid.amount)
-    );
-    sethighestBid(highBid);
+    setBids(res.data.bids);
+    sethighestBid(res.data.highBid);
   };
 
   const handleBid = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +60,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
           console.log("error");
         }
         setNewBid(0);
+        setErrorMsg(false);
       }
     } else {
       console.log("You need to be logged in");

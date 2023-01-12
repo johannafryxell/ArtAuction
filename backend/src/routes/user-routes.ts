@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { getAccount } from "../controllers/accountControllers";
+import { getAccount, getUserAuctions } from "../controllers/accountControllers";
 
 const router: Router = express.Router();
 
@@ -14,6 +14,9 @@ const router: Router = express.Router();
 //   next();
 // });
 
+//Denna ska inte vara en post
 router.post("/", (getAccount));
+
+router.get("/getuserauctions", (getUserAuctions));
 
 export default router;

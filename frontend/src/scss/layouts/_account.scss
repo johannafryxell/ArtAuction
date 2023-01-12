@@ -1,0 +1,48 @@
+////////////////////
+// IMPORTS & USE //
+//////////////////
+@use "../mixins";
+@use "../base/typography";
+@import "../variables";
+
+////////////////////
+// DETAIL STYLING//
+//////////////////
+.account {
+  margin: 0 auto;
+  @include mixins.flex(column, space-between, center);
+
+  @include typography.inter();
+
+  @include mixins.tablet {
+    @include mixins.flex(row, space-between, flex-start);
+  }
+
+  &__section {
+    &--user {
+      height: 40vh;
+    }
+    &--auctions {
+      @include mixins.flex(row, space-between, center);
+
+      &__auctionSingle {
+        @include mixins.flex(row, center, center);
+        border: 1px solid black;
+        width: 50vw;
+        height: 50vw;
+
+        img {
+          width: 50%;
+          height: 50%;
+          object-fit: cover;
+        }
+      }
+      @include mixins.tablet {
+        &__auctionSingle {
+          width: 20vw;
+          height: 20vw;
+        }
+      }
+    }
+  }
+}

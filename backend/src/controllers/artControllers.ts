@@ -66,7 +66,9 @@ export const getBids = async (req: Request, res: Response) => {
 
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
-    res.send(bids);
+    const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
+
+    res.send({bids:bids, highBid: highBid});
   } catch (err) {
     res.send(err);
   }
@@ -74,7 +76,6 @@ export const getBids = async (req: Request, res: Response) => {
 };
 
 export const postBid = async (req: Request, res: Response) => {
-  // const { auctionId } = req.query as { auctionId: string };
   const { auctionId, userId, amount, published } = req.body;
 
   try {
@@ -95,7 +96,7 @@ export const postBid = async (req: Request, res: Response) => {
       await newBid.save();
     }
 
-    res.send(bids);
+    // res.send({bids:bids, highBid: highBid});
   } catch (err) {
     res.send(err);
   }

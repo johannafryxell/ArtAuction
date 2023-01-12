@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { AuthContext, IAuth } from "../AuthProvider";
+import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import { IUser } from "../../models/IUser";
+import { AboutUser } from "../userComponents/AboutUser";
+import { UserAuctions } from "../userComponents/UserAuctions";
 
 export function Account() {
   const cookies = new Cookies();
@@ -36,9 +38,9 @@ export function Account() {
   }, []);
 
   return (
-    <>
-      <h1>Account</h1>
-      <span>{user.firstName}</span>
-    </>
+    <main className="account">
+      <AboutUser user={user}/>
+      <UserAuctions user={user}/>
+    </main>
   );
 }

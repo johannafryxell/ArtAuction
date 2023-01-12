@@ -5,9 +5,9 @@
 @use "../base/typography";
 @import "../variables";
 
+////////////////////
+// DETAIL STYLING//
 //////////////////
-// HOME STYLING//
-////////////////
 .detail {
   margin: 0 auto;
   @include mixins.flex(column, space-between, center);
