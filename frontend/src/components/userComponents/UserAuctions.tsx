@@ -7,6 +7,7 @@ import { IAuction } from "../../models/IAuction";
 import { IArt } from "../../models/IArt";
 import { IBid } from "../../models/IBid";
 import { Link } from "react-router-dom";
+import { IArtAuction } from "../../models/IArtAuction";
 
 interface IUserAuctionsProps {
   user: IUser;
@@ -14,8 +15,9 @@ interface IUserAuctionsProps {
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
   const cookies = new Cookies();
-  const [auctions, setAuctions] = useState<IAuction[]>([]);
-  const [artList, setArtlist] = useState<IArt[]>([]);
+
+  const [ongoingAuctions, setOngoingAuctions] = useState<IArtAuction[]>([]);
+  const [endedAuctions, setEndedAuctions] = useState<IArtAuction[]>([]);
   const [highBids, setHighBids] = useState<IBid[]>([]);
 
   const getAuctions = async () => {
@@ -24,8 +26,11 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
     let res: any = await axios.get(
       "http://localhost:3001/account/getuserauctions/?userId=" + user.id
     );
-    setAuctions(res.data.auctions);
-    setArtlist(res.data.art);
+    // console.log("auctions",res.data.artauctions);
+    // console.log("bids",res.data.highBids);
+
+    setOngoingAuctions(res.data.ongoing);
+    setEndedAuctions(res.data.ended);
     setHighBids(res.data.highBids);
   };
 
@@ -33,36 +38,32 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
     getAuctions();
   }, []);
 
-  function displayAuctions() {
+  function displayAuctions(auctionList: IArtAuction[], ended: boolean) {
     const list: any = [];
-    console.log(highBids);
+    console.log(ongoingAuctions);
 
-    auctions.map((auction) => {
-      artList.map((art) => {
-        if (art.objectID == auction.artId.toString()) {
-          highBids.map((bid) => {
-            if (bid.auctionId == auction._id.toString()) {
-              list.push(
-                <div
-                  key={art.objectID}
-                  className="account__section--auctions__auctionSingle"
-                >
-                  <Link className="auctLink" to={"/auction/" + auction.artId}>
-                    <h4 className="title">{art.title}</h4>
-                    <img src={art.primaryImage} alt={art.title} />
-                    <div className="infoDetail">
-                      <h4>Leading bid</h4>
-                      <span>{bid.amount}</span>
-                    </div>
-                    <div className="infoDetail">
-                      <h4>Starting price</h4>
-                      <span>{auction.price}</span>
-                    </div>
-                  </Link>
+    auctionList.map((art: IArtAuction) => {
+      highBids.map((bid) => {
+        if (bid.auctionId == art._id) {
+          list.push(
+            <div
+              key={art.objectID}
+              className="account__section--auctions__auctionSingle"
+            >
+              <Link className="auctLink" to={"/auction/" + art.artId}>
+                <h4 className="title">{art.title}</h4>
+                <img src={art.primaryImage} alt={art.title} />
+                <div className="infoDetail">
+                  {ended ? <h4>Ended at</h4> : <h4>Leading bid</h4>}
+                  <span>{bid.amount}</span>
                 </div>
-              );
-            }
-          });
+                <div className="infoDetail">
+                  <h4>Starting price</h4>
+                  <span>{art.price}</span>
+                </div>
+              </Link>
+            </div>
+          );
         }
       });
     });
@@ -73,7 +74,8 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
 
   return (
     <div className="account__section account__section--auctions">
-      {displayAuctions()}
+      {displayAuctions(ongoingAuctions, false)}
+      {displayAuctions(endedAuctions, true)}
     </div>
   );
 };

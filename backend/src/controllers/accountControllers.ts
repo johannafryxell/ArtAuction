@@ -6,6 +6,7 @@ import { Auction } from "../models/AuctionModel";
 import { IArt } from "../../../frontend/src/models/IArt";
 import { IArtAuction } from "../../../frontend/src/models/IArtAuction";
 import { fetchData } from "../../services/fetchData";
+import { IAuction } from "../../../frontend/src/models/IAuction";
 const jwt = require("jsonwebtoken");
 
 //////////////////////////
@@ -37,11 +38,10 @@ export const getUserAuctions = async (req: Request, res: Response) => {
     { $sort: { amount: -1 } },
     { $group: { _id: "$auctionId", highestBid: { $first: "$$ROOT" } } },
     { $replaceRoot: { newRoot: "$highestBid" } },
-]);
-  console.log(highBids);
+  ]);
 
   //Get the auction objects from the id:s
-  const auctions = await Auction.find().where("_id").in(userAuctIds).exec();
+  const auctions = await Auction.find().where("_id").in(userAuctIds).lean().exec();
 
   //Get the art info
   const url =
@@ -55,5 +55,15 @@ export const getUserAuctions = async (req: Request, res: Response) => {
     })
   );
 
-  res.send({ auctions: auctions, art: artList, highBids: highBids });
+  const combined = auctions.map((auction) => {
+    const matchedArt = artList.find((art) => +art.objectID === auction.artId);
+    return { ...auction, ...matchedArt };
+  });
+  
+  const ongoing = combined.filter((p) => +p.endTime >= +new Date());
+
+  const ended = combined.filter((p) => +p.endTime <= +new Date());  
+
+  res.send({ ongoing: ongoing ,ended: ended,  highBids: highBids });
+  // res.send({ auctions: auctions, art: artList, highBids: highBids });
 };

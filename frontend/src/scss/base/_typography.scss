@@ -2,6 +2,7 @@
 // IMPORTS //
 ////////////
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&family=Nova+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap");
 /////////////
 // MIXINS //
 ///////////
@@ -11,4 +12,11 @@
 
 @mixin nova {
   font-family: "Nova Mono", monospace;
+}
+
+@mixin anton {
+  font-family: "Anton", sans-serif;
+}
+@mixin montserrat {
+  font-family: "Montserrat", sans-serif;
 }

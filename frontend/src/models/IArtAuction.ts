@@ -3,7 +3,8 @@ export interface IArtAuction {
   artId: number;
   published: string;
   endTime: string;
-  objectID : number,
+  price: number;
+  objectID : number;
   primaryImage: string;
   objectName: string;
   title: string;

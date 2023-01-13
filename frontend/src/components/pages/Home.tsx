@@ -18,6 +18,7 @@ export function Home() {
     artId: 0,
     published: "",
     endTime: "",
+    price: 0,
     objectID: 0,
     primaryImage: "",
     objectName: "",

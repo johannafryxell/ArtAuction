@@ -41,6 +41,8 @@
     width: 100%;
 
     h1 {
+      line-height: 1;
+      @include typography.anton;
       font-size: 64px;
       @include mixins.tablet{
         font-size: 100px;

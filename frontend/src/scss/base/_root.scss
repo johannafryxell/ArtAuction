@@ -1,4 +1,6 @@
+@use "./typography";
 @import "../variables";
+
 *,
 *::before,
 *::after {
@@ -8,6 +10,7 @@
 }
 html,
 body {
+  @include typography.montserrat;
   scroll-behavior: smooth;
   background-color: $greige-main;
   &::-webkit-scrollbar {
