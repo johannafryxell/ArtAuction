@@ -26,21 +26,6 @@ export const getAccount = async (req: Request, res: Response) => {
 export const getUserAuctions = async (req: Request, res: Response) => {
   let { userId } = req.query as { userId: string };
 
-  //HÄMTAR OBJEKT MED AUCTIONID OCH LISTA MED EN ANVÄNDARES ALLA BUD
-  // const userBids = await Bids.aggregate([
-  //   { $match: { userId: new ObjectId(userId) } },
-  //   { $sort: { amount: -1 } },
-  //   { $group: { _id: "$auctionId", bids: { $push: "$$ROOT" } } },
-  // ]);
-  // console.log(userBids);
-
-  // userBids.map((bids) => {
-  //   const highBid = Math.max(
-  //     ...(bids.bids as Array<IBid>).map((bid) => bid.amount)
-  //   );
-  //   console.log(highBid);
-  // });
-
   // Get distinct id:s of auctions user has bidded on
   const userAuctIds = await Bids.find({
     userId: new ObjectId(userId),

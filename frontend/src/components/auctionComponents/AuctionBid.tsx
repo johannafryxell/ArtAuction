@@ -5,6 +5,7 @@ import { IBid, IPlaceBid } from "../../models/IBid";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import { AuthContext, IAuth } from "../AuthProvider";
+import { CountDown } from "./CountDown";
 
 interface IAuctionBidProps {
   auction: IAuction;
@@ -28,7 +29,6 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     );
 
     if (res.data.bids) {
-      // console.log(res.data);
       setBids(res.data.bids);
       sethighestBid(res.data.highBid);
     }
@@ -89,8 +89,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   return (
     <div className="detail__artinfo--box">
       <div className="bidInfo">
-        <span>Ends</span>
-        <span>{props.auction.endTime}</span>
+        <CountDown endTime={props.auction.endTime}></CountDown>
       </div>
       <div className="bidInfo">
         {props.auction.price < highestBid ? (

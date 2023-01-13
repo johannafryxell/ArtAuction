@@ -15,7 +15,7 @@ export function Detail() {
     _id: "",
     artId: 0,
     published: "",
-    endTime: "",
+    endTime: new Date(),
     price: 0,
   });
   const [art, setArt] = useState<IArt>({
