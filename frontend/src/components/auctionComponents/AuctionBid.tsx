@@ -20,6 +20,18 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   const [highestBid, sethighestBid] = useState<number>(0);
   const [newBid, setNewBid] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [ended, setEnded] = useState(false);
+
+  function calcEndTime() {
+    let endTime = props.auction.endTime.toLocaleString();
+    let today = new Date().toLocaleString();
+
+    if (new Date(today) >= new Date(endTime)) {
+      setEnded(true);
+    } else {
+      setEnded(false);
+    }
+  }
 
   const getBids = async () => {
     let auctionId = props.auction._id;
@@ -41,6 +53,10 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   useEffect(() => {
     getBids();
   }, [props.auction, newBid]);
+
+  useEffect(() => {
+    calcEndTime();
+  }, [props.auction]);
 
   const placeBid = async () => {
     if (auth) {
@@ -90,38 +106,47 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   }
 
   return (
-    <div className="detail__artinfo--box">
-      <div className="bidInfo">
-        <CountDown endTime={props.auction.endTime}></CountDown>
-      </div>
-      <div className="bidInfo">
-        {props.auction.price < highestBid ? (
-          <>
-            <span>Current bid</span>
-            <span>{highestBid}</span>
-          </>
-        ) : (
-          <>
-            <span>Starting price</span>
-            <span>{props.auction.price}</span>
-          </>
-        )}
-      </div>
-      <div className="minBox">{bidMessage()}</div>
-      <div className="inputBox">
-        {newBid == 0 ? (
-          <input type="number" onChange={handleBid} value={""} />
-        ) : (
-          <input type="number" onChange={handleBid} value={newBid} />
-        )}
-        <button onClick={placeBid} id="bidInput">
-          Place Bid
-        </button>
-      </div>
-      <div className="bidInfo">
-        <span>Bid history</span>
-        <span>{bids.length} bids</span>
-      </div>
-    </div>
+    <>
+      {ended ? (
+        <div className="detail__artinfo--box">
+          <span>Auction ended {new Date(props.auction.endTime).toDateString()}</span>
+          <span>Sold for {highestBid}</span>
+        </div>
+      ) : (
+        <div className="detail__artinfo--box">
+          <div className="bidInfo">
+            <CountDown endTime={props.auction.endTime}></CountDown>
+          </div>
+          <div className="bidInfo">
+            {props.auction.price < highestBid ? (
+              <>
+                <span>Current bid</span>
+                <span>{highestBid}</span>
+              </>
+            ) : (
+              <>
+                <span>Starting price</span>
+                <span>{props.auction.price}</span>
+              </>
+            )}
+          </div>
+          <div className="minBox">{bidMessage()}</div>
+          <div className="inputBox">
+            {newBid == 0 ? (
+              <input type="number" onChange={handleBid} value={""} />
+            ) : (
+              <input type="number" onChange={handleBid} value={newBid} />
+            )}
+            <button onClick={placeBid} id="bidInput">
+              Place Bid
+            </button>
+          </div>
+          <div className="bidInfo">
+            <span>Bid history</span>
+            <span>{bids.length} bids</span>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

@@ -48,14 +48,8 @@ export const CountDown = (props: ICountDownProps) => {
   });
 
   function timeDisplay() {
-    const oneDay = 24 * 60 * 60 * 1000;
-
-    const diffDays = Math.round(Math.abs((+today - +endTime) / oneDay));
-
     const ending = new Date(props.endTime).toLocaleDateString();
     const now: string = new Date().toLocaleDateString();
-    // console.log(endDate);
-    // console.log(endTime)
 
     if (ending === now) {
       return (

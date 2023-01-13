@@ -84,12 +84,13 @@ export function Detail() {
           <AuctionImage art={art}></AuctionImage>
         </div>
         <div className="detail__artinfo">
-          {!ended && <AuctionBid auction={auction}></AuctionBid>}
+          <AuctionBid auction={auction}></AuctionBid>
+          {/* {!ended && <AuctionBid auction={auction}></AuctionBid>}
           {ended && (
             <div className="detail__artinfo--box">
               <span>This auction has ended</span>
             </div>
-          )}
+          )} */}
           <AuctionInfo art={art}></AuctionInfo>
           <BidInfo />
           <AuctionInfo art={art}></AuctionInfo>
