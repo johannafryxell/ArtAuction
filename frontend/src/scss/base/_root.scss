@@ -10,7 +10,8 @@
 }
 html,
 body {
-  @include typography.montserrat;
+  color: $almost-black;
+  @include typography.inter;
   scroll-behavior: smooth;
   background-color: $greige-main;
   &::-webkit-scrollbar {

@@ -17,6 +17,7 @@ export function Header() {
           >
             Home
           </NavLink>
+          <span>/</span>
           <NavLink
             className={({ isActive }) =>
               isActive ? "header__menu--linkActive" : "header__menu--link"
@@ -25,6 +26,8 @@ export function Header() {
           >
             Current Auction
           </NavLink>
+          <span>/</span>
+
           <NavLink
             className={({ isActive }) =>
               isActive ? "header__menu--linkActive" : "header__menu--link"

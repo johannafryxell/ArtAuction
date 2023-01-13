@@ -53,13 +53,15 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
               <Link className="auctLink" to={"/auction/" + art.artId}>
                 <h4 className="title">{art.title}</h4>
                 <img src={art.primaryImage} alt={art.title} />
-                <div className="infoDetail">
-                  {ended ? <h4>Ended at</h4> : <h4>Leading bid</h4>}
-                  <span>{bid.amount}</span>
-                </div>
-                <div className="infoDetail">
-                  <h4>Starting price</h4>
-                  <span>{art.price}</span>
+                <div className="infoBox">
+                  <div className="infoDetail">
+                    {ended ? <h4>Ended at</h4> : <h4>Leading bid</h4>}
+                    <span>{bid.amount}</span>
+                  </div>
+                  <div className="infoDetail">
+                    <h4>Starting price</h4>
+                    <span>{art.price}</span>
+                  </div>
                 </div>
               </Link>
             </div>
