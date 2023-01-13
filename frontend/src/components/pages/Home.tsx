@@ -2,16 +2,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IArt } from "../../models/IArt";
+import { IArtAuction } from "../../models/IArtAuction";
 import { IAuction } from "../../models/IAuction";
+import { SkeletonImage } from "../layoutComponents/LoaderImage";
+import { LoaderSkeleton } from "../layoutComponents/LoaderSkeleton";
 
 export function Home() {
   ////////////////
   // USESTATES //
   //////////////
-  const [quadArtList, setQuadArtList] = useState<IArt[]>([]);
-  const [artList, setArtList] = useState<IArt[]>([]);
-  const [firstArt, setFirstArt] = useState<IArt>({
-    objectID: "",
+  const [quadArtList, setQuadArtList] = useState<IArtAuction[]>([]);
+  const [artList, setArtList] = useState<IArtAuction[]>([]);
+  const [firstArt, setFirstArt] = useState<IArtAuction>({
+    _id: "",
+    artId: 0,
+    published: "",
+    endTime: "",
+    objectID: 0,
     primaryImage: "",
     objectName: "",
     title: "",
@@ -25,15 +32,23 @@ export function Home() {
   /////////////////
   // USEEFFECTS //
   ///////////////
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/art/getartwork").then((res) => {
+  const getArtwork = async () => {
+    axios.get("http://localhost:3001/art/getartwork?ended=" + false).then((res) => {
       const list = res.data;
+      console.log(list[0]);
+      list.map((art: any) => {
+        console.log(art.objectID);
+      });
+
       setFirstArt(list[0]);
       setQuadArtList([list[1], list[2], list[3], list[4]]);
       setArtList(list.slice(5));
       // setArtList(list)
     });
+  };
+
+  useEffect(() => {
+    getArtwork();
   }, []);
 
   return (
@@ -45,7 +60,11 @@ export function Home() {
               className="home__grid--auction__link"
               to={"/auction/" + firstArt.objectID}
             >
-              <img src={firstArt.primaryImage} alt="artwork" />
+              {firstArt.objectID != 0 ? (
+                <img src={firstArt.primaryImage} alt="artwork" />
+              ) : (
+                <LoaderSkeleton type="img" />
+              )}
             </Link>
           </div>
           <div className="home__top--quad">

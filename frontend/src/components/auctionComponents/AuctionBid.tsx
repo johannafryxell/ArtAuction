@@ -55,7 +55,10 @@ export const AuctionBid = (props: IAuctionBidProps) => {
       if (newBid <= highestBid + 49) {
         setErrorMsg(true);
         setNewBid(highestBid + 50);
-      } else {
+      } else if(newBid < props.auction.price){
+        setErrorMsg(true);
+        setNewBid(props.auction.price + 50);
+      }else {
         try {
           await axios.post("http://localhost:3001/art/postbid", body);
           setNewBid(0);

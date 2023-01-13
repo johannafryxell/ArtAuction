@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { fetchData } from "../../services/fetchData";
 import { Auction } from "../models/AuctionModel";
 import { IArt } from "../../../frontend/src/models/IArt";
+import { IAuction } from "../../../frontend/src/models/IAuction";
 import { Bids, IBid } from "../models/BidModel";
 import { ObjectId } from "mongodb";
 import { Number } from "mongoose";
@@ -67,8 +68,8 @@ export const getBids = async (req: Request, res: Response) => {
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
     const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
-    
-    res.send({bids:bids, highBid: highBid});
+
+    res.send({ bids: bids, highBid: highBid });
   } catch (err) {
     res.send(err);
   }
@@ -82,7 +83,7 @@ export const postBid = async (req: Request, res: Response) => {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
     const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
 
-    if (amount <= (highBid + 49)) {
+    if (amount <= highBid + 49) {
       console.log("You need to pay more");
     } else {
       const newBid = new Bids({
@@ -103,18 +104,51 @@ export const postBid = async (req: Request, res: Response) => {
 };
 
 export const getAllArt = async (req: Request, res: Response) => {
+  //Check if all dates should be included
+  const { passed } = req.query;
+  let auctions:IAuction[] = []
+  const currentDate = new Date();
+
+  if(passed){
+     auctions = await Auction.find({}).sort({ endTime: 1 }).lean();
+     console.log(auctions[0].endTime);
+     console.log(new Date());
+     
+  }else{
+    auctions = await Auction.find({ endTime: { $gte: currentDate } }).lean();
+    console.log(auctions);
+    console.log(new Date());
+    
+  }
+  // console.log(auctions[0].endTime);
+  // console.log(new Date());
+  // if(auctions[0].endTime < new Date()){
+  //   console.log("true");
+    
+  // }else{
+  //   console.log("false");
+    
+  // }
+  
+
   const url =
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-  const auctions = await Auction.find({}).sort("desc").lean();
   const artList: IArt[] = [];
-
   const art = await Promise.all(
     auctions.map(async (auction) => {
       const auctionsData: IArt = await fetchData(url + auction.artId);
       artList.push(auctionsData);
     })
   );
-  res.send(artList);
+
+  const combined = auctions.map((auction) => {
+    const matchedArt = artList.find((art) => +art.objectID === auction.artId);
+    return { ...auction, ...matchedArt };
+  });
+  // console.log(combined);
+
+  res.send(combined);
+  // res.send(artList);
 };
 
 /////////////////////

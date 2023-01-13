@@ -6,6 +6,7 @@ import axios from "axios";
 import { IAuction } from "../../models/IAuction";
 import { IArt } from "../../models/IArt";
 import { IBid } from "../../models/IBid";
+import { Link } from "react-router-dom";
 
 interface IUserAuctionsProps {
   user: IUser;
@@ -35,7 +36,6 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
   function displayAuctions() {
     const list: any = [];
     console.log(highBids);
-    
 
     auctions.map((auction) => {
       artList.map((art) => {
@@ -47,16 +47,18 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
                   key={art.objectID}
                   className="account__section--auctions__auctionSingle"
                 >
-                  <h4 className="title">{art.title}</h4>
-                  <img src={art.primaryImage} alt={art.title} />
-                  <div className="infoDetail">
-                    <h4>Leading bid</h4>
-                    <span>{bid.amount}</span>
-                  </div>
-                  <div className="infoDetail">
-                    <h4>Starting price</h4>
-                    <span>{auction.price}</span>
-                  </div>
+                  <Link className="auctLink" to={"/auction/" + auction.artId}>
+                    <h4 className="title">{art.title}</h4>
+                    <img src={art.primaryImage} alt={art.title} />
+                    <div className="infoDetail">
+                      <h4>Leading bid</h4>
+                      <span>{bid.amount}</span>
+                    </div>
+                    <div className="infoDetail">
+                      <h4>Starting price</h4>
+                      <span>{auction.price}</span>
+                    </div>
+                  </Link>
                 </div>
               );
             }
@@ -65,7 +67,6 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
       });
     });
     console.log(list);
-    
 
     return list;
   }
