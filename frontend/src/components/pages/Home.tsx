@@ -33,12 +33,8 @@ export function Home() {
   // USEEFFECTS //
   ///////////////
   const getArtwork = async () => {
-    axios.get("http://localhost:3001/art/getartwork?ended=" + false).then((res) => {
+    axios.get("http://localhost:3001/art/getartwork").then((res) => {
       const list = res.data;
-      console.log(list[0]);
-      list.map((art: any) => {
-        console.log(art.objectID);
-      });
 
       setFirstArt(list[0]);
       setQuadArtList([list[1], list[2], list[3], list[4]]);

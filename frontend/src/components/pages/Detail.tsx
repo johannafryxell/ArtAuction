@@ -10,7 +10,7 @@ import { BidInfo } from "../auctionComponents/BidInfo";
 
 export function Detail() {
   const [id, setId] = useState(useParams().id);
-  const [endsToday, setEndsToday] = useState<boolean>(false);
+  const [ended, setEnded] = useState<boolean>(false);
   const [auction, setAuction] = useState<IAuction>({
     _id: "",
     artId: 0,
@@ -29,6 +29,19 @@ export function Detail() {
     accessionYear: "",
     artistDisplayBio: "",
   });
+  ////////////////
+  // FUNCTIONS //
+  //////////////
+  function calcEndTime() {
+    let endTime = auction.endTime.toLocaleString();
+    let today = new Date().toLocaleString();
+
+    if (new Date(today) >= new Date(endTime)) {
+      setEnded(true);
+    } else {
+      setEnded(false);
+    }
+  }
 
   const getAuction = async () => {
     axios
@@ -38,7 +51,6 @@ export function Detail() {
           console.log("error: " + res.data);
         } else {
           setAuction(res.data.auction);
-          checkToday(res.data.today);
         }
       });
   };
@@ -46,10 +58,14 @@ export function Detail() {
   //////////////////
   // USE EFFECTS //
   ////////////////
-
   useEffect(() => {
     getAuction();
+    calcEndTime();
   }, []);
+
+  useEffect(() => {
+    calcEndTime();
+  }, [auction]);
 
   useEffect(() => {
     axios
@@ -61,17 +77,6 @@ export function Detail() {
       });
   }, [auction]);
 
-  ////////////////
-  // FUNCTIONS //
-  //////////////
-  function checkToday(today: boolean) {
-    if (today) {
-      setEndsToday(true);
-    } else {
-      setEndsToday(false);
-    }
-  }
-
   return (
     <>
       <main className="detail">
@@ -79,7 +84,12 @@ export function Detail() {
           <AuctionImage art={art}></AuctionImage>
         </div>
         <div className="detail__artinfo">
-          <AuctionBid auction={auction}></AuctionBid>
+          {!ended && <AuctionBid auction={auction}></AuctionBid>}
+          {ended && (
+            <div className="detail__artinfo--box">
+              <span>This auction has ended</span>
+            </div>
+          )}
           <AuctionInfo art={art}></AuctionInfo>
           <BidInfo />
           <AuctionInfo art={art}></AuctionInfo>

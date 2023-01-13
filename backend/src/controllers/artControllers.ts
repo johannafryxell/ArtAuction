@@ -104,19 +104,11 @@ export const postBid = async (req: Request, res: Response) => {
 };
 
 export const getAllArt = async (req: Request, res: Response) => {
-  //Check if all dates should be included
-  const { passed } = req.query;
-  let auctions:IAuction[] = []
-
-  if(passed){
-     auctions = await Auction.find({}).sort({ endTime: 1 }).lean();
-     console.log(auctions[0].endTime);
-     console.log(new Date());
-     
-  }else{
-    auctions = await Auction.find({}).sort({ endTime: 1 }).lean();
-    auctions = auctions.filter(p => p.endTime >= new Date()) 
-  }  
+  //Find all auctions and sort
+  let auctions: IAuction[] = await Auction.find({}).sort({ endTime: 1 }).lean();
+  
+  //Remove all that has ended
+  auctions = auctions.filter((p) => p.endTime >= new Date());
 
   const url =
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
@@ -128,14 +120,13 @@ export const getAllArt = async (req: Request, res: Response) => {
     })
   );
 
+  //Combine the lists of objects
   const combined = auctions.map((auction) => {
     const matchedArt = artList.find((art) => +art.objectID === auction.artId);
     return { ...auction, ...matchedArt };
   });
-  // console.log(combined);
 
   res.send(combined);
-  // res.send(artList);
 };
 
 /////////////////////
