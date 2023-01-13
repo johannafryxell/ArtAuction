@@ -13,7 +13,10 @@
   min-height: 85%;
   @include mixins.flex(column, space-between, center);
 
-  @include typography.inter();
+  img{
+    border-radius: 2px;
+  }
+
   ///////////////
   // SECTIONS //
   /////////////

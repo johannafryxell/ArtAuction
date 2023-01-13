@@ -45,12 +45,33 @@
     width: 100%;
 
     h1 {
+      overflow: hidden;
+      .diffLetter{
+        overflow: hidden;
+        color: rgb(80, 80, 80);
+        // font-style: italic;
+        // margin-right: 15px;
+        //En vitsvart ram
+        // text-shadow: 2px 1px 1px white, 4px 2px 1px black;
+
+        //Inverted colors
+        // background-color: $almost-black;
+        // color: $greige-main;
+
+        //Outlined
+        // color: $greige-main;
+        // -webkit-text-stroke: 0.01px $almost-black;
+      }
       @include typography.fjalla;
       padding-top: 5px;
       font-size: 65px;
       line-height: 0.87;
 
       @include mixins.tablet{
+        padding-top: 8px;
+        font-size: 90px;
+      }
+      @include mixins.desktop{
         padding-top: 8px;
         font-size: 120px;
       }
