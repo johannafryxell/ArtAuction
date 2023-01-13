@@ -7,7 +7,7 @@ export function DetailLayout() {
     <>
       <Header></Header>
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </>
   );
 }

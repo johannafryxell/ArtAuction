@@ -7,7 +7,7 @@ export function AccountLayout() {
     <>
       <Header></Header>
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </>
   );
 }

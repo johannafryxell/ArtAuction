@@ -1,0 +1,17 @@
+////////////////////
+// IMPORTS & USE //
+//////////////////
+@use "../mixins";
+@use "../base/typography";
+@import "../variables";
+
+////////////////////
+// FOOTER STYLING//
+//////////////////
+.footer {
+  border-top: 1px solid black;
+  margin: 0 auto;
+  @include mixins.flex(column, center, center);
+  margin-top: -1px;
+  height: 20vh;
+}

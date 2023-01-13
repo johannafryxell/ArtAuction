@@ -7,7 +7,7 @@ export function LoginLayout() {
     <>
       <Header></Header>
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </>
   );
 }

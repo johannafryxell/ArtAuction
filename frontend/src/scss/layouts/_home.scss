@@ -91,6 +91,11 @@
         height: 50%;
         object-fit: cover;
       }
+      &:last-child {
+        margin-left: 0.5px;
+        border-right: 1px solid black;
+        border-left: none;
+      }
     }
 
     @include mixins.tablet {

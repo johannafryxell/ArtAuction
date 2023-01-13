@@ -14,10 +14,13 @@
 
   &__menu {
     @include mixins.flex(row, center, center, 2rem);
+    background-color: $greige-main;
     height: 50px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     width: 100%;
+    position: sticky; 
+    top: 0;
 
     &--link {
       text-decoration: none;
@@ -41,11 +44,13 @@
     width: 100%;
 
     h1 {
-      line-height: 1;
-      @include typography.anton;
-      font-size: 64px;
+      @include typography.fjalla;
+      padding-top: 5px;
+      font-size: 65px;
+      line-height: 0.87;
       @include mixins.tablet{
-        font-size: 100px;
+        padding-top: 8px;
+        font-size: 120px;
       }
     }
   }
