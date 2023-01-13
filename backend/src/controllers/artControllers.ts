@@ -107,7 +107,6 @@ export const getAllArt = async (req: Request, res: Response) => {
   //Check if all dates should be included
   const { passed } = req.query;
   let auctions:IAuction[] = []
-  const currentDate = new Date();
 
   if(passed){
      auctions = await Auction.find({}).sort({ endTime: 1 }).lean();
@@ -115,21 +114,9 @@ export const getAllArt = async (req: Request, res: Response) => {
      console.log(new Date());
      
   }else{
-    auctions = await Auction.find({ endTime: { $gte: currentDate } }).lean();
-    console.log(auctions);
-    console.log(new Date());
-    
-  }
-  // console.log(auctions[0].endTime);
-  // console.log(new Date());
-  // if(auctions[0].endTime < new Date()){
-  //   console.log("true");
-    
-  // }else{
-  //   console.log("false");
-    
-  // }
-  
+    auctions = await Auction.find({}).sort({ endTime: 1 }).lean();
+    auctions = auctions.filter(p => p.endTime >= new Date()) 
+  }  
 
   const url =
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
