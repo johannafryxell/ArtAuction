@@ -1,20 +1,25 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./scss/main.scss";
+
+// PAGES //
 import { Home } from "./components/pages/Home";
+import { Account } from "./components/pages/Account";
+import { Login } from "./components/pages/Login";
+import { Detail } from "./components/pages/Detail";
+
+// LAYOUTS //
 import { HomeLayout } from "./components/layouts/HomeLayout";
 import { DetailLayout } from "./components/layouts/DetailLayout";
 import { LoginLayout } from "./components/layouts/LoginLayout";
-import { Detail } from "./components/pages/Detail";
-import { Login } from "./components/pages/Login";
-import "./scss/main.scss";
+import { AccountLayout } from "./components/layouts/AccountLayout";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { IArtCollection } from "./models/IArt";
-
-import { AuthProvider } from "../src/components/AuthProvider"
-import { AccountLayout } from "./components/layouts/AccountLayout";
-import { Account } from "./components/pages/Account";
+import { useAuctions } from "./components/AuctionProvider";
 
 function App() {
+  const auctionObject = useAuctions();
+
   // useEffect(() => {
   // // Gets id:s for objects with images
   // axios
@@ -27,27 +32,22 @@ function App() {
 
   return (
     <>
-      {/* <AuthContext.Provider> */}
-      <AuthProvider>
-
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomeLayout />}>
-              <Route path="/" element={<Home />}></Route>
-            </Route>
-            <Route path="/auction" element={<DetailLayout />}>
-              <Route path="/auction/:id" element={<Detail />}></Route>
-            </Route>
-            <Route path="/login" element={<LoginLayout />}>
-              <Route path="/login" element={<Login />}></Route>
-            </Route>
-            <Route path="/account" element={<AccountLayout />}>
-              <Route path="/account" element={<Account />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-      {/* </AuthContext.Provider> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeLayout />}>
+            {auctionObject?.auctions.length != 0 && <Route path="/" element={<Home />}></Route>}
+          </Route>
+          <Route path="/auction" element={<DetailLayout />}>
+            <Route path="/auction/:id" element={<Detail />}></Route>
+          </Route>
+          <Route path="/login" element={<LoginLayout />}>
+            <Route path="/login" element={<Login />}></Route>
+          </Route>
+          <Route path="/account" element={<AccountLayout />}>
+            <Route path="/account" element={<Account />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

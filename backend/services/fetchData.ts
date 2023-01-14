@@ -14,8 +14,9 @@ export async function fetchData<T>(url: string): Promise<T> {
     const data: T = response.data;
 
     // Spara i cachen
-    lscache.set(cacheKey, data, 60); // Spara i 60 minuter
-
+    const setCache= lscache.set(cacheKey, data, 60); // Spara i 60 minuter
+    console.log(lscache.supported());
+    
     return data;
   });
 }
