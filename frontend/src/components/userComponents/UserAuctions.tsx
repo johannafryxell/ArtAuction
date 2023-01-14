@@ -11,49 +11,19 @@ import { IArtAuction } from "../../models/IArtAuction";
 import { useAuctions } from "../AuctionProvider";
 
 interface IUserAuctionsProps {
-  user: IUser;
+  highBids: IBid[];
+  ongoingAuctions: IArtAuction[]
+  endedAuctions: IArtAuction[]
 }
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
   const cookies = new Cookies();
-  const auctions = useAuctions().auctions;
-
-  const [ongoingAuctions, setOngoingAuctions] = useState<IArtAuction[]>([]);
-  const [endedAuctions, setEndedAuctions] = useState<IArtAuction[]>([]);
-  const [highBids, setHighBids] = useState<IBid[]>([]);
-
-  const getAuctions = async () => {
-    const user: any = jwt(cookies.get("logIn"));
-
-    let res: any = await axios.get(
-      "http://localhost:3001/account/getuserauctions/?userId=" + user.id
-    );
-    const auctionIds = res.data.auctionIds;
-    const bids = res.data.highBids;
-    setHighBids(bids);
-
-    let filteredAuctions = auctions.filter((obj) => auctionIds.includes(obj._id));
-
-    setOngoingAuctions(filteredAuctions);
-
-    // const object:any = auctions.find({}).where("_id").in(array)
-
-    // console.log("auctions",res.data.artauctions);
-    // console.log("bids",res.data.highBids);
-
-    // setOngoingAuctions(res.data.ongoing);
-    // setEndedAuctions(res.data.ended);
-  };
-
-  useEffect(() => {
-    getAuctions();
-  }, []);
 
   function displayAuctions(auctionList: IArtAuction[], ended: boolean) {
     const list: any = [];
 
     auctionList.map((art: IArtAuction) => {
-      highBids.map((bid) => {
+      props.highBids.map((bid) => {
         if (bid.auctionId == art._id) {
           list.push(
             <div
@@ -85,8 +55,8 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
 
   return (
     <div className="account__section account__section--auctions">
-      {displayAuctions(ongoingAuctions, false)}
-      {displayAuctions(endedAuctions, true)}
+      {displayAuctions(props.ongoingAuctions, false)}
+      {displayAuctions(props.endedAuctions, true)}
     </div>
   );
 };

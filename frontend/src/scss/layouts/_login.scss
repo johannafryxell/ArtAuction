@@ -2,8 +2,8 @@
 // IMPORTS & USE //
 //////////////////
 @use "../mixins";
-@use "../variables";
 @use "../base/typography";
+@import "../variables";
 //////////////////////
 // LOGIN VARIABLES //
 ////////////////////
@@ -59,14 +59,15 @@ $transition: all 0.2s ease-out;
           font-size: 1rem;
           padding: 0.75rem 0.75rem 0rem 0.75rem;
           font-weight: 300;
+          background-color: $greige-light;
         }
         &--btn {
           @include mixins.flex(column, center, center, 1rem);
           transition: $transition;
           padding: calc(var(--font-size) * 0.5);
           // margin-top: 1.25rem;
-          background-color: black;
-          color: white;
+          background-color: $almost-black;
+          color: $greige-light;
           font-size: 1.125rem;
           cursor: pointer;
         }
@@ -117,7 +118,7 @@ $transition: all 0.2s ease-out;
         width: 100%;
         transition: $transition;
         padding: calc(var(--font-size) * 0.3);
-        background-color: variables.$greige-main;
+        background-color: $greige-main;
         color: black;
         border: 1px solid black;
         font-size: 1rem;

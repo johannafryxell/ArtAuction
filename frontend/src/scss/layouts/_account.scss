@@ -20,9 +20,98 @@
 
   &__section {
     &--user {
+      @include mixins.flex(column, center, center, 0.8rem);
       min-width: 40vw;
-      height: 40vh;
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      &__bigBox {
+        .endSoon {
+          @include mixins.flex(column, space-between, center);
+          border-radius: 4px;
+          border: $border;
+          width: 50vw;
+
+          span {
+            font-size: 0.9rem;
+            width: 100%;
+            text-align: center;
+            border-bottom: $border;
+            padding-bottom: 8px;
+            padding-top: 8px;
+          }
+          .imgContainer {
+            @include mixins.flex(column, center, center);
+            height: 200px;
+            width: 200px;
+
+            img {
+              height: 50%;
+              width: 50%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+      &__statistics {
+        @include mixins.flex(row, space-between, center);
+        width: 100%;
+
+        .statBox {
+          @include mixins.flex(column, center, center);
+          width: 30%;
+          border-radius: 4px;
+          border: $border;
+
+          :first-child {
+            text-align: center;
+            width: 100%;
+            border-bottom: $border;
+          }
+          :last-child {
+            padding-top: 8px;
+            padding-bottom: 8px;
+          }
+        }
+      }
+
+      &__logout {
+        width: 100%;
+        button {
+          background-color: $almost-black;
+          width: 100%;
+          height: 40px;
+          border-radius: 4px;
+          color: $greige-light;
+          border: none;
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+
+      @include mixins.tablet {
+        &__bigBox {
+          @include mixins.flex(column, center, center);
+          width: 100%;
+
+          .endSoon {
+            width: 80%;
+          }
+        }
+        &__statistics,
+        &__logout {
+          width: 80%;
+        }
+      }
+      @include mixins.desktop {
+        &__bigBox,&__statistics,
+        &__logout,.endSoon {
+          width: 300px;
+        }
+      }
     }
+
     &--auctions {
       @include mixins.flex(row, space-between, center);
       flex-wrap: wrap;
@@ -68,7 +157,6 @@
 
         &:last-child {
           border-right: 1px solid black;
-          width: calc(50vw + 0.8px);
         }
         &:nth-last-child(2) {
           border-bottom: 1px solid black;
@@ -84,10 +172,6 @@
           height: 20vw;
           border-bottom: 1px solid black;
           border-top: none;
-          &:last-child {
-            border-right: 1px solid black;
-            width: calc(20vw + 1px);
-          }
         }
       }
       @include mixins.desktop {

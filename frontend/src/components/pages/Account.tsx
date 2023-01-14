@@ -7,11 +7,20 @@ import jwt from "jwt-decode";
 import { IUser } from "../../models/IUser";
 import { AboutUser } from "../userComponents/AboutUser";
 import { UserAuctions } from "../userComponents/UserAuctions";
+import { useAuctions } from "../AuctionProvider";
+import { IArtAuction } from "../../models/IArtAuction";
+import { IBid } from "../../models/IBid";
 
 export function Account() {
   const cookies = new Cookies();
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext) as IAuth;
+  const auctions = useAuctions().auctions;
+  const ended = useAuctions().ended;
+
+  const [ongoingAuctions, setOngoingAuctions] = useState<IArtAuction[]>([]);
+  const [endedAuctions, setEndedAuctions] = useState<IArtAuction[]>([]);
+  const [highBids, setHighBids] = useState<IBid[]>([]);
 
   const [user, setUser] = useState<IUser>({
     _id: "",
@@ -20,6 +29,27 @@ export function Account() {
     firstName: "",
     lastName: "",
   });
+
+  const getAuctions = async () => {
+    const user: any = jwt(cookies.get("logIn"));
+
+    let res: any = await axios.get(
+      "http://localhost:3001/account/getuserauctions/?userId=" + user.id
+    );
+    const auctionIds = res.data.auctionIds; //Only auctions the user has placed bids on
+    const bids: IBid[] = res.data.highBids;
+    setHighBids(bids);
+
+    let filteredOngoing = auctions.filter((obj) =>
+      auctionIds.includes(obj._id)
+    );
+    let filteredEnded = ended.filter((obj) =>
+      auctionIds.includes(obj._id)
+    );
+
+    setOngoingAuctions(filteredOngoing);
+    setEndedAuctions(filteredEnded);
+  };
 
   const getUser = async () => {
     const user = cookies.get("logIn");
@@ -32,6 +62,7 @@ export function Account() {
   useEffect(() => {
     if (auth) {
       getUser();
+      getAuctions();
     } else {
       navigate("/login");
     }
@@ -39,8 +70,21 @@ export function Account() {
 
   return (
     <main className="account">
-      <AboutUser user={user}/>
-      <UserAuctions user={user}/>
+      {ongoingAuctions && (
+        <>
+          <AboutUser
+            highBids={highBids}
+            ongoingAuctions={ongoingAuctions}
+            endedAuctions={endedAuctions}
+            user={user}
+          />
+          <UserAuctions
+            highBids={highBids}
+            ongoingAuctions={ongoingAuctions}
+            endedAuctions={endedAuctions}
+          />
+        </>
+      )}
     </main>
   );
 }

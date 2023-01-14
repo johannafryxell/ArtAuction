@@ -1,9 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuctions } from "../AuctionProvider";
 import { AuthContext, IAuth } from "../AuthProvider";
 
 export function Header() {
   const { auth } = useContext(AuthContext) as IAuth;
+  const [artId, setArtId] = useState(0);
+  const auctions = useAuctions().auctions;
+
+  useEffect(() => {
+    if (auctions.length != 0) {
+      setArtId(auctions[0].artId);
+    }
+  }, [auctions]);
 
   return (
     <>
@@ -22,7 +31,7 @@ export function Header() {
             className={({ isActive }) =>
               isActive ? "header__menu--linkActive" : "header__menu--link"
             }
-            to="/auction"
+            to={"/auction/" + artId}
           >
             Current Auction
           </NavLink>
@@ -40,25 +49,29 @@ export function Header() {
         <div className="header__logo">
           {/* <h1>ALTERNATIVE AUCTION</h1> */}
           <h1>
-              <span className="diffLetter">A</span>
-              <span className="diffLetter">R</span>
-              <span className="diffLetter">T</span>
-              <span>E</span>
-              <span>R</span>
-              <span>N</span>
-              <span>A</span>
-              <span>T</span>
-              <span>I</span>
-              <span>V</span>
-              <span>E</span>
-              <span> </span>
-              <span>A</span>
+            <span>T</span>
+            <span>H</span>
+            <span>E</span>
+            <span> </span>
+            <span className="diffLetter">A</span>
+            <span className="diffLetter">R</span>
+            <span className="diffLetter">T</span>
+            <span>E</span>
+            <span>R</span>
+            <span>N</span>
+            <span>A</span>
+            <span>T</span>
+            <span>I</span>
+            <span>V</span>
+            <span>E</span>
+            {/* <span> </span> */}
+            {/* <span>A</span>
               <span>U</span>
               <span>C</span>
               <span>T</span>
               <span>I</span>
               <span>O</span>
-              <span>N</span>
+              <span>N</span> */}
           </h1>
         </div>
       </header>

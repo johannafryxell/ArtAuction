@@ -103,14 +103,14 @@ export const postBid = async (req: Request, res: Response) => {
   // return;
 };
 
-export const getAllArt = async (req: Request, res: Response) => { 
+export const getAllArt = async (req: Request, res: Response) => {
   console.log("Getting art");
-   
+
   //Find all auctions and sort
   let auctions: IAuction[] = await Auction.find({}).sort({ endTime: 1 }).lean();
-  
+
   //Remove all that has ended
-  auctions = auctions.filter((p) => p.endTime >= new Date());
+  // auctions = auctions.filter((p) => p.endTime >= new Date());
 
   const url =
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
@@ -128,7 +128,12 @@ export const getAllArt = async (req: Request, res: Response) => {
     return { ...auction, ...matchedArt };
   });
 
-  res.send(combined);
+  const ongoing = combined.filter((p) => +p.endTime >= +new Date());
+
+  const ended = combined.filter((p) => +p.endTime <= +new Date());
+
+  res.send({ ongoing: ongoing, ended: ended });
+  // res.send(combined);
 };
 
 /////////////////////

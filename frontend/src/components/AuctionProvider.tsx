@@ -10,6 +10,7 @@ import { IArtAuction } from "../models/IArtAuction";
 
 export interface IAuctionProvider {
   auctions: IArtAuction[];
+  ended: IArtAuction[];
 }
 
 interface IAuctionContextProps {
@@ -17,20 +18,19 @@ interface IAuctionContextProps {
 }
 
 // const AuctionContext = createContext<IAuctionProvider | null>(null);
-const AuctionContext = createContext<IAuctionProvider>({ auctions: [] });
+const AuctionContext = createContext<IAuctionProvider>({ auctions: [], ended: [] });
 
 export const ArtProvider = ({ children }: IAuctionContextProps) => {
   const [auctions, setAuctions] = useState<IArtAuction[]>([]);
+  const [ended, setEnded] = useState<IArtAuction[]>([]);
   // const [auctions, setAuctions] = useState<IAuctionProvider>();
 
   const getArtwork = async () => {
     axios.get("http://localhost:3001/art/getartwork").then((res) => {
-      const list : IArtAuction[] = res.data;
-      setAuctions(list);
-      console.log(list);
-      
-      // console.log(list);
-      
+      const ongoing : IArtAuction[] = res.data.ongoing;
+      const endedList: IArtAuction[] = res.data.ended;
+      setAuctions(ongoing);
+      setEnded(endedList);
     });
   };
 
@@ -41,7 +41,8 @@ export const ArtProvider = ({ children }: IAuctionContextProps) => {
   }, []);
 
   const value = {
-    auctions
+    auctions,
+    ended
   };
 
   return (
