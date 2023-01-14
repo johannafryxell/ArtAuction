@@ -1,14 +1,15 @@
 import { IArt } from "../../models/IArt";
 
 interface IAuctionImageProps {
-  art: IArt;
+  image: string;
+  name: string;
 }
 
 export const AuctionImage = (props: IAuctionImageProps) => {
   return (
     <>
       <div className="detail__artwork--imageBox">
-        <img src={props.art.primaryImage} alt={props.art.objectName} />
+        <img src={props.image} alt={props.name} />
       </div>
     </>
   );

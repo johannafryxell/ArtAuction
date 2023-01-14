@@ -27,15 +27,17 @@ export const ArtProvider = ({ children }: IAuctionContextProps) => {
     axios.get("http://localhost:3001/art/getartwork").then((res) => {
       const list : IArtAuction[] = res.data;
       setAuctions(list);
+      console.log(list);
+      
       // console.log(list);
       
     });
   };
 
-  useEffect(() => {
-    if(auctions.length === 0){
+  useEffect(() => {    
+    // if(auctions.length === 0){
       getArtwork();
-    }
+    // }
   }, []);
 
   const value = {

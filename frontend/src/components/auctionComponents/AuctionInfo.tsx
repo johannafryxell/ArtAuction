@@ -1,7 +1,8 @@
 import { IArt } from "../../models/IArt";
+import { IArtAuction } from "../../models/IArtAuction";
 
 interface IAuctionInfoProps {
-  art: IArt;
+  auction: IArtAuction;
 }
 
 export const AuctionInfo = (props: IAuctionInfoProps) => {
@@ -9,50 +10,50 @@ export const AuctionInfo = (props: IAuctionInfoProps) => {
     <div className="detail__artinfo--box">
       <h3>About the piece</h3>
       <div className="detail__artinfo--box__detail">
-        {props.art.title ? (
+        {props.auction.title ? (
           <div className="detailInfo">
             <h4>Title</h4>
-            <span>{props.art.title} </span>
+            <span>{props.auction.title} </span>
           </div>
         ) : (
           ""
         )}
-        {props.art.country ? (
+        {props.auction.country ? (
           <div className="detailInfo">
             <h4>Origin</h4>
-            <span>{props.art.country} </span>
+            <span>{props.auction.country} </span>
           </div>
         ) : (
           ""
         )}
-        {props.art.accessionYear ? (
+        {props.auction.accessionYear ? (
           <div className="detailInfo">
             <h4>Accession</h4>
-            <span>{props.art.accessionYear} </span>
+            <span>{props.auction.accessionYear} </span>
           </div>
         ) : (
           ""
         )}
-        {props.art.period ? (
+        {props.auction.period ? (
           <div className="detailInfo">
             <h4>Period</h4>
-            <span>{props.art.period} </span>
+            <span>{props.auction.period} </span>
           </div>
         ) : (
           ""
         )}
-        {props.art.artistDisplayName ? (
+        {props.auction.artistDisplayName ? (
           <div className="detailInfo">
             <h4>Artist</h4>
-            <span>{props.art.artistDisplayName} </span>
+            <span>{props.auction.artistDisplayName} </span>
           </div>
         ) : (
           ""
         )}
-        {props.art.artistDisplayBio ? (
+        {props.auction.artistDisplayBio ? (
           <div className="detailInfo">
             <h4>Bio</h4>
-            <span>{props.art.artistDisplayBio} </span>
+            <span>{props.auction.artistDisplayBio} </span>
           </div>
         ) : (
           ""

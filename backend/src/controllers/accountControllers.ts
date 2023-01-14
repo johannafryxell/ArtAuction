@@ -41,29 +41,30 @@ export const getUserAuctions = async (req: Request, res: Response) => {
   ]);
 
   //Get the auction objects from the id:s
-  const auctions = await Auction.find().where("_id").in(userAuctIds).lean().exec();
+  // const auctions = await Auction.find().where("_id").in(userAuctIds).lean().exec();
 
   //Get the art info
-  const url =
-    "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
-  const artList: IArt[] = [];
+  // const url =
+  //   "https://collectionapi.metmuseum.org/public/collection/v1/objects/";
+  // const artList: IArt[] = [];
 
-  const art = await Promise.all(
-    auctions.map(async (auction) => {
-      const auctionsData: IArt = await fetchData(url + auction.artId);
-      artList.push(auctionsData);
-    })
-  );
+  // const art = await Promise.all(
+  //   auctions.map(async (auction) => {
+  //     const auctionsData: IArt = await fetchData(url + auction.artId);
+  //     artList.push(auctionsData);
+  //   })
+  // );
 
-  const combined = auctions.map((auction) => {
-    const matchedArt = artList.find((art) => +art.objectID === auction.artId);
-    return { ...auction, ...matchedArt };
-  });
+  // const combined = auctions.map((auction) => {
+  //   const matchedArt = artList.find((art) => +art.objectID === auction.artId);
+  //   return { ...auction, ...matchedArt };
+  // });
   
-  const ongoing = combined.filter((p) => +p.endTime >= +new Date());
+  // const ongoing = combined.filter((p) => +p.endTime >= +new Date());
 
-  const ended = combined.filter((p) => +p.endTime <= +new Date());  
+  // const ended = combined.filter((p) => +p.endTime <= +new Date());  
 
-  res.send({ ongoing: ongoing ,ended: ended,  highBids: highBids });
+  res.send({highBids: highBids, auctionIds: userAuctIds });
+  // res.send({ ongoing: ongoing ,ended: ended,  highBids: highBids });
   // res.send({ auctions: auctions, art: artList, highBids: highBids });
 };

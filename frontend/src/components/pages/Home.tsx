@@ -1,12 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IArt } from "../../models/IArt";
 import { IArtAuction } from "../../models/IArtAuction";
-import { IAuction } from "../../models/IAuction";
 import { useAuctions } from "../AuctionProvider";
-import { SkeletonImage } from "../layoutComponents/LoaderImage";
-import { LoaderSkeleton } from "../layoutComponents/LoaderSkeleton";
 
 export function Home() {
   ////////////////
@@ -14,7 +10,6 @@ export function Home() {
   //////////////
   const auctions = useAuctions().auctions;
 
-  // const [auctions, setAuctions] = useState<IArtAuction[]>([]);
   const [quadArtList, setQuadArtList] = useState<IArtAuction[]>([]);
   const [artList, setArtList] = useState<IArtAuction[]>([]);
   const [firstArt, setFirstArt] = useState<IArtAuction>({
@@ -33,29 +28,25 @@ export function Home() {
     accessionYear: "",
     artistDisplayBio: "",
   });
-  const [loader, setLoader] = useState(true);
 
   /////////////////
   // USEEFFECTS //
   ///////////////
-  const getArtwork = async () => {
-    axios.get("http://localhost:3001/art/getartwork").then((res) => {
-      const list = res.data;
+  // const getArtwork = async () => {
+  //   axios.get("http://localhost:3001/art/getartwork").then((res) => {
+  //     const list = res.data;
 
-      setFirstArt(list[0]);
-      setQuadArtList([list[1], list[2], list[3], list[4]]);
-      setArtList(list.slice(5));
-      setLoader(false);
-    });
-  };
+  //     setFirstArt(list[0]);
+  //     setQuadArtList([list[1], list[2], list[3], list[4]]);
+  //     setArtList(list.slice(5));
+  //     setLoader(false);
+  //   });
+  // };
 
   useEffect(() => {
-    console.log(auctions);
-
     setFirstArt(auctions[0]);
     setQuadArtList([auctions[1], auctions[2], auctions[3], auctions[4]]);
     setArtList(auctions.slice(5));
-    setLoader(false);
   }, []);
 
   return (
@@ -67,11 +58,7 @@ export function Home() {
               className="home__grid--auction__link"
               to={"/auction/" + firstArt.objectID}
             >
-              {loader ? (
-                <SkeletonImage />
-              ) : (
                 <img src={firstArt.primaryImage} alt="artwork" />
-              )}
             </Link>
           </div>
           <div className="home__top--quad">
@@ -81,11 +68,7 @@ export function Home() {
                   className="home__grid--auction__link"
                   to={"/auction/" + auction.objectID}
                 >
-                  {loader ? (
-                    <SkeletonImage />
-                  ) : (
                     <img src={auction.primaryImage} alt="artwork" />
-                  )}
                 </Link>
               </div>
             ))}
@@ -98,11 +81,7 @@ export function Home() {
                 className="home__grid--auction__link"
                 to={"/auction/" + auction.objectID}
               >
-                {loader ? (
-                  <SkeletonImage />
-                ) : (
                   <img src={auction.primaryImage} alt="artwork" />
-                )}
               </Link>
             </div>
           ))}

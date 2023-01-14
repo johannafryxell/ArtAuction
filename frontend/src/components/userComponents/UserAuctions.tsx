@@ -8,6 +8,7 @@ import { IArt } from "../../models/IArt";
 import { IBid } from "../../models/IBid";
 import { Link } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
+import { useAuctions } from "../AuctionProvider";
 
 interface IUserAuctionsProps {
   user: IUser;
@@ -15,6 +16,7 @@ interface IUserAuctionsProps {
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
   const cookies = new Cookies();
+  const auctions = useAuctions().auctions;
 
   const [ongoingAuctions, setOngoingAuctions] = useState<IArtAuction[]>([]);
   const [endedAuctions, setEndedAuctions] = useState<IArtAuction[]>([]);
@@ -26,12 +28,21 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
     let res: any = await axios.get(
       "http://localhost:3001/account/getuserauctions/?userId=" + user.id
     );
+    const auctionIds = res.data.auctionIds;
+    const bids = res.data.highBids;
+    setHighBids(bids);
+
+    let filteredAuctions = auctions.filter((obj) => auctionIds.includes(obj._id));
+
+    setOngoingAuctions(filteredAuctions);
+
+    // const object:any = auctions.find({}).where("_id").in(array)
+
     // console.log("auctions",res.data.artauctions);
     // console.log("bids",res.data.highBids);
 
-    setOngoingAuctions(res.data.ongoing);
-    setEndedAuctions(res.data.ended);
-    setHighBids(res.data.highBids);
+    // setOngoingAuctions(res.data.ongoing);
+    // setEndedAuctions(res.data.ended);
   };
 
   useEffect(() => {
@@ -40,7 +51,6 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
 
   function displayAuctions(auctionList: IArtAuction[], ended: boolean) {
     const list: any = [];
-    console.log(ongoingAuctions);
 
     auctionList.map((art: IArtAuction) => {
       highBids.map((bid) => {
@@ -69,7 +79,6 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
         }
       });
     });
-    console.log(list);
 
     return list;
   }

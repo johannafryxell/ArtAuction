@@ -103,7 +103,9 @@ export const postBid = async (req: Request, res: Response) => {
   // return;
 };
 
-export const getAllArt = async (req: Request, res: Response) => {
+export const getAllArt = async (req: Request, res: Response) => { 
+  console.log("Getting art");
+   
   //Find all auctions and sort
   let auctions: IAuction[] = await Auction.find({}).sort({ endTime: 1 }).lean();
   

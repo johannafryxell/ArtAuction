@@ -6,9 +6,10 @@ import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import { AuthContext, IAuth } from "../AuthProvider";
 import { CountDown } from "./CountDown";
+import { IArtAuction } from "../../models/IArtAuction";
 
 interface IAuctionBidProps {
-  auction: IAuction;
+  auction: IArtAuction;
 }
 
 export const AuctionBid = (props: IAuctionBidProps) => {

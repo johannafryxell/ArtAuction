@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface ICountDownProps {
-  endTime: Date;
+  endTime: string;
 }
 
 export const CountDown = (props: ICountDownProps) => {
