@@ -13,8 +13,22 @@
   min-height: 85%;
   @include mixins.flex(column, space-between, center);
 
-  img{
+  img {
     border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+
+    transition: transform .6s ease;
+  }
+
+  .imgContainer {
+    @include mixins.flex(row, center, center);
+    width: 50%;
+    height: 50%;
+
+    overflow: hidden;
   }
 
   ///////////////
@@ -29,14 +43,9 @@
       @include mixins.flex(column, center, center);
       height: 100vw;
       width: 100%;
-      border-bottom: 1px solid black;
-      border-left: 0.5px solid black;
-      border-right: 0.5px solid black;
-      img {
-        width: 50%;
-        height: 50%;
-        object-fit: cover;
-      }
+      border-bottom: $border;
+      border-left: $half-border;
+      border-right: $half-border;
     }
     &--quad {
       @include mixins.flex(row, center, center);
@@ -47,14 +56,9 @@
         @include mixins.flex(column, center, center);
         width: 50%;
         height: 50vw;
-        border-bottom: 1px solid black;
-        border-left: 0.5px solid black;
-        border-right: 0.5px solid black;
-        img {
-          width: 50%;
-          height: 50%;
-          object-fit: cover;
-        }
+        border-bottom: $border;
+        border-left: $half-border;
+        border-right: $half-border;
       }
     }
     @include mixins.tablet {
@@ -64,7 +68,7 @@
       }
       &--quad {
         width: 50vw;
-        &__auction{
+        &__auction {
           height: 25vw;
         }
       }
@@ -77,25 +81,23 @@
 
     &--auction {
       @include mixins.flex(column, center, center);
-      border-bottom: 1px solid black;
-      border-left: 0.5px solid black;
-      border-right: 0.5px solid black;
+      border-bottom: $border;
+      border-left: $half-border;
+      border-right: $half-border;
       height: 50vw;
       width: 50%;
-      
-      &__link{
+
+      &__link {
         @include mixins.flex(column, center, center);
         width: 100%;
         height: 100%;
+        &:hover img {
+          transform: scale(1.2);
+        }
       }
 
-      img {
-        width: 50%;
-        height: 50%;
-        object-fit: cover;
-      }
       &:last-child {
-        border-right: 1px solid black;
+        border-right: $border;
       }
     }
 
@@ -124,11 +126,6 @@
     &--image {
       @include mixins.flex(column, center, center);
       flex-grow: 1;
-      img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-      }
     }
 
     @include mixins.tablet {

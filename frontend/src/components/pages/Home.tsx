@@ -58,7 +58,9 @@ export function Home() {
               className="home__grid--auction__link"
               to={"/auction/" + firstArt.objectID}
             >
+              <div className="imgContainer">
                 <img src={firstArt.primaryImage} alt="artwork" />
+              </div>
             </Link>
           </div>
           <div className="home__top--quad">
@@ -68,7 +70,9 @@ export function Home() {
                   className="home__grid--auction__link"
                   to={"/auction/" + auction.objectID}
                 >
+                  <div className="imgContainer">
                     <img src={auction.primaryImage} alt="artwork" />
+                  </div>
                 </Link>
               </div>
             ))}
@@ -81,7 +85,9 @@ export function Home() {
                 className="home__grid--auction__link"
                 to={"/auction/" + auction.objectID}
               >
+                <div className="imgContainer">
                   <img src={auction.primaryImage} alt="artwork" />
+                </div>
               </Link>
             </div>
           ))}

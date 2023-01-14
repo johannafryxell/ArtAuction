@@ -18,7 +18,7 @@ import { IArtCollection } from "./models/IArt";
 import { useAuctions } from "./components/AuctionProvider";
 
 function App() {
-  const auctionObject = useAuctions();
+  const auctions = useAuctions().auctions;
 
   // useEffect(() => {
   // // Gets id:s for objects with images
@@ -35,16 +35,22 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomeLayout />}>
-            {auctionObject?.auctions.length != 0 && <Route path="/" element={<Home />}></Route>}
+            {auctions.length != 0 && (
+              <Route path="/" element={<Home />}></Route>
+            )}
           </Route>
           <Route path="/auction" element={<DetailLayout />}>
-            <Route path="/auction/:id" element={<Detail />}></Route>
+            {auctions.length != 0 && (
+              <Route path="/auction/:id" element={<Detail />}></Route>
+            )}
           </Route>
           <Route path="/login" element={<LoginLayout />}>
             <Route path="/login" element={<Login />}></Route>
           </Route>
           <Route path="/account" element={<AccountLayout />}>
-            <Route path="/account" element={<Account />}></Route>
+            {auctions.length != 0 && (
+              <Route path="/account" element={<Account />}></Route>
+            )}
           </Route>
         </Routes>
       </BrowserRouter>
