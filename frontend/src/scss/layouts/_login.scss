@@ -24,9 +24,13 @@ $transition: all 0.2s ease-out;
 ///////////////////////
 .login-page {
   --font-size: clamp(1.125rem, 2.25vw, 1.75rem);
-
   @include mixins.flex(column, center, center, 2rem);
 
+  
+  background-image: url("../../assets/clifs.jpeg");
+  background-position: center;
+  background-size: 120vw;
+  
   height: 80vh;
   ///////////////
   // SECTIONS //

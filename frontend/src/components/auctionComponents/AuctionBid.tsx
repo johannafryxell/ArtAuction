@@ -21,6 +21,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   const [highestBid, sethighestBid] = useState<number>(0);
   const [newBid, setNewBid] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState(false);
+  const [errorLogin, setErrorLogin] = useState(false);
   const [ended, setEnded] = useState(false);
 
   function calcEndTime() {
@@ -53,6 +54,8 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
   useEffect(() => {
     getBids();
+    console.log(props.auction.price);
+    console.log(bids);
   }, [props.auction, newBid]);
 
   useEffect(() => {
@@ -63,12 +66,14 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     if (auth) {
       const userToken = cookies.get("logIn");
       const decoded: any = jwt(userToken);
+
       let body: IPlaceBid = {
         auctionId: props.auction._id,
         userId: decoded.id,
         amount: newBid,
         published: new Date().toDateString(),
       };
+
       if (newBid <= highestBid + 49) {
         setErrorMsg(true);
         setNewBid(highestBid + 50);
@@ -86,14 +91,15 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         }
       }
     } else {
+      setErrorLogin(true);
       console.log("You need to be logged in");
     }
   };
 
   function bidMessage() {
-    if (!errorMsg && props.auction.price < highestBid) {
+    if (!errorMsg && props.auction.price <= highestBid) {
       return <span>Place {highestBid + 50} or more</span>;
-    } else if (errorMsg && props.auction.price < highestBid) {
+    } else if (errorMsg && props.auction.price <= highestBid) {
       return <span className="errorMsg">Place {highestBid + 50} or more</span>;
     } else if (errorMsg) {
       return (
@@ -102,7 +108,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         </span>
       );
     } else {
-      return <span>Place {props.auction.price + 50} or more</span>;
+      return <span>Place {props.auction.price} or more</span>;
     }
   }
 
@@ -110,7 +116,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     <>
       {ended ? (
         <div className="detail__artinfo--box">
-          <span>Auction ended {new Date(props.auction.endTime).toDateString()}</span>
+          <span>
+            Auction ended {new Date(props.auction.endTime).toDateString()}
+          </span>
           <span>Sold for {highestBid}</span>
         </div>
       ) : (
@@ -119,7 +127,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
             <CountDown endTime={props.auction.endTime}></CountDown>
           </div>
           <div className="bidInfo">
-            {props.auction.price < highestBid ? (
+            {props.auction.price <= highestBid ? (
               <>
                 <span>Current bid</span>
                 <span>{highestBid}</span>
@@ -131,7 +139,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
               </>
             )}
           </div>
-          <div className="minBox">{bidMessage()}</div>
+          <div className="minBox">
+            {errorLogin ? <span>You have to login to bid</span> : bidMessage()}
+          </div>
           <div className="inputBox">
             {newBid == 0 ? (
               <input type="number" onChange={handleBid} value={""} />
