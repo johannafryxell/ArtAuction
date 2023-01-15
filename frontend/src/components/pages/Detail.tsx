@@ -12,6 +12,7 @@ import { useAuctions } from "../AuctionProvider";
 
 export function Detail() {
   const auctions = useAuctions().auctions;
+  const endedAuctions = useAuctions().ended;
   const [auction, setAuction] = useState<IArtAuction>({
     _id: "",
     artId: 0,
@@ -65,7 +66,12 @@ export function Detail() {
 
   const getAuction = async () => {
     const object:any = auctions.find(({objectID}) => objectID === +id);
-    setAuction(object);
+    if(object){
+      setAuction(object);
+    }else{
+      const endedObject:any = endedAuctions.find(({objectID}) => objectID === +id);
+      setAuction(endedObject);
+    }
 
     // axios
     //   .get("http://localhost:3001/art/getsingleauction?id=" + id)

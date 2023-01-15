@@ -87,8 +87,6 @@ export function Login() {
 
       onLogin();
       navigate("/");
-
-      const decoded = jwt(res.data.token);
     } catch (err) {
       console.log("error");
       console.log(err);

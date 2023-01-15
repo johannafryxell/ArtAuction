@@ -12,8 +12,8 @@ import { useAuctions } from "../AuctionProvider";
 
 interface IUserAuctionsProps {
   highBids: IBid[];
-  ongoingAuctions: IArtAuction[]
-  endedAuctions: IArtAuction[]
+  ongoingAuctions: IArtAuction[];
+  endedAuctions: IArtAuction[];
 }
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
@@ -32,7 +32,9 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
             >
               <Link className="auctLink" to={"/auction/" + art.artId}>
                 <h4 className="title">{art.title}</h4>
-                <img src={art.primaryImage} alt={art.title} />
+                <div className="imgContainer">
+                  <img src={art.primaryImage} alt={art.title} />
+                </div>
                 <div className="infoBox">
                   <div className="infoDetail">
                     {ended ? <h4>Ended at</h4> : <h4>Leading bid</h4>}

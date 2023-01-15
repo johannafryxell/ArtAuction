@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
 import { IBid } from "../../models/IBid";
 import { IUser } from "../../models/IUser";
+import { AuthContext, IAuth } from "../AuthProvider";
 
 interface IAboutUserProps {
   highBids: IBid[];
@@ -11,13 +13,21 @@ interface IAboutUserProps {
 }
 
 export const AboutUser = (props: IAboutUserProps) => {
-  const [endSoonImg, setEndSoonImg] = useState("")
+  const [endSoonImg, setEndSoonImg] = useState("");
+  const { onLogout } = useContext(AuthContext) as IAuth;
+  const navigate = useNavigate();
 
-  useEffect(() =>{
-    if(props.ongoingAuctions.length != 0){
-      setEndSoonImg(props.ongoingAuctions[0].primaryImage)
+
+  useEffect(() => {
+    if (props.ongoingAuctions.length != 0) {
+      setEndSoonImg(props.ongoingAuctions[0].primaryImage);
     }
-  },[props.ongoingAuctions])
+  }, [props.ongoingAuctions]);
+
+  function logOut(){
+    onLogout();
+    navigate("/login");
+  }
 
   return (
     <div className="account__section account__section--user">
@@ -28,10 +38,7 @@ export const AboutUser = (props: IAboutUserProps) => {
         <div className="endSoon">
           <span>Ending soon</span>
           <div className="imgContainer">
-            <img
-              src={endSoonImg}
-              alt="artwork"
-            />
+            <img src={endSoonImg} alt="artwork" />
           </div>
         </div>
       </div>
@@ -52,7 +59,7 @@ export const AboutUser = (props: IAboutUserProps) => {
         </div>
       </div>
       <div className="account__section--user__logout">
-        <button>Log out</button>
+        <button onClick={logOut}>Log out</button>
       </div>
     </div>
   );

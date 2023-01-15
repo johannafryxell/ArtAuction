@@ -28,10 +28,18 @@ $transition: all 0.2s ease-out;
 
   
   background-image: url("../../assets/clifs.jpeg");
+  background-repeat: no-repeat;
   background-position: center;
-  background-size: 120vw;
+  background-size: 200vw;
   
   height: 80vh;
+
+  @include mixins.tablet{
+  background-size: 120vw;
+  }
+  @include mixins.desktop{
+  background-size: 110vw;
+  }
   ///////////////
   // SECTIONS //
   /////////////

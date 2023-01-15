@@ -13,22 +13,20 @@
   min-height: 85%;
   @include mixins.flex(column, space-between, center);
 
-  img {
-    border-radius: 2px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.05);
-
-    transition: transform .6s ease;
-  }
-
   .imgContainer {
     @include mixins.flex(row, center, center);
     width: 50%;
     height: 50%;
-
+    border-radius: 2px;
     overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      transition: transform 0.6s ease;
+    }
   }
 
   ///////////////

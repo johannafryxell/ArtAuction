@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const handleLogout = () => {
     setAuth(false);
+    cookies.remove("logIn");
   };
 
   const value = {

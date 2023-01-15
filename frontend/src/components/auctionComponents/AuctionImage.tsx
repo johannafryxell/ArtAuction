@@ -9,7 +9,9 @@ export const AuctionImage = (props: IAuctionImageProps) => {
   return (
     <>
       <div className="detail__artwork--imageBox">
-        <img src={props.image} alt={props.name} />
+        <div className="imgContainer">
+          <img src={props.image} alt={props.name} />
+        </div>
       </div>
     </>
   );
