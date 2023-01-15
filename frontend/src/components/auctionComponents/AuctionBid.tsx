@@ -130,12 +130,12 @@ export const AuctionBid = (props: IAuctionBidProps) => {
             {props.auction.price <= highestBid ? (
               <>
                 <span>Current bid</span>
-                <span>{highestBid}</span>
+                <span className="currentPrice">{highestBid}</span>
               </>
             ) : (
               <>
                 <span>Starting price</span>
-                <span>{props.auction.price}</span>
+                <span className="currentPrice">{props.auction.price}</span>
               </>
             )}
           </div>

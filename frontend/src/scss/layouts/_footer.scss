@@ -9,9 +9,30 @@
 // FOOTER STYLING//
 //////////////////
 .footer {
+  @include mixins.flex(row, space-around, space-around, 1rem);
   border-top: 1px solid black;
   margin: 0 auto;
-  @include mixins.flex(column, center, center);
   margin-top: -1px;
-  height: 20vh;
+  width: 100vw;
+  flex-wrap: wrap;
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  &__section {
+    width: 40vw;
+
+    .infoBox{
+      @include mixins.flex(column, space-between, flex-start);
+      .infoText{
+        @include mixins.flex(column, flex-start, flex-start);
+
+      }
+    }
+  }
+
+  @include mixins.tablet{
+    &__section{
+      width: 20vw;
+    }
+  }
 }

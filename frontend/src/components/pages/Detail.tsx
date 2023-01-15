@@ -31,38 +31,10 @@ export function Detail() {
   });
 
   const [id, setId] = useState(useParams().id || 0);
-  const [ended, setEnded] = useState<boolean>(false);
-  // const [auction, setAuction] = useState<IAuction>({
-  //   _id: "",
-  //   artId: 0,
-  //   published: "",
-  //   endTime: new Date(),
-  //   price: 0,
-  // });
-  // const [art, setArt] = useState<IArt>({
-  //   objectID: "",
-  //   primaryImage: "",
-  //   objectName: "",
-  //   title: "",
-  //   country: "",
-  //   artistDisplayName: "",
-  //   period: "",
-  //   accessionYear: "",
-  //   artistDisplayBio: "",
-  // });
+
   ////////////////
   // FUNCTIONS //
   //////////////
-  function calcEndTime() {
-    let endTime = auction.endTime.toLocaleString();
-    let today = new Date().toLocaleString();
-
-    if (new Date(today) >= new Date(endTime)) {
-      setEnded(true);
-    } else {
-      setEnded(false);
-    }
-  }
 
   const getAuction = async () => {
     const object:any = auctions.find(({objectID}) => objectID === +id);
@@ -72,16 +44,6 @@ export function Detail() {
       const endedObject:any = endedAuctions.find(({objectID}) => objectID === +id);
       setAuction(endedObject);
     }
-
-    // axios
-    //   .get("http://localhost:3001/art/getsingleauction?id=" + id)
-    //   .then((res) => {
-    //     if (res.data === "error") {
-    //       console.log("error: " + res.data);
-    //     } else {
-    //       setAuction(res.data.auction);
-    //     }
-    // });
   };
 
   //////////////////
@@ -89,22 +51,8 @@ export function Detail() {
   ////////////////
   useEffect(() => {
     getAuction();
-    calcEndTime();
   }, []);
 
-  useEffect(() => {
-    calcEndTime();
-  }, [auction]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + id
-  //     )
-  //     .then((result) => {
-  //       setArt(result.data);
-  //     });
-  // }, [auction]);
 
   return (
     <>
@@ -114,12 +62,6 @@ export function Detail() {
         </div>
         <div className="detail__artinfo">
           <AuctionBid auction={auction}></AuctionBid>
-          {/* {!ended && <AuctionBid auction={auction}></AuctionBid>}
-          {ended && (
-            <div className="detail__artinfo--box">
-              <span>This auction has ended</span>
-            </div>
-          )} */}
           <AuctionInfo auction={auction}></AuctionInfo>
           <BidInfo />
           <AuctionInfo auction={auction}></AuctionInfo>
