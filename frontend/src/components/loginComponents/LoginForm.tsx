@@ -1,27 +1,80 @@
-import { ChangeEvent } from "react";
+import axios from "axios";
+import { ChangeEvent, useContext, useState } from "react";
+import { ISigninUser } from "../../models/IUser";
 
-interface ILoginFormProps {
-  email: string;
-  password: string;
-  updEmail: (email: string) => void;
-  updPassword: (password: string) => void;
-  logIn: (e: any) => void;
-}
+import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
+import { AuthContext, IAuth } from "../AuthProvider";
 
-export const LoginForm = (props: ILoginFormProps) => {
-  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    props.updEmail(e.target.value);
+export const LoginForm = () => {
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+  /////////////////////
+  // CONTEXT VALUES //
+  ///////////////////
+  const { auth } = useContext(AuthContext) as IAuth;
+  const { onLogin } = useContext(AuthContext) as IAuth;
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailErr, setEmailErr] = useState("");
+  const [passwErr, setPasswErr] = useState("");
+
+  function validateForm() {
+    if (email == "") {
+      setEmailErr("Email required");
+    } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setEmailErr("Invalid email");
+    } else {
+      setEmailErr("");
+    }
+
+    if (password == "") {
+      setPasswErr("Password required");
+    } else {
+      setPasswErr("");
+    }
+  }
+
+  const logIn = async (e: any) => {
+    e.preventDefault();
+    let body: ISigninUser = {
+      email: email,
+      password: password,
+    };
+    validateForm()
+
+    try {
+      let res: any = await axios.post(
+        "http://localhost:3001/login/sign-in",
+        body
+      );
+      console.log(res.data);
+      
+      if (res.data.signIn) {
+        cookies.set("logIn", res.data.token);
+        onLogin();
+        navigate("/");
+      } else {
+        setEmailErr("Wrong email or password");
+      }
+    } catch (err) {
+      console.log("error");
+      console.log(err);
+    }
   };
-  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    props.updPassword(e.target.value);
-  };
+
   return (
     <>
-      {/* <div className="form"> */}
       <form
         action="login/sign-in"
         className="login-page__section login-page__section--form"
       >
+        {emailErr != "" && (
+          <div className="error">
+            <span className="error__text">{emailErr}</span>
+          </div>
+        )}
         <div className="form__input">
           <input
             type="text"
@@ -29,13 +82,19 @@ export const LoginForm = (props: ILoginFormProps) => {
             id="email"
             className="form__input--text"
             placeholder=" "
-            onChange={handleEmail}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <label htmlFor="email" className="form__input--title">
             Email
           </label>
         </div>
+        {passwErr != "" && (
+          <div className="error">
+            <span className="error__text">{passwErr}</span>
+          </div>
+        )}
         <div className="form__input">
           <input
             type="password"
@@ -43,7 +102,8 @@ export const LoginForm = (props: ILoginFormProps) => {
             id="password"
             className="form__input--text"
             placeholder=" "
-            onChange={handlePassword}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <label htmlFor="password" className="form__input--title">
@@ -55,11 +115,10 @@ export const LoginForm = (props: ILoginFormProps) => {
             type="submit"
             className="form__input--btn"
             value="Sign in"
-            onClick={(e) => props.logIn(e)}
+            onClick={logIn}
           />
         </div>
       </form>
-      {/* </div> */}
     </>
   );
 };
