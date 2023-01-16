@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
@@ -17,16 +18,31 @@ export const AboutUser = (props: IAboutUserProps) => {
   const { onLogout } = useContext(AuthContext) as IAuth;
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (props.ongoingAuctions.length != 0) {
       setEndSoonImg(props.ongoingAuctions[0].primaryImage);
     }
   }, [props.ongoingAuctions]);
 
-  function logOut(){
+  function logOut() {
     onLogout();
     navigate("/login");
+  }
+
+  function calcStatistics(list : IArtAuction[]){
+    let amount: number = 0;
+    props.highBids.map((bid) => {
+      if (bid.userId === props.user._id) {
+        amount++;
+      }
+    });
+
+    amount = amount - list.length;
+    if (amount > 0) {
+      return amount;
+    } else {
+      return 0;
+    }
   }
 
   return (
@@ -44,18 +60,18 @@ export const AboutUser = (props: IAboutUserProps) => {
       </div>
       <div className="account__section--user__statistics">
         <div className="statBox">
-          <span>Active in</span>
+          <span>Active</span>
           <span>{props.ongoingAuctions.length}</span>
         </div>
 
         <div className="statBox">
           <span>Leading</span>
-          <span>1</span>
+          <span>{calcStatistics(props.endedAuctions)}</span>
         </div>
 
         <div className="statBox">
           <span>Won</span>
-          <span>2</span>
+          <span>{calcStatistics(props.ongoingAuctions)}</span>
         </div>
       </div>
       <div className="account__section--user__logout">

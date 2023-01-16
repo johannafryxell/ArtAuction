@@ -18,7 +18,6 @@ export function Account() {
   const auctions = useAuctions().auctions;
   const ended = useAuctions().ended;
 
-
   const [ongoingAuctions, setOngoingAuctions] = useState<IArtAuction[]>([]);
   const [endedAuctions, setEndedAuctions] = useState<IArtAuction[]>([]);
   const [highBids, setHighBids] = useState<IBid[]>([]);
