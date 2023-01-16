@@ -1,0 +1,53 @@
+////////////////////
+// IMPORTS & USE //
+//////////////////
+@use "../mixins";
+@use "../base/typography";
+@import "../variables";
+//////////////////////
+// LOGIN VARIABLES //
+////////////////////
+$border-radius: 2px;
+$width: clamp(270px, 64vw, 350px);
+$transition: all 0.2s ease-out;
+///////////////////
+// LOGIN MIXINS //
+/////////////////
+@mixin field-layout($height: auto, $border-radius: initial) {
+  width: $width;
+  height: $height;
+  border-radius: $border-radius;
+  border: none;
+}
+/////////////////////////
+// LOGIN PAGE STYLING //
+///////////////////////
+.not-found {
+  @include mixins.flex(column, flext-start, center, 2rem);
+
+  height: 80vh;
+  background-image: url("../../assets/ships.jpeg");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: -40px;
+  background-size: 200vw;
+
+  @include mixins.tablet {
+    background-position-y: -60px;
+    background-size: 150vw;
+  }
+  @include mixins.desktop {
+    background-position-y: -100px;
+    background-size: 120vw;
+  }
+
+  &--section {
+    @include mixins.flex(column, center, center, 0.4rem);
+    height: 60%;
+
+    h2 {
+      color: $greige-light;
+      text-shadow: 2px 1px 1px $greige-dark, 4px 2px 1px $almost-black;
+    }
+  }
+}

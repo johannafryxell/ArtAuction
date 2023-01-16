@@ -16,6 +16,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { IArtCollection } from "./models/IArt";
 import { useAuctions } from "./components/AuctionProvider";
+import { NotFound } from "./components/pages/NotFound";
 
 function App() {
   const auctions = useAuctions().auctions;
@@ -52,6 +53,7 @@ function App() {
               <Route path="/account" element={<Account />}></Route>
             )}
           </Route>
+          <Route path="/*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </>

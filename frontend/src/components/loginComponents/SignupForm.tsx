@@ -79,7 +79,6 @@ export const SignupForm = () => {
       password: password,
       confirmPassword: confirmPassword,
     };
-    console.log(body);
 
     if (validateForm()) {
       try {
