@@ -21,18 +21,30 @@ export const LoginForm = () => {
   const [passwErr, setPasswErr] = useState("");
 
   function validateForm() {
+    let errorEmail = false;
+    let errorPassw = false;
+
     if (email == "") {
       setEmailErr("Email required");
+      errorEmail = true;
     } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setEmailErr("Invalid email");
+      errorEmail = true;
     } else {
       setEmailErr("");
     }
 
     if (password == "") {
       setPasswErr("Password required");
-    } else {
+      errorPassw = true;
+    } else if (password != "") {
       setPasswErr("");
+    }
+
+    if (!errorPassw && !errorEmail) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -42,25 +54,26 @@ export const LoginForm = () => {
       email: email,
       password: password,
     };
-    validateForm()
 
-    try {
-      let res: any = await axios.post(
-        "http://localhost:3001/login/sign-in",
-        body
-      );
-      console.log(res.data);
-      
-      if (res.data.signIn) {
-        cookies.set("logIn", res.data.token);
-        onLogin();
-        navigate("/");
-      } else {
-        setEmailErr("Wrong email or password");
+    if (validateForm()) {
+      try {
+        let res: any = await axios.post(
+          "http://localhost:3001/login/sign-in",
+          body
+        );
+        console.log(res.data);
+
+        if (res.data.signIn) {
+          cookies.set("logIn", res.data.token);
+          onLogin();
+          navigate("/");
+        } else {
+          setEmailErr("Wrong email or password");
+        }
+      } catch (err) {
+        console.log("error");
+        console.log(err);
       }
-    } catch (err) {
-      console.log("error");
-      console.log(err);
     }
   };
 
