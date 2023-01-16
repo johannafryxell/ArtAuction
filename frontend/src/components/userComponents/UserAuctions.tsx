@@ -57,6 +57,11 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
 
   return (
     <div className="account__section account__section--auctions">
+      {props.highBids.length == 0 && (
+        <div className="account__section--auctions__emptyBox">
+          <span>You have nothing to overview...</span>
+        </div>
+      )}
       {displayAuctions(props.ongoingAuctions, false)}
       {displayAuctions(props.endedAuctions, true)}
     </div>

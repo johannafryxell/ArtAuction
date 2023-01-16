@@ -21,7 +21,7 @@
 
   &__section {
     &--user {
-      @include mixins.flex(column, center, center, 0.8rem);
+      @include mixins.flex(column, center, center, 2.5rem);
       min-width: 40vw;
       padding-top: 20px;
       padding-bottom: 20px;
@@ -31,8 +31,18 @@
           @include mixins.flex(column, space-between, center);
           border-radius: 4px;
           border: $border;
-          width: 50vw;
+          width: 75vw;
           // padding: 20px;
+
+          .introText {
+            @include mixins.flex(column, center, center, 0.8rem);
+            padding: 20px;
+            .explore {
+              font-weight: 500;
+              text-decoration: none;
+              color: black;
+            }
+          }
 
           h4 {
             font-weight: 400;
@@ -114,6 +124,9 @@
       }
 
       @include mixins.tablet {
+        border-right: $border;
+        height: 80vh;
+
         &__bigBox {
           @include mixins.flex(column, center, center);
           width: 100%;
@@ -138,13 +151,21 @@
     }
 
     &--auctions {
-      @include mixins.flex(row, space-between, center);
+      @include mixins.flex(row, flex-start, flex-start);
       flex-wrap: wrap;
+
+      &__emptyBox {
+        @include mixins.flex(column, center, center);
+        border-top: $border;
+        height: 30vh;
+        width: 100vw;
+        color: $greige-dark;
+      }
 
       &__auctionSingle {
         @include mixins.flex(column, center, center);
-        border-left: 1px solid black;
-        border-top: 1px solid black;
+        border-right: $border;
+        border-top: $border;
         width: 50vw;
         height: 50vw;
         font-size: 0.9rem;
@@ -199,23 +220,33 @@
           }
         }
 
-        &:last-child {
-          border-right: 1px solid black;
-        }
         &:nth-last-child(2) {
-          border-bottom: 1px solid black;
+          border-bottom: $border;
         }
       }
       @include mixins.tablet {
-        @include mixins.flex(row, flex-start, center);
+        @include mixins.flex(row, flex-start, flex-start);
+        min-width: 60vw;
+        max-height: 80vh;
+        // overflow: hidden;
+        overflow-x: scroll;
 
         &__auctionSingle {
+          margin-left: -0.4px;
           font-size: 0.8rem;
-
           width: 20vw;
           height: 20vw;
-          border-bottom: 1px solid black;
+          border-bottom: $border;
           border-top: none;
+        }
+
+        &__emptyBox {
+          @include mixins.flex(column, center, center);
+          border-top: none;
+          border-left: $border;
+          height: 80vh;
+          width: 60vw;
+          color: $greige-dark;
         }
       }
       @include mixins.desktop {

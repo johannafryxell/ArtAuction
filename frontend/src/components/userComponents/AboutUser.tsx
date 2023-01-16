@@ -1,4 +1,5 @@
 import userEvent from "@testing-library/user-event";
+import { spawn } from "child_process";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
@@ -6,6 +7,7 @@ import { IBid } from "../../models/IBid";
 import { IUser } from "../../models/IUser";
 import { CountDown } from "../auctionComponents/CountDown";
 import { AuthContext, IAuth } from "../AuthProvider";
+import { SkeletonImage } from "../layoutComponents/LoaderImage";
 
 interface IAboutUserProps {
   highBids: IBid[];
@@ -68,15 +70,28 @@ export const AboutUser = (props: IAboutUserProps) => {
       </h3>
       <div className="account__section--user__bigBox">
         <div className="endSoon">
-          <h4>Ending soon</h4>
-          <Link className="auctLink" to={"/auction/" + endSoon.objectID}>
-            <div className="imgContainer">
-              <img src={endSoon.primaryImage} alt="artwork" />
+          {endSoon._id == "" ? (
+            <div className="introText">
+              <p>
+                Welcome {props.user.firstName}! This is your overview. Once
+                you've entered some auctions, information about them will be
+                presented here.
+              </p>
+              <Link to={"/"} className="explore">Get out and explore the arternatives!</Link>
             </div>
-            <div className="endTimeContainer">
-              <CountDown endTime={endSoon.endTime} />
-            </div>
-          </Link>
+          ) : (
+            <>
+              <h4>Ending soon</h4>
+              <Link className="auctLink" to={"/auction/" + endSoon.objectID}>
+                <div className="imgContainer">
+                  <img src={endSoon.primaryImage} alt="artwork" />
+                </div>
+                <div className="endTimeContainer">
+                  <CountDown endTime={endSoon.endTime} />
+                </div>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <div className="account__section--user__statistics">
