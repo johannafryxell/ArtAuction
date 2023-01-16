@@ -18,10 +18,10 @@ export const postLogin = async (req: Request, res: Response) => {
     if (user && comparePassword(password, user.password)) {
       const userData = { email: user.email, id: user._id };
       const accessToken = jwt.sign(userData, process.env.JWT_SECRET);
-      
-      res.send({signIn: true, token: accessToken});
-    }else{
-      res.send({signIn: false});
+
+      res.send({ signIn: true, token: accessToken });
+    } else {
+      res.send({ signIn: false });
     }
   });
 };
@@ -29,22 +29,37 @@ export const postLogin = async (req: Request, res: Response) => {
 export const postSignup = async (req: Request, res: Response) => {
   const { email, firstName, lastName, password, confirmPassword } = req.body;
 
+  if (
+    (firstName.trim() ||
+      lastName.trim() ||
+      password.trim() ||
+      confirmPassword.trim() ||
+      email.trim()) == "" ||
+    null
+  ) {
+    res.send("empty");
+    return
+  }
+
   Users.findOne({ email }, async (err: any, user: IUser) => {
     if (user) {
-      console.log("The mail exists");
+      res.send("exist");
     } else if (password !== confirmPassword) {
-      console.log("The password doesnt match");
-    } else if (!password || !confirmPassword) {
-      console.log("You need to have a password");
+      res.send("noMatch");
     } else {
-      const newUser = new Users({
+      const newUser:any = new Users({
         email,
         firstName,
         lastName,
         password: hashPassword(password),
       });
       newUser.validateSync();
-      await newUser.save();
+      let created = await newUser.save();
+
+      const userData = { email: created.email, id: created._id };
+      const accessToken = jwt.sign(userData, process.env.JWT_SECRET);
+
+      res.send({ signIn: true, token: accessToken });
     }
   });
 };

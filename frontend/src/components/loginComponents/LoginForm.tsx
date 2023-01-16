@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ISigninUser } from "../../models/IUser";
 
 import Cookies from "universal-cookie";
@@ -12,7 +12,6 @@ export const LoginForm = () => {
   /////////////////////
   // CONTEXT VALUES //
   ///////////////////
-  const { auth } = useContext(AuthContext) as IAuth;
   const { onLogin } = useContext(AuthContext) as IAuth;
 
   const [email, setEmail] = useState("");
@@ -21,27 +20,26 @@ export const LoginForm = () => {
   const [passwErr, setPasswErr] = useState("");
 
   function validateForm() {
-    let errorEmail = false;
-    let errorPassw = false;
+    let error = false;
 
     if (email == "") {
       setEmailErr("Email required");
-      errorEmail = true;
+      error = true;
     } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setEmailErr("Invalid email");
-      errorEmail = true;
+      error = true;
     } else {
       setEmailErr("");
     }
 
     if (password == "") {
       setPasswErr("Password required");
-      errorPassw = true;
+      error = true;
     } else if (password != "") {
       setPasswErr("");
     }
 
-    if (!errorPassw && !errorEmail) {
+    if (!error) {
       return true;
     } else {
       return false;
