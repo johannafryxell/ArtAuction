@@ -92,7 +92,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
       }
     } else {
       setErrorLogin(true);
-      console.log("You need to be logged in");
+      setNewBid(0);
     }
   };
 
@@ -146,7 +146,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
             )}
           </div>
           <div className="minBox">
-            {errorLogin ? <span>You have to login to bid</span> : bidMessage()}
+            {errorLogin ? <span className="errorMsg">Log in to place bid</span> : bidMessage()}
           </div>
           <div className="inputBox">
             {newBid == 0 ? (
