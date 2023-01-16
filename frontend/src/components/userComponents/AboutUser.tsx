@@ -1,9 +1,10 @@
 import userEvent from "@testing-library/user-event";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
 import { IBid } from "../../models/IBid";
 import { IUser } from "../../models/IUser";
+import { CountDown } from "../auctionComponents/CountDown";
 import { AuthContext, IAuth } from "../AuthProvider";
 
 interface IAboutUserProps {
@@ -14,13 +15,28 @@ interface IAboutUserProps {
 }
 
 export const AboutUser = (props: IAboutUserProps) => {
-  const [endSoonImg, setEndSoonImg] = useState("");
+  const [endSoon, setEndSoon] = useState<IArtAuction>({
+    _id: "",
+    artId: 0,
+    published: "",
+    endTime: "",
+    price: 0,
+    objectID: 0,
+    primaryImage: "",
+    objectName: "",
+    title: "",
+    country: "",
+    artistDisplayName: "",
+    period: "",
+    accessionYear: "",
+    artistDisplayBio: "",
+  });
   const { onLogout } = useContext(AuthContext) as IAuth;
   const navigate = useNavigate();
 
   useEffect(() => {
     if (props.ongoingAuctions.length != 0) {
-      setEndSoonImg(props.ongoingAuctions[0].primaryImage);
+      setEndSoon(props.ongoingAuctions[0]);
     }
   }, [props.ongoingAuctions]);
 
@@ -29,7 +45,7 @@ export const AboutUser = (props: IAboutUserProps) => {
     navigate("/login");
   }
 
-  function calcStatistics(list : IArtAuction[]){
+  function calcStatistics(list: IArtAuction[]) {
     let amount: number = 0;
     props.highBids.map((bid) => {
       if (bid.userId === props.user._id) {
@@ -52,10 +68,15 @@ export const AboutUser = (props: IAboutUserProps) => {
       </h3>
       <div className="account__section--user__bigBox">
         <div className="endSoon">
-          <span>Ending soon</span>
-          <div className="imgContainer">
-            <img src={endSoonImg} alt="artwork" />
-          </div>
+          <h4>Ending soon</h4>
+          <Link className="auctLink" to={"/auction/" + endSoon.objectID}>
+            <div className="imgContainer">
+              <img src={endSoon.primaryImage} alt="artwork" />
+            </div>
+            <div className="endTimeContainer">
+              <CountDown endTime={endSoon.endTime} />
+            </div>
+          </Link>
         </div>
       </div>
       <div className="account__section--user__statistics">

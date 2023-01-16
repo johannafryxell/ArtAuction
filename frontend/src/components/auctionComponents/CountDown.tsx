@@ -51,9 +51,9 @@ export const CountDown = (props: ICountDownProps) => {
     if (timeLeft.days <= 0) {
       return (
         <div className="timeCount">
-          <span>{timeLeft.hours}:</span>
-          <span>{timeLeft.minutes}:</span>
-          <span>{timeLeft.seconds}</span>
+          <span>{timeLeft.hours < 10 && "0"}{timeLeft.hours}:</span>
+          <span>{timeLeft.minutes < 10 && "0"}{timeLeft.minutes}:</span>
+          <span>{timeLeft.seconds < 10 && "0"}{timeLeft.seconds}</span>
         </div>
       );
     } else {

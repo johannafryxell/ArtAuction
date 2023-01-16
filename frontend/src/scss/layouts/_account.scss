@@ -34,14 +34,30 @@
           width: 50vw;
           // padding: 20px;
 
-          span {
-            font-size: 0.9rem;
+          h4 {
+            font-weight: 400;
             width: 100%;
             text-align: center;
-            border-bottom: $border;
             padding-bottom: 8px;
             padding-top: 8px;
+            border-bottom: $border;
             margin-bottom: 20px;
+          }
+
+          .auctLink {
+            text-decoration: none;
+
+            .endTimeContainer {
+              @include mixins.flex(column, center, flex-end);
+              color: black;
+              margin-bottom: 20px;
+              width: 100%;
+
+              .endTime {
+                width: 100%;
+                @include mixins.flex(row, space-between, center);
+              }
+            }
           }
 
           .imgContainer {
