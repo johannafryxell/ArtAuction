@@ -8,6 +8,7 @@ import { AuctionBid } from "../auctionComponents/AuctionBid";
 import { AuctionImage } from "../auctionComponents/AuctionImage";
 import { AuctionInfo } from "../auctionComponents/AuctionInfo";
 import { BidInfo } from "../auctionComponents/BidInfo";
+import { Suggestion } from "../auctionComponents/Suggestion";
 import { useAuctions } from "../AuctionProvider";
 
 export function Detail() {
@@ -30,18 +31,22 @@ export function Detail() {
     artistDisplayBio: "",
   });
 
-  const [id, setId] = useState(useParams().id || 0);
+  const [id, setId] = useState<number>(+(useParams().id || 0));
 
   ////////////////
   // FUNCTIONS //
   //////////////
 
   const getAuction = async () => {
-    const object:any = auctions.find(({objectID}) => objectID === +id);
-    if(object){
+    console.log("Get auction");
+
+    const object: any = auctions.find(({ objectID }) => objectID === +id);
+    if (object) {
       setAuction(object);
-    }else{
-      const endedObject:any = endedAuctions.find(({objectID}) => objectID === +id);
+    } else {
+      const endedObject: any = endedAuctions.find(
+        ({ objectID }) => objectID === +id
+      );
       setAuction(endedObject);
     }
   };
@@ -51,20 +56,22 @@ export function Detail() {
   ////////////////
   useEffect(() => {
     getAuction();
-  }, []);
-
+  }, [id]);
 
   return (
     <>
       <main className="detail">
         <div className="detail__artwork">
-          <AuctionImage image={auction.primaryImage} name={auction.objectName}></AuctionImage>
+          <AuctionImage
+            image={auction.primaryImage}
+            name={auction.objectName}
+          ></AuctionImage>
         </div>
         <div className="detail__artinfo">
           <AuctionBid auction={auction}></AuctionBid>
           <AuctionInfo auction={auction}></AuctionInfo>
           <BidInfo />
-          <AuctionInfo auction={auction}></AuctionInfo>
+          <Suggestion setId={setId} />
         </div>
       </main>
     </>

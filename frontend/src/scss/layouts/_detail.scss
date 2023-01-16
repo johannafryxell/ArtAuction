@@ -79,7 +79,7 @@
       min-height: 300px;
       border-bottom: $border;
       border-left: $border;
-      padding: 30px;
+      padding: 21px;
 
       &:last-child {
         border-bottom: none;
@@ -88,11 +88,15 @@
       .bidInfo {
         width: 100%;
         @include mixins.flex(row, space-between, end);
-        span{
+        span {
           font-size: 0.9rem;
         }
-        .currentPrice{
+        .currentPrice {
           font-size: 2rem;
+        }
+
+        .endTime {
+          @include mixins.flex(column, center, flex-start);
         }
       }
       .inputBox {
@@ -159,6 +163,22 @@
 
       p {
         font-size: 0.9rem;
+      }
+
+      &__ended {
+        @include mixins.flex(column, center, flex-start);
+
+        .endDate {
+          @include mixins.flex(column, center, flex-start);
+        }
+
+        .sold {
+          @include mixins.flex(row, space-between, flex-end);
+          width: 100%;
+          :last-child {
+            font-size: 36px;
+          }
+        }
       }
     }
 

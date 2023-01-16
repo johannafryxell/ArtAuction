@@ -115,11 +115,17 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   return (
     <>
       {ended ? (
-        <div className="detail__artinfo--box">
-          <span>
-            Auction ended {new Date(props.auction.endTime).toDateString()}
-          </span>
-          <span>Sold for {highestBid}</span>
+        <div className="detail__artinfo--box detail__artinfo--box__ended">
+          <div className="endDate">
+            <span>Auction ended</span>
+            <span>{new Date(props.auction.endTime).toDateString()}</span>
+          </div>
+          {highestBid != 0 && (
+            <div className="sold">
+              <span>Sold for</span>
+              <span>{highestBid}</span>
+            </div>
+          )}
         </div>
       ) : (
         <div className="detail__artinfo--box">

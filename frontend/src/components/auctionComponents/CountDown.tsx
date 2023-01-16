@@ -22,13 +22,13 @@ export const CountDown = (props: ICountDownProps) => {
   const endTime = new Date(props.endTime).toLocaleString();
   const today: string = new Date().toLocaleString();
   const endDate = new Date(endTime).getDate().toLocaleString();
-  const endMonth = monthNames[+(new Date(endTime).getMonth().toLocaleString())];
+  const endMonth = monthNames[+new Date(endTime).getMonth().toLocaleString()];
   const [timeLeft, setTimeLeft] = useState(calcCountDown());
 
   function calcCountDown() {
     const year = new Date(today).getFullYear();
     const difference = +new Date(endTime) - +new Date(today);
-    
+
     let timeLeft: any = {};
 
     timeLeft = {
@@ -48,10 +48,7 @@ export const CountDown = (props: ICountDownProps) => {
   });
 
   function timeDisplay() {
-    const ending = new Date(props.endTime).toLocaleDateString();
-    const now: string = new Date().toLocaleDateString();
-
-    if (ending === now) {
+    if (timeLeft.days <= 0) {
       return (
         <div className="timeCount">
           <span>{timeLeft.hours}:</span>
@@ -62,9 +59,11 @@ export const CountDown = (props: ICountDownProps) => {
     } else {
       return (
         <div>
-          {timeLeft.days != 0 && 
-          <span>{timeLeft.days} days </span>
-          }
+          {timeLeft.days != 0 && (
+            <span>
+              {timeLeft.days} {timeLeft.days == 1 ? "day " : "days "}
+            </span>
+          )}
           <span>
             {timeLeft.hours} {timeLeft.hours == 1 ? "hour" : "hours"}
           </span>
@@ -75,12 +74,23 @@ export const CountDown = (props: ICountDownProps) => {
 
   return (
     <>
-      {new Date(props.endTime).toLocaleDateString() === new Date().toLocaleDateString() ? (
-        <span>Ends today</span>
+      {new Date(props.endTime).toLocaleDateString() ===
+      new Date().toLocaleDateString() ? (
+        <div>
+          <span>Ends today</span>
+          <span>{endTime}</span>
+        </div>
       ) : (
-        <span>
-          Ends {endDate} {endMonth}
-        </span>
+        <div className="endTime">
+          <span>Ends</span>
+          <span>
+            {endDate} {endMonth}{" "}
+            {new Date(props.endTime).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
+        </div>
       )}
       {timeDisplay()}
     </>
