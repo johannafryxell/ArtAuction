@@ -27,6 +27,7 @@ it("logs out", () => {
   cy.get('#password').type('lösen', {force: true});
   cy.get(".form__input--btn").click();
   cy.visit("http://localhost:3000/account");
+  cy.wait(2000);
   cy.get("button").click();
   cy.visit("http://localhost:3000/");
 });
