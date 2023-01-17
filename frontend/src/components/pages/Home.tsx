@@ -32,20 +32,6 @@ export function Home() {
     artistDisplayBio: "",
   });
 
-  /////////////////
-  // USEEFFECTS //
-  ///////////////
-  // const getArtwork = async () => {
-  //   axios.get("http://localhost:3001/art/getartwork").then((res) => {
-  //     const list = res.data;
-
-  //     setFirstArt(list[0]);
-  //     setQuadArtList([list[1], list[2], list[3], list[4]]);
-  //     setArtList(list.slice(5));
-  //     setLoader(false);
-  //   });
-  // };
-
   useEffect(() => {
     setFirstArt(auctions[0]);
     setQuadArtList([auctions[1], auctions[2], auctions[3], auctions[4]]);

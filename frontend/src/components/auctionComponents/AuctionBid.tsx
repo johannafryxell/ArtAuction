@@ -38,7 +38,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
     let auctionId = props.auction._id;
 
     let res: any = await axios.get(
-      "http://localhost:3001/art/getbids/?auctionId=" + auctionId
+      "http://localhost:3001/auction/getbids/?auctionId=" + auctionId
     );
 
     if (res.data.bids) {
@@ -79,7 +79,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         setNewBid(props.auction.price + 50);
       } else {
         try {
-          await axios.post("http://localhost:3001/art/postbid", body);
+          await axios.post("http://localhost:3001/auction/postbid", body);
           setNewBid(0);
           setErrorMsg(false);
         } catch (err) {

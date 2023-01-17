@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from "express";
-import AuctionRoute from "./routes/art-routes";
+import AuctionRoute from "./routes/auction-routes";
 import LoginRoute from "./routes/login-routes";
 import UserRoute from "./routes/user-routes";
 const session = require("express-session");
@@ -69,7 +69,7 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.use("/art", AuctionRoute);
+app.use("/auction", AuctionRoute);
 app.use("/login", LoginRoute);
 app.use("/account", UserRoute);
 
