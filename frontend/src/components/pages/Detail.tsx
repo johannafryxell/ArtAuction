@@ -41,8 +41,6 @@ export function Detail() {
   //////////////
 
   const getAuction = async () => {
-    console.log("Get auction");
-
     const object: any = auctions.find(({ objectID }) => objectID === +id);
     if (object) {
       setAuction(object);

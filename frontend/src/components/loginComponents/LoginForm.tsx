@@ -59,7 +59,6 @@ export const LoginForm = () => {
           "http://localhost:3001/login/sign-in",
           body
         );
-        console.log(res.data);
 
         if (res.data.signIn) {
           cookies.set("logIn", res.data.token);

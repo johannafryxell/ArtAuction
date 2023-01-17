@@ -82,7 +82,6 @@ export const SignupForm = () => {
 
     if (validateForm()) {
       try {
-        console.log("trying...");
         let res = await axios.post("http://localhost:3001/login/sign-up", body);
         if (res.data === "exist") {
           setEmailError("This email is already in use");
