@@ -47,7 +47,7 @@ export const AboutUser = (props: IAboutUserProps) => {
     navigate("/login");
   }
 
-  function calcStatistics(list: IArtAuction[]) {
+  function calcLeading() {
     let amount: number = 0;
     props.highBids.map((bid) => {
       if (bid.userId === props.user._id) {
@@ -55,12 +55,35 @@ export const AboutUser = (props: IAboutUserProps) => {
       }
     });
 
-    amount = amount - list.length;
+    amount = amount - props.endedAuctions.length;
     if (amount > 0) {
       return amount;
     } else {
       return 0;
     }
+  }
+
+  function calcWon(){
+    let bids: IBid[] = [];
+    let amount:number = 0
+    
+    props.highBids.map((bid) => {
+      if (bid.userId === props.user._id) {
+        // bids.push(bid);
+        props.endedAuctions.map((auction) => {
+          if(bid.auctionId === auction._id){
+            amount++
+          }
+        })
+      }
+    });
+
+    if (amount > 0) {
+      return amount;
+    } else {
+      return 0;
+    }
+
   }
 
   return (
@@ -102,12 +125,12 @@ export const AboutUser = (props: IAboutUserProps) => {
 
         <div className="statBox">
           <span>Leading</span>
-          <span>{calcStatistics(props.endedAuctions)}</span>
+          <span>{calcLeading()}</span>
         </div>
 
         <div className="statBox">
           <span>Won</span>
-          <span>{calcStatistics(props.ongoingAuctions)}</span>
+          <span>{calcWon()}</span>
         </div>
       </div>
       <div className="account__section--user__logout">

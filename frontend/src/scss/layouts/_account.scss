@@ -151,8 +151,7 @@
     }
 
     &--auctions {
-      @include mixins.flex(row, flex-start, flex-start);
-      flex-wrap: wrap;
+      @include mixins.flex(column, flex-start, flex-start);
 
       &__emptyBox {
         @include mixins.flex(column, center, center);
@@ -162,91 +161,120 @@
         color: $greige-dark;
       }
 
-      &__auctionSingle {
-        @include mixins.flex(column, center, center);
-        border-right: $border;
+      &__filter {
+        @include mixins.flex(row, flex-start, center, 1rem);
+        padding-left: 40px;
+        height: 50px;
         border-top: $border;
-        width: 50vw;
-        height: 50vw;
-        font-size: 0.9rem;
+        border-bottom: $border;
+        margin-bottom: -1px;
+        width: 100vw;
+        select {
+          background-color: $greige-main;
+          border: none;
+          width: 100px;
+          font-size: 1rem;
+          z-index: index;
+        }
+      }
 
-        .auctLink {
-          @include mixins.flex(column, space-between, center, 0.4rem);
-          padding: 20px;
-          color: black;
-          text-decoration: none;
-          width: 100%;
-          height: 100%;
+      &__auctionBox {
+        @include mixins.flex(row, flex-start, flex-start);
+        flex-wrap: wrap;
 
-          // img {
-          //   width: 50%;
-          //   height: 50%;
-          //   object-fit: cover;
-          // }
+        &--auctionSingle {
+          @include mixins.flex(column, center, center);
+          border-right: $border;
+          border-top: $border;
+          width: 50vw;
+          height: 50vw;
+          font-size: 0.9rem;
 
-          .imgContainer {
-            @include mixins.flex(row, center, center);
-            width: 50%;
-            height: 50%;
-            border-radius: 2px;
-            overflow: hidden;
+          .auctLink {
+            @include mixins.flex(column, space-between, center, 0.4rem);
+            padding: 20px;
+            color: black;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
 
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              transform: scale(1.07);
-              transition: transform 0.6s ease;
-              &:hover {
-                transform: scale(1.2);
+            // img {
+            //   width: 50%;
+            //   height: 50%;
+            //   object-fit: cover;
+            // }
+
+            .imgContainer {
+              @include mixins.flex(row, center, center);
+              width: 50%;
+              height: 50%;
+              border-radius: 2px;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: scale(1.07);
+                transition: transform 0.6s ease;
+                &:hover {
+                  transform: scale(1.2);
+                }
               }
             }
-          }
 
-          .infoBox {
-            @include mixins.flex(column, center, space-between, 0.1rem);
-            width: 100%;
+            .infoBox {
+              @include mixins.flex(column, center, space-between, 0.1rem);
+              width: 100%;
 
-            .infoDetail {
-              @include mixins.flex(row, space-between, center);
+              .infoDetail {
+                @include mixins.flex(row, space-between, center);
+              }
+            }
+
+            .title {
+              width: 100%;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
             }
           }
 
-          .title {
-            width: 100%;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
+          &:nth-last-child(2) {
+            border-bottom: $border;
           }
-        }
-
-        &:nth-last-child(2) {
-          border-bottom: $border;
         }
       }
       @include mixins.tablet {
-        @include mixins.flex(row, flex-start, flex-start);
-        min-width: 60vw;
         max-height: 80vh;
-        // overflow: hidden;
-        overflow-x: scroll;
-
-        &__auctionSingle {
-          margin-left: -0.4px;
-          font-size: 0.8rem;
-          width: 20vw;
-          height: 20vw;
-          border-bottom: $border;
+        &__filter {
           border-top: none;
+          margin-bottom: none;
+          width: 60vw;
         }
 
-        &__emptyBox {
-          @include mixins.flex(column, center, center);
-          border-top: none;
-          border-left: $border;
-          height: 80vh;
-          width: 60vw;
-          color: $greige-dark;
+        &__auctionBox {
+          @include mixins.flex(row, flex-start, flex-start);
+          min-width: 60vw;
+          overflow-x: scroll;
+
+          &--auctionSingle {
+            margin-left: -0.4px;
+            font-size: 0.8rem;
+            width: 20vw;
+            height: 20vw;
+            border-bottom: $border;
+            border-top: none;
+          }
+
+          &__emptyBox {
+            @include mixins.flex(column, center, center);
+            border-top: none;
+            border-left: $border;
+            height: 80vh;
+            width: 60vw;
+            color: $greige-dark;
+          }
         }
       }
       @include mixins.desktop {

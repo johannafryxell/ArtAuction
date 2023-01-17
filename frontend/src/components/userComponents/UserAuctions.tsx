@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { IUser } from "../../models/IUser";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
@@ -17,7 +17,11 @@ interface IUserAuctionsProps {
 }
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
-  const cookies = new Cookies();
+  const [filter, setFilter] = useState("all");
+
+  const changeFilter = (event: any) => {
+    setFilter(event.target.value);
+  };
 
   function displayAuctions(auctionList: IArtAuction[], ended: boolean) {
     const list: any = [];
@@ -28,7 +32,7 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
           list.push(
             <div
               key={art.objectID}
-              className="account__section--auctions__auctionSingle"
+              className="account__section--auctions__auctionBox--auctionSingle"
             >
               <Link className="auctLink" to={"/auction/" + art.artId}>
                 <h4 className="title">{art.title}</h4>
@@ -56,14 +60,29 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
   }
 
   return (
-    <div className="account__section account__section--auctions">
-      {props.highBids.length == 0 && (
-        <div className="account__section--auctions__emptyBox">
-          <span>You have nothing to overview...</span>
+    <>
+      <div className="account__section account__section--auctions">
+        <div className="account__section--auctions__filter">
+          <span>Display: </span>
+          <select name="filter" id="filter" onChange={changeFilter} >
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="ended">Ended</option>
+          </select>
         </div>
-      )}
-      {displayAuctions(props.ongoingAuctions, false)}
-      {displayAuctions(props.endedAuctions, true)}
-    </div>
+        {props.highBids.length == 0 && (
+          <div className="account__section--auctions__emptyBox">
+            <span>You have nothing to overview...</span>
+          </div>
+        )}
+        <div className="account__section--auctions__auctionBox">
+          {/* account__section--auctions__auctionSingle */}
+          {(filter == "all" || filter == "active") &&
+            displayAuctions(props.ongoingAuctions, false)}
+          {(filter == "all" || filter == "ended") &&
+            displayAuctions(props.endedAuctions, true)}
+        </div>
+      </div>
+    </>
   );
 };
