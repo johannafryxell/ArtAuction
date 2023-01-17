@@ -26,7 +26,6 @@ export const CountDown = (props: ICountDownProps) => {
   const [timeLeft, setTimeLeft] = useState(calcCountDown());
 
   function calcCountDown() {
-    const year = new Date(today).getFullYear();
     const difference = +new Date(endTime) - +new Date(today);
 
     let timeLeft: any = {};

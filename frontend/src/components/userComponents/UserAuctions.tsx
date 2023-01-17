@@ -1,15 +1,10 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { IUser } from "../../models/IUser";
-import Cookies from "universal-cookie";
-import jwt from "jwt-decode";
-import axios from "axios";
-import { IAuction } from "../../models/IAuction";
-import { IArt } from "../../models/IArt";
-import { IBid } from "../../models/IBid";
 import { Link } from "react-router-dom";
-import { IArtAuction } from "../../models/IArtAuction";
-import { useAuctions } from "../AuctionProvider";
-import { spawn } from "child_process";
+import { useState } from "react";
+
+// INTERFACE //
+import { IUser } from "../../interface/IUser";
+import { IBid } from "../../interface/IBid";
+import { IArtAuction } from "../../interface/IArtAuction";
 
 interface IUserAuctionsProps {
   highBids: IBid[];

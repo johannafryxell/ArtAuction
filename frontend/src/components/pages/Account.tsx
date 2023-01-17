@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext, IAuth } from "../AuthProvider";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
-import { IUser } from "../../models/IUser";
+import { IUser } from "../../interface/IUser";
 import { AboutUser } from "../userComponents/AboutUser";
 import { UserAuctions } from "../userComponents/UserAuctions";
 import { useAuctions } from "../AuctionProvider";
-import { IArtAuction } from "../../models/IArtAuction";
-import { IBid } from "../../models/IBid";
+import { IArtAuction } from "../../interface/IArtAuction";
+import { IBid } from "../../interface/IBid";
 
 export function Account() {
   const cookies = new Cookies();

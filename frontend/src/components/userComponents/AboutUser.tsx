@@ -1,13 +1,16 @@
-import userEvent from "@testing-library/user-event";
-import { spawn } from "child_process";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { IArtAuction } from "../../models/IArtAuction";
-import { IBid } from "../../models/IBid";
-import { IUser } from "../../models/IUser";
+
+// INTERFACE //
+import { IArtAuction } from "../../interface/IArtAuction";
+import { IBid } from "../../interface/IBid";
+import { IUser } from "../../interface/IUser";
+
+// COMPONENTS //
 import { CountDown } from "../auctionComponents/CountDown";
+
+// CONTEXT //
 import { AuthContext, IAuth } from "../AuthProvider";
-import { SkeletonImage } from "../layoutComponents/LoaderImage";
 
 interface IAboutUserProps {
   highBids: IBid[];

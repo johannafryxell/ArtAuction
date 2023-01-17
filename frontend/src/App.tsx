@@ -6,49 +6,33 @@ import { Home } from "./components/pages/Home";
 import { Account } from "./components/pages/Account";
 import { Login } from "./components/pages/Login";
 import { Detail } from "./components/pages/Detail";
-
-// LAYOUTS //
-import { HomeLayout } from "./components/layouts/HomeLayout";
-import { DetailLayout } from "./components/layouts/DetailLayout";
-import { LoginLayout } from "./components/layouts/LoginLayout";
-import { AccountLayout } from "./components/layouts/AccountLayout";
-import { createContext, useEffect, useState } from "react";
-import axios from "axios";
-import { IArtCollection } from "./models/IArt";
-import { useAuctions } from "./components/AuctionProvider";
 import { NotFound } from "./components/pages/NotFound";
+import { BaseLayout } from "./components/layouts/BaseLayout";
+
+// CONTEXT //
+import { useAuctions } from "./components/AuctionProvider";
 
 function App() {
   const auctions = useAuctions().auctions;
-
-  // useEffect(() => {
-  // // Gets id:s for objects with images
-  // axios
-  //   .get<IArtCollection>("https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=Auguste Renoir")
-  //   .then((result) => {
-  //     console.log(result);
-  //   });
-  // }
-  // )
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomeLayout />}>
+          <Route path="/" element={<BaseLayout />}>
             {auctions.length != 0 && (
               <Route path="/" element={<Home />}></Route>
             )}
           </Route>
-          <Route path="/auction" element={<DetailLayout />}>
+          <Route path="/auction" element={<BaseLayout />}>
             {auctions.length != 0 && (
               <Route path="/auction/:id" element={<Detail />}></Route>
             )}
           </Route>
-          <Route path="/login" element={<LoginLayout />}>
+          <Route path="/login" element={<BaseLayout />}>
             <Route path="/login" element={<Login />}></Route>
           </Route>
-          <Route path="/account" element={<AccountLayout />}>
+          <Route path="/account" element={<BaseLayout />}>
             {auctions.length != 0 && (
               <Route path="/account" element={<Account />}></Route>
             )}

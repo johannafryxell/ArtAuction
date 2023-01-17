@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { ISignupUser } from "../../models/IUser";
+import { ISignupUser } from "../../interface/IUser";
 import { AuthContext, IAuth } from "../AuthProvider";
 
 export const SignupForm = () => {

@@ -1,14 +1,17 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IArt } from "../../models/IArt";
-import { IArtAuction } from "../../models/IArtAuction";
-import { IAuction } from "../../models/IAuction";
+
+// INTERFACE //
+import { IArtAuction } from "../../interface/IArtAuction";
+
+// COMPONENTS //
 import { AuctionBid } from "../auctionComponents/AuctionBid";
 import { AuctionImage } from "../auctionComponents/AuctionImage";
 import { AuctionInfo } from "../auctionComponents/AuctionInfo";
 import { BidInfo } from "../auctionComponents/BidInfo";
 import { Suggestion } from "../auctionComponents/Suggestion";
+
+// CONTEXT //
 import { useAuctions } from "../AuctionProvider";
 
 export function Detail() {

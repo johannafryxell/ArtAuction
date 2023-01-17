@@ -1,12 +1,11 @@
-import axios from "axios";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { IAuction } from "../../models/IAuction";
-import { IBid, IPlaceBid } from "../../models/IBid";
+import axios from "axios";
 import Cookies from "universal-cookie";
 import jwt from "jwt-decode";
 import { AuthContext, IAuth } from "../AuthProvider";
 import { CountDown } from "./CountDown";
-import { IArtAuction } from "../../models/IArtAuction";
+import { IBid, IPlaceBid } from "../../interface/IBid";
+import { IArtAuction } from "../../interface/IArtAuction";
 
 interface IAuctionBidProps {
   auction: IArtAuction;
@@ -54,8 +53,6 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
   useEffect(() => {
     getBids();
-    console.log(props.auction.price);
-    console.log(bids);
   }, [props.auction, newBid]);
 
   useEffect(() => {

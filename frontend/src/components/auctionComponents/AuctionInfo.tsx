@@ -1,5 +1,4 @@
-import { IArt } from "../../models/IArt";
-import { IArtAuction } from "../../models/IArtAuction";
+import { IArtAuction } from "../../interface/IArtAuction";
 
 interface IAuctionInfoProps {
   auction: IArtAuction;

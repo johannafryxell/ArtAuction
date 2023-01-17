@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { IArtAuction } from "../../models/IArtAuction";
 import { useAuctions } from "../AuctionProvider";
 
 interface ISuggestionProps {

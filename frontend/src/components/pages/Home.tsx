@@ -1,7 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { IArtAuction } from "../../models/IArtAuction";
+
+// INTERFACE //
+import { IArtAuction } from "../../interface/IArtAuction";
+
+// CONTEXT //
 import { useAuctions } from "../AuctionProvider";
 
 export function Home() {

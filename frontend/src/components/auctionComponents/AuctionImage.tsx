@@ -1,5 +1,3 @@
-import { IArt } from "../../models/IArt";
-
 interface IAuctionImageProps {
   image: string;
   name: string;

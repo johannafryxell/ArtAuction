@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IArtAuction } from "../models/IArtAuction";
+import { IArtAuction } from "../interface/IArtAuction";
 
 export interface IAuctionProvider {
   auctions: IArtAuction[];
@@ -35,9 +35,7 @@ export const ArtProvider = ({ children }: IAuctionContextProps) => {
   };
 
   useEffect(() => {    
-    // if(auctions.length === 0){
       getArtwork();
-    // }
   }, []);
 
   const value = {
