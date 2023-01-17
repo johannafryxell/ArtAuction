@@ -9,11 +9,13 @@ import { IBid } from "../../models/IBid";
 import { Link } from "react-router-dom";
 import { IArtAuction } from "../../models/IArtAuction";
 import { useAuctions } from "../AuctionProvider";
+import { spawn } from "child_process";
 
 interface IUserAuctionsProps {
   highBids: IBid[];
   ongoingAuctions: IArtAuction[];
   endedAuctions: IArtAuction[];
+  user: IUser;
 }
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
@@ -32,7 +34,11 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
           list.push(
             <div
               key={art.objectID}
-              className="account__section--auctions__auctionBox--auctionSingle"
+              className={
+                ended && filter == "all"
+                  ? "account__section--auctions__auctionBox--auctionSingle account__section--auctions__auctionBox--auctionSingle__ended"
+                  : "account__section--auctions__auctionBox--auctionSingle"
+              }
             >
               <Link className="auctLink" to={"/auction/" + art.artId}>
                 <h4 className="title">{art.title}</h4>
@@ -41,7 +47,11 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
                 </div>
                 <div className="infoBox">
                   <div className="infoDetail">
-                    {ended ? <h4>Ended at</h4> : <h4>Leading bid</h4>}
+                    {ended && bid.userId == props.user._id && (
+                      <h4>You won at</h4>
+                    )}
+                    {ended && bid.userId != props.user._id && <h4>Ended at</h4>}
+                    {!ended && <h4>Leading bid</h4>}
                     <span>{bid.amount}</span>
                   </div>
                   <div className="infoDetail">
@@ -64,7 +74,7 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
       <div className="account__section account__section--auctions">
         <div className="account__section--auctions__filter">
           <span>Display: </span>
-          <select name="filter" id="filter" onChange={changeFilter} >
+          <select name="filter" id="filter" onChange={changeFilter}>
             <option value="all">All</option>
             <option value="active">Active</option>
             <option value="ended">Ended</option>

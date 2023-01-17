@@ -77,11 +77,12 @@ export function Account() {
             ongoingAuctions={ongoingAuctions}
             endedAuctions={endedAuctions}
             user={user}
-          />
+            />
           <UserAuctions
             highBids={highBids}
             ongoingAuctions={ongoingAuctions}
             endedAuctions={endedAuctions}
+            user={user}
           />
         </>
       )}

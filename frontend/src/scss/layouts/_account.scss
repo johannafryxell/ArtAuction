@@ -174,7 +174,9 @@
           border: none;
           width: 100px;
           font-size: 1rem;
-          z-index: index;
+          &:hover{
+            cursor: pointer;
+          }
         }
       }
 
@@ -189,6 +191,10 @@
           width: 50vw;
           height: 50vw;
           font-size: 0.9rem;
+
+          &__ended{
+            opacity: 0.6;
+          }
 
           .auctLink {
             @include mixins.flex(column, space-between, center, 0.4rem);
