@@ -97,7 +97,7 @@ export const AboutUser = (props: IAboutUserProps) => {
       </h3>
       <div className="account__section--user__bigBox">
         <div className="endSoon">
-          {endSoon._id == "" ? (
+          {props.ongoingAuctions.length == 0 && props.endedAuctions.length==0 ? (
             <div className="introText">
               <p>
                 Welcome {props.user.firstName}! This is your overview. Once

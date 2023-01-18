@@ -1,0 +1,273 @@
+[{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab23e"
+  },
+  "artId": 436548,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1676546771000"
+    }
+  },
+  "price": 450
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab23f"
+  },
+  "artId": 437052,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1678915390000"
+    }
+  },
+  "price": 340
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab240"
+  },
+  "artId": 334373,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1674516803000"
+    }
+  },
+  "price": 550
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab241"
+  },
+  "artId": 334374,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1673609603000"
+    }
+  },
+  "price": 290
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab242"
+  },
+  "artId": 438551,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1673663603000"
+    }
+  },
+  "price": 620
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab243"
+  },
+  "artId": 438011,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1673753603000"
+    }
+  },
+  "price": 390
+},{
+  "_id": {
+    "$oid": "63a18455d93e9d1f6d5ab244"
+  },
+  "artId": 437432,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1673840003000"
+    }
+  },
+  "price": 460
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab248"
+  },
+  "artId": 337576,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1675049603000"
+    }
+  },
+  "price": 400
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab249"
+  },
+  "artId": 436322,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1674012803000"
+    }
+  },
+  "price": 400
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab24b"
+  },
+  "artId": 436948,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1674099203000"
+    }
+  },
+  "price": 500
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab24c"
+  },
+  "artId": 435875,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1674185603000"
+    }
+  },
+  "price": 550
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab24d"
+  },
+  "artId": 459111,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1676845166000"
+    }
+  },
+  "price": 580
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab24e"
+  },
+  "artId": 438013,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1674358403000"
+    }
+  },
+  "price": 390
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab251"
+  },
+  "artId": 438144,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1679500214000"
+    }
+  },
+  "price": 590
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab252"
+  },
+  "artId": 334652,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1681421901000"
+    }
+  },
+  "price": 470
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab253"
+  },
+  "artId": 435867,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1677051203000"
+    }
+  },
+  "price": 600
+},{
+  "_id": {
+    "$oid": "63adc836d93e9d1f6d5ab254"
+  },
+  "artId": 437050,
+  "published": {
+    "$date": {
+      "$numberLong": "1645010771000"
+    }
+  },
+  "endTime": {
+    "$date": {
+      "$numberLong": "1679595994000"
+    }
+  },
+  "price": 350
+}]
