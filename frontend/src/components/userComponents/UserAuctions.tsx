@@ -44,11 +44,12 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
                 </div>
                 <div className="infoBox">
                   <div className="infoDetail">
-                    {ended && bid.userId == userId && (
-                      <h4>You won at</h4>
-                    )}
+                    {ended && bid.userId == userId && <h4>You won at</h4>}
                     {ended && bid.userId != userId && <h4>Ended at</h4>}
-                    {!ended && <h4>Leading bid</h4>}
+                    {!ended && bid.userId == userId && (
+                      <h4>Your leading bid</h4>
+                    )}
+                    {!ended && bid.userId != userId && <h4>Leading bid</h4>}
                     <span>{bid.amount}</span>
                   </div>
                   <div className="infoDetail">
