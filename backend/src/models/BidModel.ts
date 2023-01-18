@@ -2,9 +2,9 @@ import { ObjectId } from "mongodb";
 import { Schema, model } from "mongoose";
 
 export interface IBid {
-  _id: string;
-  auctionId: string;
-  userId: string;
+  _id: ObjectId;
+  auctionId: ObjectId;
+  userId: ObjectId;
   amount: number;
   published: string;
 }

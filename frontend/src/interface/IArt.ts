@@ -1,5 +1,5 @@
 export interface IArt{
-    objectID : string,
+    objectID : number,
     primaryImage : string,
     objectName : string,
     title : string,

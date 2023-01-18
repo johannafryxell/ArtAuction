@@ -15,15 +15,6 @@ require("../services/database.ts");
 
 const app: Application = express();
 
-// app.use(express.static(path.join(__dirname, "..", "build")));
-// app.use(express.static("public"));
-// app.use(
-//   session({
-//     secret: process.env.JWT_SECRET,
-//     resave: true,
-//     saveUninitialized: true,
-//   })
-// );
 app.use(cookieParser());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));

@@ -1,7 +1,8 @@
+import { ObjectId } from "mongodb";
 import { Schema, model, Types } from "mongoose";
 
 interface IAuction {
-  _id: string;
+  _id: ObjectId;
   artId: number;
   published: String;
   endTime: String;
@@ -10,7 +11,7 @@ interface IAuction {
 
 export const AuctionSchema = new Schema({
   id: {
-    type: Types.ObjectId,
+    type: ObjectId,
     required: true,
   },
   artId: {

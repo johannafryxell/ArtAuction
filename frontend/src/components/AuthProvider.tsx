@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useState } from "react";
+import jwt from "jwt-decode";
 import Cookies from "universal-cookie";
 
 export interface IAuth {
   auth: boolean;
+  userId: string,
   onLogin: () => void;
   onLogout: () => void;
 }
@@ -24,10 +26,21 @@ export const AuthProvider = ({ children }: IAuthContextProps) => {
       return false;
     }
   }
+
+  function setUser() {
+    const userToken = cookies.get("logIn");
+    if(userToken){
+      const decoded: any = jwt(userToken);
+      return decoded.id
+    }
+  }
+
   const [auth, setAuth] = useState(checkCookie());
+  const [userId, setUserId] = useState(setUser());
 
   const handleLogin = async () => {
     setAuth(true);
+    setUserId(setUser());
   };
 
   const handleLogout = () => {
@@ -37,9 +50,11 @@ export const AuthProvider = ({ children }: IAuthContextProps) => {
 
   const value = {
     auth,
+    userId,
     onLogin: handleLogin,
     onLogout: handleLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+

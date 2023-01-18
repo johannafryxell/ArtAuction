@@ -26,7 +26,7 @@ export const ArtProvider = ({ children }: IAuctionContextProps) => {
   // const [auctions, setAuctions] = useState<IAuctionProvider>();
 
   const getArtwork = async () => {
-    axios.get("http://localhost:3001/art/getartwork").then((res) => {
+    axios.get("http://localhost:3001/auction/getartwork").then((res) => {
       const ongoing : IArtAuction[] = res.data.ongoing;
       const endedList: IArtAuction[] = res.data.ended;
       setAuctions(ongoing);

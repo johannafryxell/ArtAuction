@@ -7,7 +7,6 @@ export interface IUser {
 }
 
 export interface ISignupUser {
-  // id: string;
   email: string;
   password: string;
   confirmPassword: string;

@@ -1,7 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import Cookies from "universal-cookie";
-import jwt from "jwt-decode";
 import { AuthContext, IAuth } from "../AuthProvider";
 import { CountDown } from "./CountDown";
 import { IBid, IPlaceBid } from "../../interface/IBid";
@@ -12,9 +10,9 @@ interface IAuctionBidProps {
 }
 
 export const AuctionBid = (props: IAuctionBidProps) => {
-  const cookies = new Cookies();
 
   const { auth } = useContext(AuthContext) as IAuth;
+  const { userId } = useContext(AuthContext) as IAuth;
 
   const [bids, setBids] = useState<IBid[]>([]);
   const [highestBid, sethighestBid] = useState<number>(0);
@@ -43,7 +41,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
     if (res.data.bids) {
       setBids(res.data.bids);
-      sethighestBid(res.data.highBid);
+      sethighestBid(res.data.highBid);      
     }
   };
 
@@ -61,12 +59,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
   const placeBid = async () => {
     if (auth) {
-      const userToken = cookies.get("logIn");
-      const decoded: any = jwt(userToken);
-
       let body: IPlaceBid = {
         auctionId: props.auction._id,
-        userId: decoded.id,
+        userId: userId,
         amount: newBid,
         published: new Date().toDateString(),
       };
@@ -115,7 +110,13 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         <div className="detail__artinfo--box detail__artinfo--box__ended">
           <div className="endDate">
             <span>Auction ended</span>
-            <span>{new Date(props.auction.endTime).toDateString()}</span>
+            <span>
+              {new Date(props.auction.endTime)
+                .toDateString()
+                .split(" ")
+                .slice(1)
+                .join(" ")}
+            </span>
           </div>
           {highestBid != 0 && (
             <div className="sold">
@@ -143,7 +144,11 @@ export const AuctionBid = (props: IAuctionBidProps) => {
             )}
           </div>
           <div className="minBox">
-            {errorLogin ? <span className="errorMsg">Log in to place bid</span> : bidMessage()}
+            {errorLogin ? (
+              <span className="errorMsg">Log in to place bid</span>
+            ) : (
+              bidMessage()
+            )}
           </div>
           <div className="inputBox">
             {newBid == 0 ? (
