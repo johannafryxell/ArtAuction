@@ -31,17 +31,6 @@
           border-radius: 4px;
           border: $border;
           width: 75vw;
-          // padding: 20px;
-
-          .introText {
-            @include mixins.flex(column, center, center, 0.8rem);
-            padding: 20px;
-            .explore {
-              font-weight: 500;
-              text-decoration: none;
-              color: black;
-            }
-          }
 
           h4 {
             font-weight: 400;
@@ -156,8 +145,17 @@
         @include mixins.flex(column, center, center);
         border-top: $border;
         height: 30vh;
-        width: 100vw;
         color: $greige-dark;
+
+        .introText {
+          @include mixins.flex(column, center, center, 0.8rem);
+          padding: 20px;
+          .explore {
+            font-weight: 500;
+            text-decoration: none;
+            color: black;
+          }
+        }
       }
 
       &__filter {

@@ -80,7 +80,14 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
         </div>
         {props.highBids.length == 0 && (
           <div className="account__section--auctions__emptyBox">
-            <span>You have nothing to overview...</span>
+            <div className="introText">
+              <p>
+                Welcome {props.user.firstName}! This is your overview. Once
+                you've entered some auctions, information about them will be
+                presented here.
+              </p>
+              <Link to={"/"} className="explore">Get out and explore the arternatives!</Link>
+            </div>
           </div>
         )}
         <div className="account__section--auctions__auctionBox">

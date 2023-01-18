@@ -11,6 +11,7 @@ import { CountDown } from "../auctionComponents/CountDown";
 
 // CONTEXT //
 import { AuthContext, IAuth } from "../AuthProvider";
+import { LoaderImage } from "../loaders/LoaderImage";
 
 interface IAboutUserProps {
   highBids: IBid[];
@@ -67,18 +68,18 @@ export const AboutUser = (props: IAboutUserProps) => {
     }
   }
 
-  function calcWon(){
+  function calcWon() {
     let bids: IBid[] = [];
-    let amount:number = 0
-    
+    let amount: number = 0;
+
     props.highBids.map((bid) => {
       if (bid.userId === userId) {
         // bids.push(bid);
         props.endedAuctions.map((auction) => {
-          if(bid.auctionId === auction._id){
-            amount++
+          if (bid.auctionId === auction._id) {
+            amount++;
           }
-        })
+        });
       }
     });
 
@@ -87,7 +88,6 @@ export const AboutUser = (props: IAboutUserProps) => {
     } else {
       return 0;
     }
-
   }
 
   return (
@@ -97,15 +97,15 @@ export const AboutUser = (props: IAboutUserProps) => {
       </h3>
       <div className="account__section--user__bigBox">
         <div className="endSoon">
-          {props.ongoingAuctions.length == 0 && props.endedAuctions.length==0 ? (
-            <div className="introText">
-              <p>
-                Welcome {props.user.firstName}! This is your overview. Once
-                you've entered some auctions, information about them will be
-                presented here.
-              </p>
-              <Link to={"/"} className="explore">Get out and explore the arternatives!</Link>
-            </div>
+          {props.ongoingAuctions.length == 0 &&
+          props.endedAuctions.length == 0 ? (
+            <>
+              {/* <Link className="auctLink" to={"/auction/" + endSoon.objectID}> */}
+                <div className="imgContainer">
+                  <LoaderImage />
+                </div>
+              {/* </Link> */}
+            </>
           ) : (
             <>
               <h4>Ending soon</h4>

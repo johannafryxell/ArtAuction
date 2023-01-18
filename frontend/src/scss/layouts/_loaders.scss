@@ -20,8 +20,8 @@
   border-radius: 2px;
   position: relative;
   overflow: hidden;
-  width: 50%;
-  height: 50%;
+  width: 90%;
+  height: 90%;
 }
 
 .skeleton-image {
@@ -112,7 +112,7 @@
     bottom: 0;
     width: 0;
     border: $half-border;
-    animation: border_width 1.5s linear forwards;
+    animation: border_width 1.4s linear forwards;
 
   }
 
@@ -127,7 +127,7 @@
     bottom: 0;
     height: 0;
     border: $half-border;
-    animation: border_height 1.5s linear forwards;
+    animation: border_height 1.4s linear forwards;
   }
 
   @keyframes border_width {
