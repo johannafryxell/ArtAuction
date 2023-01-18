@@ -2,8 +2,6 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext, IAuth } from "../AuthProvider";
-import Cookies from "universal-cookie";
-import jwt from "jwt-decode";
 import { IUser } from "../../interface/IUser";
 import { AboutUser } from "../userComponents/AboutUser";
 import { UserAuctions } from "../userComponents/UserAuctions";
@@ -12,9 +10,10 @@ import { IArtAuction } from "../../interface/IArtAuction";
 import { IBid } from "../../interface/IBid";
 
 export function Account() {
-  const cookies = new Cookies();
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext) as IAuth;
+  const { userId } = useContext(AuthContext) as IAuth;
+
   const auctions = useAuctions().auctions;
   const ended = useAuctions().ended;
 
@@ -31,10 +30,8 @@ export function Account() {
   });
 
   const getAuctions = async () => {
-    const user: any = jwt(cookies.get("logIn"));
-
     let res: any = await axios.get(
-      "http://localhost:3001/account/getuserauctions/?userId=" + user.id
+      "http://localhost:3001/account/getuserauctions/?userId=" + userId
     );
     const auctionIds = res.data.auctionIds; //Only auctions the user has placed bids on
     const bids: IBid[] = res.data.highBids;
@@ -52,17 +49,14 @@ export function Account() {
   };
 
   const getUser = async () => {
-    const user = cookies.get("logIn");
-    const body = jwt(user);
-
-    let res: any = await axios.post("http://localhost:3001/account", body);
+    let res: any = await axios.get("http://localhost:3001/account/?userId=" + userId);
     setUser(res.data);
   };
 
   useEffect(() => {
     if (auth) {
       getUser();
-      getAuctions();
+      getAuctions();      
     } else {
       navigate("/login");
     }

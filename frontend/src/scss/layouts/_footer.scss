@@ -32,7 +32,7 @@
     }
 
     @include mixins.tablet {
-      width: 900px;
+      width: 700px;
       &__section {
         width: auto;
       }
@@ -42,7 +42,8 @@
     @include mixins.flex(column, flex-end, flex-end);
     width: 100vw;
     .logo {
-      padding: 20px;
+      padding-right: 30px;
+      padding-bottom: 30px;
       color: $almost-black;
       @include typography.fjalla;
       font-size: 2rem;

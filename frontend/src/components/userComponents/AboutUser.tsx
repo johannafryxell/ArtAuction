@@ -37,6 +37,7 @@ export const AboutUser = (props: IAboutUserProps) => {
     artistDisplayBio: "",
   });
   const { onLogout } = useContext(AuthContext) as IAuth;
+  const { userId } = useContext(AuthContext) as IAuth;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export const AboutUser = (props: IAboutUserProps) => {
   function calcLeading() {
     let amount: number = 0;
     props.highBids.map((bid) => {
-      if (bid.userId === props.user._id) {
+      if (bid.userId === userId) {
         amount++;
       }
     });
@@ -71,7 +72,7 @@ export const AboutUser = (props: IAboutUserProps) => {
     let amount:number = 0
     
     props.highBids.map((bid) => {
-      if (bid.userId === props.user._id) {
+      if (bid.userId === userId) {
         // bids.push(bid);
         props.endedAuctions.map((auction) => {
           if(bid.auctionId === auction._id){

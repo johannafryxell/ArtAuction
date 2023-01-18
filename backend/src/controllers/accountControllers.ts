@@ -7,9 +7,12 @@ import { ObjectId } from "mongodb";
 // ACCOUNT CONTROLLERS //
 ////////////////////////
 export const getAccount = async (req: Request, res: Response) => {
-  let { email } = req.body;
+  let { userId } = req.query as { userId: string };
+  console.log("get account");
+  console.log(userId);
+  
 
-  Users.findOne({ email }, (err: any, user: IUser) => {
+  Users.findOne({ userId }, (err: any, user: IUser) => {
     if (user) {
       res.send(user);
     } else {
