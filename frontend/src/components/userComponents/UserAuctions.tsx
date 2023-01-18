@@ -70,7 +70,7 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
   return (
     <>
       <div className="account__section account__section--auctions">
-        {(props.ongoingAuctions.length != 0 &&
+        {(props.ongoingAuctions.length != 0 ||
           props.endedAuctions.length != 0) ?
           <div className="account__section--auctions__filter">
           <span>Display: </span>
