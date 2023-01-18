@@ -17,8 +17,6 @@
 }
 
 .skeleton-wrapper {
-  // margin: 20px auto;
-  // padding: 10px 15px;
   border-radius: 2px;
   position: relative;
   overflow: hidden;
@@ -40,7 +38,6 @@
 /* animation effects */
 .shimmer-wrapper {
   position: absolute;
-  /* parent must be relative position & overflow hidden */
   top: 0;
   left: 0;
   width: 100%;

@@ -14,8 +14,6 @@ export const getBids = async (req: Request, res: Response) => {
 
   try {
     const bids = await Bids.find({ auctionId: new ObjectId(auctionId) }).lean();
-    // const highBid = Math.max(...(bids as Array<IBid>).map((bid) => bid.amount));
-
     const highBid = bids.reduce((prev, current) =>
       prev.amount > current.amount ? prev : current
     );
@@ -61,9 +59,6 @@ export const getAllArt = async (req: Request, res: Response) => {
 
   //Find all auctions and sort
   let auctions: IAuction[] = await Auction.find({}).sort({ endTime: 1 }).lean();
-
-  //Remove all that has ended
-  // auctions = auctions.filter((p) => p.endTime >= new Date());
 
   const url =
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/";

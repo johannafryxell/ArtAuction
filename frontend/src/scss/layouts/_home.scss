@@ -157,27 +157,4 @@
       }
     }
   }
-
-  // &__grid {
-  //   @include mixins.flex(column, center, center);
-  //   border-top: 1px solid black;
-  //   width: 100%;
-
-  //   &--auction {
-  //     @include mixins.flex(row, center, center);
-  //     height: 120px;
-  //     width: 100%;
-  //     border-bottom: 1px solid black;
-  //   }
-
-  //   @include mixins.tablet {
-  //     @include mixins.flex(row, space-between, center);
-  //     &--auction {
-  //       @include mixins.flex(row, center, center);
-  //       height: 200px;
-  //       flex-grow: 1;
-  //       border-right: 1px solid black;
-  //     }
-  //   }
-  // }
 }

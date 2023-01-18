@@ -17,7 +17,7 @@ export function Footer() {
               <h3>Contact and help</h3>
               <div className="infoText">
                 <span>FAQ</span>
-                <span>auction@arternative.com</span>
+                <span>the@arternative.com</span>
                 <span>+02 003 004</span>
               </div>
             </div>

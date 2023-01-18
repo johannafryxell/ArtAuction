@@ -4,7 +4,6 @@
 @use "../mixins";
 @use "../base/typography";
 @import "../variables";
-// @import "../../assets/clifs.jpeg";
 
 ////////////////////
 // DETAIL STYLING//
@@ -203,12 +202,6 @@
             text-decoration: none;
             width: 100%;
             height: 100%;
-
-            // img {
-            //   width: 50%;
-            //   height: 50%;
-            //   object-fit: cover;
-            // }
 
             .imgContainer {
               @include mixins.flex(row, center, center);
