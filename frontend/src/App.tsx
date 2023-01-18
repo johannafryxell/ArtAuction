@@ -21,8 +21,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<BaseLayout />}>
-            {auctions.length != 0 && (
+            {auctions.length != 0 ? (
               <Route path="/" element={<Home />}></Route>
+            ) : (
+              <Route path="/" element={<LoaderGrid />}></Route>
             )}
           </Route>
           <Route path="/auction" element={<BaseLayout />}>
