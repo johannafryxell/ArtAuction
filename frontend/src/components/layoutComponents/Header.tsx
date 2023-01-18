@@ -47,7 +47,7 @@ export function Header() {
           </NavLink>
         </nav>
         <div className="header__logo">
-          {/* <h1>ALTERNATIVE AUCTION</h1> */}
+
           <h1>
             <span>T</span>
             <span>H</span>
@@ -64,14 +64,6 @@ export function Header() {
             <span>I</span>
             <span>V</span>
             <span>E</span>
-            {/* <span> </span> */}
-            {/* <span>A</span>
-              <span>U</span>
-              <span>C</span>
-              <span>T</span>
-              <span>I</span>
-              <span>O</span>
-              <span>N</span> */}
           </h1>
         </div>
       </header>
