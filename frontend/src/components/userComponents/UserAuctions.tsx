@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // INTERFACE //
 import { IUser } from "../../interface/IUser";
 import { IBid } from "../../interface/IBid";
 import { IArtAuction } from "../../interface/IArtAuction";
+import { AuthContext, IAuth } from "../AuthProvider";
 
 interface IUserAuctionsProps {
   highBids: IBid[];
@@ -15,6 +16,7 @@ interface IUserAuctionsProps {
 
 export const UserAuctions = (props: IUserAuctionsProps) => {
   const [filter, setFilter] = useState("all");
+  const { userId } = useContext(AuthContext) as IAuth;
 
   const changeFilter = (event: any) => {
     setFilter(event.target.value);
@@ -42,10 +44,10 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
                 </div>
                 <div className="infoBox">
                   <div className="infoDetail">
-                    {ended && bid.userId == props.user._id && (
+                    {ended && bid.userId == userId && (
                       <h4>You won at</h4>
                     )}
-                    {ended && bid.userId != props.user._id && <h4>Ended at</h4>}
+                    {ended && bid.userId != userId && <h4>Ended at</h4>}
                     {!ended && <h4>Leading bid</h4>}
                     <span>{bid.amount}</span>
                   </div>

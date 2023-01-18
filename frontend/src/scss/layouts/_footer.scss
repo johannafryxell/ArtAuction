@@ -10,10 +10,10 @@
 //////////////////
 .footer {
   border-top: $border;
+  margin-top: -1px;
   &--content {
     @include mixins.flex(row, space-around, space-around, 1rem);
     margin: 0 auto;
-    margin-top: -1px;
     width: 100vw;
 
     flex-wrap: wrap;
