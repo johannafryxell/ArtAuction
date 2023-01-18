@@ -1,7 +1,7 @@
 import { LoaderShimmer } from "./LoaderShimmer";
 import { LoaderSkeleton } from "./LoaderSkeleton";
 
-export const SkeletonImage = () => {
+export const LoaderImage = () => {
   return (
     <>
       <div className="skeleton-wrapper">
