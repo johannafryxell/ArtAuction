@@ -100,11 +100,11 @@ export const AboutUser = (props: IAboutUserProps) => {
           {props.ongoingAuctions.length == 0 &&
           props.endedAuctions.length == 0 ? (
             <>
-              {/* <Link className="auctLink" to={"/auction/" + endSoon.objectID}> */}
-                <div className="imgContainer">
-                  <LoaderImage />
-                </div>
-              {/* </Link> */}
+              <h4>...</h4>
+
+              <div className="imgContainer">
+                <LoaderImage />
+              </div>
             </>
           ) : (
             <>

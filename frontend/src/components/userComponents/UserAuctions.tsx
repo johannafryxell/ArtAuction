@@ -70,7 +70,9 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
   return (
     <>
       <div className="account__section account__section--auctions">
-        <div className="account__section--auctions__filter">
+        {(props.ongoingAuctions.length != 0 &&
+          props.endedAuctions.length != 0) ?
+          <div className="account__section--auctions__filter">
           <span>Display: </span>
           <select name="filter" id="filter" onChange={changeFilter}>
             <option value="all">All</option>
@@ -78,6 +80,9 @@ export const UserAuctions = (props: IUserAuctionsProps) => {
             <option value="ended">Ended</option>
           </select>
         </div>
+        :
+        <div className="account__section--auctions__filter"></div>
+        }
         {props.highBids.length == 0 && (
           <div className="account__section--auctions__emptyBox">
             <div className="introText">

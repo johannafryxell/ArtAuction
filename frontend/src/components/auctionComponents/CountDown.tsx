@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { LoaderSkeleton } from "../loaders/LoaderSkeleton";
 
 interface ICountDownProps {
   endTime: string;
@@ -55,7 +56,7 @@ export const CountDown = (props: ICountDownProps) => {
           <span>{timeLeft.seconds < 10 && "0"}{timeLeft.seconds}</span>
         </div>
       );
-    } else {
+    } else if(timeLeft.days > 0){
       return (
         <div>
           {timeLeft.days != 0 && (
@@ -68,6 +69,8 @@ export const CountDown = (props: ICountDownProps) => {
           </span>
         </div>
       );
+    }else{
+      return(<LoaderSkeleton type={"text"}/>)
     }
   }
 
