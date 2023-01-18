@@ -10,7 +10,7 @@
 ////////////////
 .home {
   margin: 0 auto;
-  min-height: 85%;
+
   @include mixins.flex(column, space-between, center);
 
   .imgContainer {

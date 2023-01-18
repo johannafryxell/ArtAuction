@@ -102,109 +102,113 @@ export const SignupForm = () => {
 
   return (
     <>
-      <form className="login-page__section login-page__section--form">
-        {firstError != "" && (
-          <div className="error">
-            <span className="error__text">{firstError}</span>
+      <form className="login-page__section login-page__section--signup">
+        <div className="login-page__section--form">
+          {firstError != "" && (
+            <div className="error">
+              <span className="error__text">{firstError}</span>
+            </div>
+          )}
+          <div className="form__input">
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              className="form__input--text"
+              placeholder=" "
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <label htmlFor="firstName" className="form__input--title">
+              First name
+            </label>
           </div>
-        )}
-        <div className="form__input">
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            className="form__input--text"
-            placeholder=" "
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-          <label htmlFor="firstName" className="form__input--title">
-            First name
-          </label>
-        </div>
-        {lastError != "" && (
-          <div className="error">
-            <span className="error__text">{lastError}</span>
+          {lastError != "" && (
+            <div className="error">
+              <span className="error__text">{lastError}</span>
+            </div>
+          )}
+          <div className="form__input">
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              className="form__input--text"
+              placeholder=" "
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+            <label htmlFor="lastName" className="form__input--title">
+              Last name
+            </label>
           </div>
-        )}
-        <div className="form__input">
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            className="form__input--text"
-            placeholder=" "
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-          <label htmlFor="lastName" className="form__input--title">
-            Last name
-          </label>
-        </div>
-        {emailError != "" && (
-          <div className="error">
-            <span className="error__text">{emailError}</span>
+          {emailError != "" && (
+            <div className="error">
+              <span className="error__text">{emailError}</span>
+            </div>
+          )}
+          <div className="form__input">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="form__input--text"
+              placeholder=" "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label htmlFor="email" className="form__input--title">
+              Email
+            </label>
           </div>
-        )}
-        <div className="form__input">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="form__input--text"
-            placeholder=" "
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="email" className="form__input--title">
-            Email
-          </label>
         </div>
-        {passwordError != "" && (
-          <div className="error">
-            <span className="error__text">{passwordError}</span>
+        <div className="login-page__section--form">
+          {passwordError != "" && (
+            <div className="error">
+              <span className="error__text">{passwordError}</span>
+            </div>
+          )}
+          <div className="form__input">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className="form__input--text"
+              placeholder=" "
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label htmlFor="password" className="form__input--title">
+              Password
+            </label>
           </div>
-        )}
-        <div className="form__input">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="form__input--text"
-            placeholder=" "
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <label htmlFor="password" className="form__input--title">
-            Password
-          </label>
-        </div>
-        <div className="form__input">
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            className="form__input--text"
-            placeholder=" "
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-          <label htmlFor="confirmPassword" className="form__input--title">
-            Repeat password
-          </label>
-        </div>
-        <div className="form__input">
-          <input
-            type="submit"
-            className="form__input--btn"
-            value="Sign up"
-            onClick={signUp}
-          />
+          <div className="form__input">
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              className="form__input--text"
+              placeholder=" "
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <label htmlFor="confirmPassword" className="form__input--title">
+              Repeat password
+            </label>
+          </div>
+          <div className="form__input">
+            <input
+              type="submit"
+              className="form__input--btn"
+              value="Sign up"
+              onClick={signUp}
+            />
+          </div>
         </div>
       </form>
     </>

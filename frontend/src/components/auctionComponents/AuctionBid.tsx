@@ -10,12 +10,17 @@ interface IAuctionBidProps {
 }
 
 export const AuctionBid = (props: IAuctionBidProps) => {
-
   const { auth } = useContext(AuthContext) as IAuth;
   const { userId } = useContext(AuthContext) as IAuth;
 
   const [bids, setBids] = useState<IBid[]>([]);
-  const [highestBid, sethighestBid] = useState<number>(0);
+  const [highestBid, sethighestBid] = useState<IBid>({
+    _id: "",
+    auctionId: "",
+    userId: "",
+    amount: 0,
+    published: "",
+  });
   const [newBid, setNewBid] = useState<number>(0);
   const [errorMsg, setErrorMsg] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
@@ -41,7 +46,7 @@ export const AuctionBid = (props: IAuctionBidProps) => {
 
     if (res.data.bids) {
       setBids(res.data.bids);
-      sethighestBid(res.data.highBid);      
+      sethighestBid(res.data.highBid);
     }
   };
 
@@ -66,9 +71,9 @@ export const AuctionBid = (props: IAuctionBidProps) => {
         published: new Date().toDateString(),
       };
 
-      if (newBid <= highestBid + 49) {
+      if (newBid <= highestBid.amount + 49) {
         setErrorMsg(true);
-        setNewBid(highestBid + 50);
+        setNewBid(highestBid.amount + 50);
       } else if (newBid < props.auction.price) {
         setErrorMsg(true);
         setNewBid(props.auction.price + 50);
@@ -89,15 +94,15 @@ export const AuctionBid = (props: IAuctionBidProps) => {
   };
 
   function bidMessage() {
-    if (!errorMsg && props.auction.price <= highestBid) {
-      return <span>Place {highestBid + 50} or more</span>;
-    } else if (errorMsg && props.auction.price <= highestBid) {
-      return <span className="errorMsg">Place {highestBid + 50} or more</span>;
+    if (!errorMsg && props.auction.price <= highestBid.amount) {
+      return <span>Place {highestBid.amount + 50} or more</span>;
+    } else if (errorMsg && props.auction.price <= highestBid.amount) {
+      return (
+        <span className="errorMsg">Place {highestBid.amount + 50} or more</span>
+      );
     } else if (errorMsg) {
       return (
-        <span className="errorMsg">
-          Place {props.auction.price + 50} or more
-        </span>
+        <span className="errorMsg">Place {props.auction.price} or more</span>
       );
     } else {
       return <span>Place {props.auction.price} or more</span>;
@@ -118,10 +123,14 @@ export const AuctionBid = (props: IAuctionBidProps) => {
                 .join(" ")}
             </span>
           </div>
-          {highestBid != 0 && (
+          {highestBid.amount != 0 && (
             <div className="sold">
-              <span>Sold for</span>
-              <span>{highestBid}</span>
+              {highestBid.userId == userId ? (
+                <span>You won at</span>
+              ) : (
+                <span>Sold for</span>
+              )}
+              <span>{highestBid.amount}</span>
             </div>
           )}
         </div>
@@ -131,10 +140,10 @@ export const AuctionBid = (props: IAuctionBidProps) => {
             <CountDown endTime={props.auction.endTime}></CountDown>
           </div>
           <div className="bidInfo">
-            {props.auction.price <= highestBid ? (
+            {props.auction.price <= highestBid.amount ? (
               <>
                 <span>Current bid</span>
-                <span className="currentPrice">{highestBid}</span>
+                <span className="currentPrice">{highestBid.amount}</span>
               </>
             ) : (
               <>

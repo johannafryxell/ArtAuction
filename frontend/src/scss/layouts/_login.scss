@@ -7,7 +7,7 @@
 //////////////////////
 // LOGIN VARIABLES //
 ////////////////////
-$border-radius: 2px;
+$border-radius: 8px;
 $width: clamp(270px, 64vw, 350px);
 $transition: all 0.2s ease-out;
 ///////////////////
@@ -26,19 +26,18 @@ $transition: all 0.2s ease-out;
   --font-size: clamp(1.125rem, 2.25vw, 1.75rem);
   @include mixins.flex(column, center, center, 2rem);
 
-  
   background-image: url("../../assets/clifs.jpeg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 200vw;
-  
+
   height: 80vh;
 
-  @include mixins.tablet{
-  background-size: 120vw;
+  @include mixins.tablet {
+    background-size: 120vw;
   }
-  @include mixins.desktop{
-  background-size: 110vw;
+  @include mixins.desktop {
+    background-size: 110vw;
   }
   ///////////////
   // SECTIONS //
@@ -47,10 +46,20 @@ $transition: all 0.2s ease-out;
     ///////////////////
     // FORM SECTION //
     /////////////////
+    &--signup {
+      @include mixins.flex(column, center, center, 1.125rem);
+      
+      @include mixins.tablet{
+        @include mixins.flex(row, center, center, 1.125rem);
+
+      }
+    }
+
     &--form {
       @include mixins.flex(column, center, center, 1.125rem);
       .form__input {
-        border: 1px solid black;
+        background-color: $greige-light;
+        border-radius: $border-radius;
         position: relative;
         &--title {
           position: absolute;
@@ -109,7 +118,7 @@ $transition: all 0.2s ease-out;
         position: relative;
         width: 100%;
         &__text {
-          background-color: #d92e22;
+          background-color: $warning;
           color: white;
           position: absolute;
           right: 0;
@@ -122,17 +131,14 @@ $transition: all 0.2s ease-out;
     }
     &--registerView {
       @include mixins.flex(column, center, center, 1.7rem);
-      .registerView__text {
-        // margin-top: 1.7rem;
-      }
-  
+
       .registerView__btn {
         width: 100%;
         transition: $transition;
         padding: calc(var(--font-size) * 0.3);
         background-color: $greige-main;
         color: black;
-        border: 1px solid black;
+        border: $border;
         font-size: 1rem;
         text-decoration: none;
         cursor: pointer;
@@ -144,7 +150,6 @@ $transition: all 0.2s ease-out;
         transform: scale(1.05);
         outline: none;
       }
-      
     }
   }
   *::selection {
